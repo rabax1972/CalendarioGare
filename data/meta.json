@@ -1,5 +1,5 @@
 {
- "generatoIl": "2026-10-29T13:15:11.356Z",
+ "generatoIl": "2026-10-29T17:03:55.837Z",
  "stagione": "2026/27",
  "fonti": [
   {
@@ -7,8 +7,8 @@
    "nome": "CSEN Parma – Torneo misto",
    "abilitata": true,
    "ok": true,
-   "ultimoSuccesso": "2026-10-29T13:12:31.628Z",
-   "ultimoTentativo": "2026-10-29T13:12:29.070Z",
+   "ultimoSuccesso": "2026-10-29T17:02:12.096Z",
+   "ultimoTentativo": "2026-10-29T17:02:09.436Z",
    "partite": 180
   },
   {
@@ -26,18 +26,19 @@
    "nome": "FIPAV Emilia-Romagna – campionati regionali",
    "abilitata": true,
    "ok": true,
-   "ultimoSuccesso": "2026-10-29T13:13:05.751Z",
-   "ultimoTentativo": "2026-10-29T13:12:31.636Z",
+   "ultimoSuccesso": "2026-10-29T17:02:45.921Z",
+   "ultimoTentativo": "2026-10-29T17:02:12.096Z",
    "partite": 756
   },
   {
    "id": "myvolley",
    "nome": "FIPAV – campionati nazionali (federvolley.it)",
    "abilitata": true,
-   "ok": true,
+   "ok": false,
    "ultimoSuccesso": "2026-10-29T13:14:34.214Z",
-   "ultimoTentativo": "2026-10-29T13:13:05.762Z",
-   "partite": 610
+   "ultimoTentativo": "2026-10-29T17:02:45.930Z",
+   "partite": 610,
+   "errore": "HTTP 403 per https://media.myvolley.net/public/json/2026/index.json"
   }
  ]
 }
