@@ -1,0 +1,224 @@
+# Volley Parma – calendari e risultati
+
+PWA in italiano, pensata per lo smartphone, con calendari, risultati e classifiche della pallavolo di Parma e provincia.
+Uno scraper in TypeScript gira come GitHub Action e scrive file JSON statici in `data/`. L'app (Vite + React) legge solo
+quei file: non c'è nessun server da gestire.
+
+| Ambito | Fonte | Stato |
+|---|---|---|
+| Torneo misto CSEN Parma | volleymistocsenparma.it | ✅ incluso |
+| Campionati regionali FIPAV Emilia-Romagna (solo gare con squadre di Parma) | crer.portalefipav.net | ✅ incluso |
+| Campionati nazionali A1–B2 (solo gare con squadre di Parma) | JSON di federvolley.it (media.myvolley.net) | ✅ incluso |
+| Campionati provinciali FIPAV Parma | fipavonline.it | ⛔ escluso: i termini del sito vietano lo scraping. Nell'app c'è solo il link. Vedi `docs/richiesta-autorizzazione-fipav.md` |
+| Rassegna stampa | feed RSS di 12 TV Parma, ParmaReport, iVolley Magazine, Federvolley | ✅ inclusa. Gazzetta di Parma, SportParma, ParmaToday, ParmaDaily e VolleyNews esclusi (vietano la raccolta automatica): solo articoli aggiunti a mano |
+
+Dettagli su URL, struttura HTML e limiti di ogni fonte: [docs/FONTI.md](docs/FONTI.md).
+
+## Struttura
+
+```
+shared/model.ts            modello dati comune (Campionato, Squadra, Partita, Classifica, Meta)
+scraper/src/
+  main.ts                  esegue le fonti, conserva l'ultimo dato valido, scrive data/*.json
+  build.ts                 unisce le fonti: alias, filtro Parma, gare spostate, report
+  parma.ts                 riconoscimento delle squadre di Parma e provincia
+  alias.ts                 lettura di alias.json, whitelist-manuale.json, colori.json
+  colors.ts                palette accessibile e assegnazione deterministica dei colori
+  rassegna.ts              rassegna stampa: feed RSS, articoli pertinenti, squadre citate
+  http.ts                  fetch con User-Agent dichiarato, 1 richiesta/1,2 s per host, cache ETag su disco
+  sources/                 una fonte per file (csen, crer, myvolley, fipavParma)
+scraper/test/              test dei parser con fixture HTML/JSON salvate
+web/                       PWA (index.html, src/, public/ con icone e splash)
+data/                      dati generati + file di configurazione modificabili a mano
+.github/workflows/         Action schedulata: scraping, commit dei dati, build, GitHub Pages
+```
+
+## Installazione
+
+Serve Node.js 22 o superiore (testato con Node 24).
+
+```bash
+npm install
+```
+
+## Scraper
+
+```bash
+npm run scrape                     # tutte le fonti abilitate
+npm run scrape -- --fonte=csen     # una sola fonte (csen | crer | myvolley)
+npm run scrape -- --solo-build     # rigenera data/*.json dagli snapshot, senza scaricare nulla
+```
+
+Cosa produce in `data/`:
+
+| File | Contenuto |
+|---|---|
+| `campionati.json`, `squadre.json`, `partite.json`, `classifiche.json` | dati letti dall'app |
+| `meta.json` | ora di generazione e stato di ogni fonte (ultimo successo, errore) |
+| `report-parma.md` | **report di debug**: squadre riconosciute come parmensi in ogni campionato regionale/nazionale, con il motivo |
+| `fonti/<fonte>.json` | ultimo snapshot valido di ogni fonte |
+| `rassegna.json` | rassegna stampa della stagione: titolo, testata, data, link, breve estratto, squadre citate (vedi `docs/FONTI.md` §7) |
+| `rose.json` | rose delle squadre di Parma (CSEN, Lega Volley Femminile): nome, numero, ruolo, link alla foto (vedi `docs/FONTI.md` §6) |
+| `loghi/*.webp`, `loghi/indice.json`, `loghi/abbinamenti.json` | loghi delle squadre (96×96), da dove vengono e abbinamenti per nome (vedi `docs/FONTI.md` §5) |
+
+Comportamento in caso di problemi:
+
+- ogni fonte è indipendente. Se una fallisce (errore di rete, struttura cambiata, numero di gare sospetto) il suo snapshot
+  precedente **non viene toccato**, l'errore finisce in `meta.json` e nel log, e il processo esce con codice 1;
+- nell'app l'intestazione segnala "una fonte non aggiornata" e la pagina Info mostra da quando i dati sono fermi.
+
+Rispetto delle fonti: User-Agent dichiarato, al massimo una richiesta ogni 1,2 secondi per host, richieste condizionali
+(ETag) e scoperta completa dei gironi **una volta al giorno**. Negli altri giri si scaricano solo i gironi con squadre di
+Parma (oggi circa 20 richieste a giro). Per cambiare il contatto nel User-Agent usa la variabile `SCRAPER_USER_AGENT`.
+
+## App
+
+```bash
+npm run dev        # sviluppo su http://localhost:5173 (legge direttamente data/)
+npm run build      # controllo tipi + build in dist/ (copia i JSON in dist/data/)
+npm run preview    # prova la build, service worker compreso
+```
+
+Funzioni: prossime gare per giorno (Oggi / Weekend / 7 giorni / Tutte), risultati recenti, filtri per campionato, livello,
+genere, squadra e comune, pagina della singola squadra, classifiche, "Le mie squadre" (salvate in `localStorage`),
+dettaglio gara con parziali, mappa e link alla fonte, condivisione (Web Share API, altrimenti copia negli appunti), gare
+rinviate e spostate in evidenza, rassegna stampa (anche nella pagina della squadra), tema chiaro/scuro automatico, legenda colori sempre a portata di mano.
+
+PWA: installabile (manifest, icone, splash iOS), offline con gli ultimi dati (*stale-while-revalidate* sui JSON: quando
+arrivano dati nuovi l'app li ricarica da sola) e avviso "Nuova versione disponibile".
+
+Verifiche fatte: Lighthouse 13.5 → accessibilità 100, best practice 100. La categoria PWA non esiste più da Lighthouse 12:
+con Lighthouse 11.7.1 → PWA 100, accessibilità 100.
+
+## Pubblicazione
+
+### GitHub Pages (predefinito)
+
+1. Crea il repository su GitHub e fai il push su `main`.
+2. *Settings → Pages → Build and deployment → Source: **GitHub Actions***.
+3. *Settings → Actions → General → Workflow permissions: **Read and write***, perché l'Action fa il commit dei dati.
+4. La prima esecuzione parte con il push, oppure a mano da *Actions → Aggiorna dati e pubblica → Run workflow*.
+
+L'Action `aggiorna-e-pubblica.yml`:
+- gira ogni 3 ore nei giorni feriali e ogni ora nel weekend (orari UTC, modificabili nel file);
+- esegue test, scraping e commit di `data/` (solo se i dati sono cambiati), poi build e deploy;
+- scrive il report delle squadre di Parma nel riepilogo dell'esecuzione;
+- se una fonte fallisce pubblica comunque gli ultimi dati validi e segna l'esecuzione come fallita (ti arriva l'email di GitHub).
+
+### Cloudflare Pages (alternativa)
+
+Collega il repository a Cloudflare Pages con comando di build `npm run build` e cartella `dist`. Lascia attiva l'Action
+per lo scraping: ogni commit dei dati fa ripartire la build su Cloudflare. In quel caso puoi togliere dal workflow i
+passi `configure-pages`, `upload-pages-artifact` e il job `pubblica`.
+
+## Configurazione manuale
+
+Dopo ogni modifica: `npm run scrape -- --solo-build`, poi controlla `data/report-parma.md`.
+
+### `data/alias.json` – nomi delle squadre
+
+La stessa squadra può comparire con nomi diversi (sponsor, abbreviazioni, stagioni diverse). Maiuscole, accenti,
+punteggiatura, forme giuridiche (ASD, SSD, POL…) e sigla provincia finale vengono già ignorate. Per i casi rimanenti:
+
+```json
+{
+  "squadre": [
+    { "nome": "CRAL CRÉDIT AGRICOLE", "varianti": ["CREDIT AGRICOLE"], "comune": "Parma" },
+    { "nome": "Volley Felino", "varianti": ["MOLINARI VOLLEY FELINO", "FELINO VOLLEY"], "societa": "ASD Volley Felino" }
+  ]
+}
+```
+
+`nome` è il nome mostrato nell'app. `comune` e `societa` sono facoltativi e prevalgono su quanto dedotto dalle fonti.
+`logo` è facoltativo: un URL usato al posto di quello della fonte (prendilo solo da siti che ne consentono l'uso),
+oppure `false` per mostrare il monogramma.
+Squadre con lo stesso nome in campionati diversi (es. Serie D maschile e Under 17 femminile della stessa società) restano
+squadre distinte.
+
+### `data/whitelist-manuale.json` – filtro "squadre di Parma"
+
+Per i campionati regionali e nazionali una gara è inclusa se almeno una squadra è riconosciuta come parmense. I criteri,
+nell'ordine:
+
+1. esclusa a mano (`escludi`) → mai parmense;
+2. nella whitelist (`squadre`);
+3. codice affiliazione FIPAV che inizia con `08038` (o con un prefisso in `codiciSocieta`);
+4. provincia `PR` dichiarata dalla fonte o sigla `PR` in fondo al nome;
+5. società del portale regionale con un'altra squadra già riconosciuta (o in `idSocietaCrer`);
+6. nome presente nei campionati provinciali (CSEN, e FIPAV Parma se un giorno sarà abilitato);
+7. squadra di casa in una palestra della provincia di Parma.
+
+```json
+{
+  "squadre": ["NOME SQUADRA NON RICONOSCIUTA"],
+  "codiciSocieta": [],
+  "idSocietaCrer": ["4470"],
+  "escludi": ["SQUADRA RICONOSCIUTA PER ERRORE"]
+}
+```
+
+### `data/privacy.json` – rose e richieste di rimozione
+
+Le rose contengono dati personali. Regole fisse: foto solo come link alla fonte, mai foto di minorenni o di chi non ha
+una data di nascita verificabile (LVF), data di nascita mai pubblicata. Per le richieste:
+
+```json
+{
+  "contatto": "volleyparma@example.org",
+  "nascondiRose": ["NOME SQUADRA"],
+  "nascondiAtleti": ["Cognome Nome"],
+  "nascondiFoto": ["Cognome Nome"]
+}
+```
+
+`contatto` (email o link) compare nella pagina squadra e in Info: finché è vuoto l'app invita a rivolgersi alla fonte.
+Ti conviene impostarlo prima di pubblicare l'app. Dopo una modifica: `npm run scrape -- --solo-build`.
+
+### `data/rassegna-config.json` – rassegna stampa
+
+```json
+{
+  "squadre": [{ "parole": ["club italia"], "squadre": ["CLUB ITALIA"], "senza": ["maschil"] }],
+  "articoli": [{ "titolo": "…", "url": "https://www.gazzettadiparma.it/…", "data": "2026-10-25", "testata": "Gazzetta di Parma" }],
+  "escludi": ["https://… articolo fuori tema"]
+}
+```
+
+- `squadre`: parole (a parola intera, senza badare a maiuscole e accenti) che nel titolo o nell'attacco indicano una
+  squadra. `squadre` accetta nomi di squadra o di società come in `squadre.json`: con una società si associano tutte le
+  sue squadre. `senza` annulla l'abbinamento se compare una di quelle parole (anche come inizio di parola).
+- `articoli`: articoli aggiunti a mano, per esempio dalle testate che non si possono leggere in automatico. `squadre`
+  è facoltativo: se manca si ricava dal titolo.
+- `escludi`: URL da non mostrare.
+
+### `data/colori.json` – colori dei campionati
+
+I colori sono assegnati in modo deterministico dall'id del campionato, da una palette di 18 colori con contrasto AA
+verificato nei test per entrambi i temi. Per forzarne uno: `{ "campionati": { "crer-serie-d-f": "viola" } }` (i nomi
+sono in `scraper/src/colors.ts`).
+
+## Aggiungere un campionato o una fonte
+
+- **Nuovo campionato di una fonte esistente**: niente da fare. I gironi regionali e nazionali vengono scoperti dagli
+  indici delle fonti ogni giorno, e compaiono se ci gioca una squadra di Parma. Le serie nazionali considerate sono in
+  `SERIE_NAZIONALI` (`scraper/src/sources/myvolley.ts`).
+- **Nuova fonte**:
+  1. documentala in `docs/FONTI.md` (URL, struttura, robots.txt, termini d'uso);
+  2. crea `scraper/src/sources/<nome>.ts` con parser puri (`parse…(html)`) e un oggetto `Fonte` con `esegui()` che
+     restituisce uno `Snapshot`. Usa `filtroParma: true` se vanno tenute solo le gare con squadre di Parma;
+  3. salva le pagine di esempio in `scraper/test/fixtures/<nome>/` (senza dati personali) e scrivi i test;
+  4. aggiungila all'elenco `FONTI` in `scraper/src/main.ts`: le fonti provinciali prima di quelle regionali e nazionali.
+- **Abilitare i provinciali FIPAV** (solo con autorizzazione scritta): implementa `esegui` in
+  `scraper/src/sources/fipavParma.ts` seguendo `csen.ts` e metti `abilitata: true`.
+
+## Test
+
+```bash
+npm test
+```
+
+I test leggono le fixture salvate di ogni fonte. Se un sito cambia struttura, aggiorna la fixture scaricando di nuovo la
+pagina: i test che falliscono indicano cosa sistemare nel parser. In produzione lo scraper si accorge comunque di risultati
+anomali (zero partite, calo improvviso, squadre senza nome) e mantiene i dati precedenti.
+
+Icone e splash screen si rigenerano da `web/public/favicon.svg` con `npm run icons`.
