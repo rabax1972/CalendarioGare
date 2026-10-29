@@ -2,19 +2,15 @@ name: Aggiorna dati e pubblica
 
 on:
   schedule:
-    # Orari in UTC (in Italia +1 d'inverno, +2 d'estate).
-    # Lunedì–venerdì: ogni 3 ore dalle 6 alle 23 circa.
-    - cron: '17 5-22/3 * * 1-5'
-    # Sabato e domenica: ogni ora dalle 9 alle 24 circa (le gare si concentrano nel weekend).
-    - cron: '17 7-22 * * 0,6'
+    # Ogni 2 ore (orari UTC). GitHub può partire con qualche minuto di ritardo nei momenti di carico.
+    - cron: '17 */2 * * *'
+  # Un push pubblica le modifiche al codice, senza scraping.
   push:
     branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: aggiorna-e-pubblica
@@ -23,8 +19,7 @@ concurrency:
 jobs:
   aggiorna:
     runs-on: ubuntu-latest
-    outputs:
-      esito-scraper: ${{ steps.scraper.outputs.esito }}
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
 
@@ -75,34 +70,16 @@ jobs:
             git push
           fi
 
-      - id: pages
-        uses: actions/configure-pages@v5
-
-      - name: Build PWA
+      # Pubblicazione su Aruba senza FTP (scripts/pubblica-aruba.ts): build e invio al server dei soli file cambiati.
+      # Se non è cambiato nulla non si invia niente. Senza il secret ARUBA_CHIAVE viene saltata.
+      - name: Pubblicazione su Aruba
         env:
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
-        run: npm run build
+          ARUBA_CHIAVE: ${{ secrets.ARUBA_CHIAVE }}
+        run: npm run pubblica:aruba
 
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: dist
-
-  pubblica:
-    needs: aggiorna
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    steps:
-      - id: deploy
-        uses: actions/deploy-pages@v4
-
-  # Se una fonte è fallita i dati precedenti restano pubblicati, ma l'esecuzione viene segnata come fallita.
-  segnala-errori:
-    needs: [aggiorna, pubblica]
-    if: always() && needs.aggiorna.outputs.esito-scraper != '' && needs.aggiorna.outputs.esito-scraper != '0'
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
+      # Se una fonte è fallita i dati precedenti restano pubblicati, ma l'esecuzione viene segnata come fallita.
+      - name: Segnala fonti non aggiornate
+        if: steps.scraper.outputs.esito != '' && steps.scraper.outputs.esito != '0'
+        run: |
           echo "::error::Almeno una fonte non è stata aggiornata: vedi il log del passo 'Scraping'. Sono rimasti pubblicati gli ultimi dati validi."
           exit 1

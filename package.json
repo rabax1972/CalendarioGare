@@ -12,6 +12,7 @@
     "build": "tsc -p tsconfig.json --noEmit && vite build",
     "preview": "vite preview",
     "scrape": "tsx scraper/src/main.ts",
+    "pubblica:aruba": "tsx scripts/pubblica-aruba.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "icons": "pwa-assets-generator",

@@ -1,7 +1,7 @@
 # Volley Parma – calendari e risultati
 
 PWA in italiano, pensata per lo smartphone, con calendari, risultati e classifiche della pallavolo di Parma e provincia.
-Uno scraper in TypeScript gira come GitHub Action e scrive file JSON statici in `data/`. L'app (Vite + React) legge solo
+Uno scraper in TypeScript gira come GitHub Action ogni 2 ore e scrive file JSON statici in `data/`. L'app (Vite + React) legge solo
 quei file: non c'è nessun server da gestire.
 
 | Ambito | Fonte | Stato |
@@ -30,7 +30,8 @@ scraper/src/
 scraper/test/              test dei parser con fixture HTML/JSON salvate
 web/                       PWA (index.html, src/, public/ con icone e splash)
 data/                      dati generati + file di configurazione modificabili a mano
-.github/workflows/         Action schedulata: scraping, commit dei dati, build, GitHub Pages
+.github/workflows/         Action ogni 2 ore: scraping, commit dei dati, pubblicazione su Aruba
+scripts/pubblica-aruba.ts  invio al sito Aruba dei soli file cambiati (con web/public/api/*.php e web.config)
 ```
 
 ## Installazione
@@ -92,24 +93,47 @@ con Lighthouse 11.7.1 → PWA 100, accessibilità 100.
 
 ## Pubblicazione
 
-### GitHub Pages (predefinito)
+L'app è pubblicata su Aruba: **https://www.giacomorabaglia.com/calendariogare/** (hosting Windows, IIS). Aruba non esegue
+Node e il suo PHP può scrivere solo in `mdb-database`, la cartella nella radice del dominio. Per questo l'aggiornamento
+automatico funziona come in Classifiche, senza FTP:
 
-1. Crea il repository su GitHub e fai il push su `main`.
-2. *Settings → Pages → Build and deployment → Source: **GitHub Actions***.
-3. *Settings → Actions → General → Workflow permissions: **Read and write***, perché l'Action fa il commit dei dati.
-4. La prima esecuzione parte con il push, oppure a mano da *Actions → Aggiorna dati e pubblica → Run workflow*.
+- l'Action [`aggiorna-e-pubblica.yml`](.github/workflows/aggiorna-e-pubblica.yml) gira **ogni 2 ore** (e a ogni push su
+  `main`, senza scraping): test, scraping, commit di `data/` se i dati sono cambiati, poi `npm run pubblica:aruba`;
+- [`scripts/pubblica-aruba.ts`](scripts/pubblica-aruba.ts) fa la build e chiede al sito le impronte dei file che serve adesso
+  (`api/index.php?a=sito-impronte`). Se qualcosa è cambiato, manda uno zip con i soli file nuovi o cambiati
+  (`?a=sito-carica`, intestazione `X-Chiave`). Se non è cambiato nulla non manda niente;
+- il server estrae lo zip in `mdb-database/calendariogare/sito/` ([`web/public/api/_pubblicazione.php`](web/public/api/_pubblicazione.php))
+  e [`web.config`](web/public/web.config) fa servire quei file da `api/sito.php` al posto di quelli statici;
+- se una fonte fallisce si pubblicano comunque gli ultimi dati validi e l'esecuzione viene segnata come fallita (arriva
+  l'email di GitHub). Il report delle squadre di Parma è nel riepilogo dell'esecuzione.
 
-L'Action `aggiorna-e-pubblica.yml`:
-- gira ogni 3 ore nei giorni feriali e ogni ora nel weekend (orari UTC, modificabili nel file);
-- esegue test, scraping e commit di `data/` (solo se i dati sono cambiati), poi build e deploy;
-- scrive il report delle squadre di Parma nel riepilogo dell'esecuzione;
-- se una fonte fallisce pubblica comunque gli ultimi dati validi e segna l'esecuzione come fallita (ti arriva l'email di GitHub).
+`api/` e `web.config` non passano mai dalla pubblicazione automatica: si caricano a mano.
 
-### Cloudflare Pages (alternativa)
+### Prima installazione
 
-Collega il repository a Cloudflare Pages con comando di build `npm run build` e cartella `dist`. Lascia attiva l'Action
-per lo scraping: ogni commit dei dati fa ripartire la build su Cloudflare. In quel caso puoi togliere dal workflow i
-passi `configure-pages`, `upload-pages-artifact` e il job `pubblica`.
+1. Crea il repository su GitHub (anche privato) e fai il push su `main`.
+2. *Settings → Actions → General → Workflow permissions: **Read and write***, perché l'Action fa il commit dei dati.
+3. *Settings → Secrets and variables → Actions → New repository secret*: `ARUBA_CHIAVE`, con la chiave che trovi in
+   `aruba/calendariogare-config.php` (e nel `.env`, per lanciare la pubblicazione dal PC). Sono file esclusi da git.
+   Se ti servisse una chiave nuova, una stringa lunga e casuale va bene, purché sia la stessa nei tre posti.
+4. Con FileZilla:
+   - carica `aruba/calendariogare-config.php` nella cartella `mdb-database` del dominio (accanto a `classifiche-config.php`);
+   - fai `npm run build` e carica **tutto** il contenuto di `dist/` nella cartella `/calendariogare`, compresi `api/` e `web.config`.
+5. Avvia la prima esecuzione da *Actions → Aggiorna dati e pubblica → Run workflow*.
+
+Dal PC si può pubblicare anche a mano: `npm run pubblica:aruba` (legge `ARUBA_CHIAVE` dal `.env`).
+
+### Dopo un caricamento completo con FileZilla
+
+Le copie in `mdb-database/calendariogare/sito/` hanno la precedenza sui file della cartella. Se ricarichi tutto `dist/` a
+mano (per esempio per aggiornare `api/` o `web.config`), lancia poi `npm run pubblica:aruba -- --svuota`, che le toglie.
+
+### Altri hosting
+
+`npm run build` produce percorsi relativi: il contenuto di `dist/` funziona in qualsiasi cartella. Il `web.config` serve
+solo su IIS: dichiara i tipi `.webmanifest` e `.webp`, che IIS altrimenti non serve (404). Le sue regole di riscrittura
+non fanno nulla finché `mdb-database/calendariogare/sito/` non esiste. Su un altro hosting i file vanno ricopiati dopo
+ogni aggiornamento dei dati, oppure va adattato il passo di pubblicazione del workflow.
 
 ## Configurazione manuale
 

@@ -42,8 +42,9 @@ function datiStatici(): Plugin {
 
 export default defineConfig({
   root: 'web',
-  // Su GitHub Pages il sito sta in /<nome-repo>/: la Action imposta BASE_PATH.
-  base: process.env.BASE_PATH ?? '/',
+  // Percorsi relativi: la build funziona in qualsiasi cartella (es. /calendariogare/), perché il router usa l'hash.
+  // Su GitHub Pages la Action imposta comunque BASE_PATH.
+  base: process.env.BASE_PATH ?? './',
   build: { outDir: '../dist', emptyOutDir: true },
   plugins: [
     react(),

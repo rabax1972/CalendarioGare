@@ -19,7 +19,7 @@ export function Info() {
       <section className="blocco" aria-labelledby="t-fonti">
         <h2 id="t-fonti">Fonti dei dati · stagione {d.meta.stagione}</h2>
         <p>
-          Dati aggiornati {quando(d.meta.generatoIl)}. Lo scraper controlla le fonti ogni 2–3 ore, più spesso nel fine settimana.
+          Dati aggiornati {quando(d.meta.generatoIl)}. Lo scraper controlla le fonti ogni 2 ore.
         </p>
         <ul className="fonti">
           {d.meta.fonti.map((f) => (

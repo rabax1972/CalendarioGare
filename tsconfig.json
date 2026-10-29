@@ -16,5 +16,5 @@
     "skipLibCheck": true,
     "types": ["node", "vite/client", "vite-plugin-pwa/react", "vite-plugin-pwa/info"]
   },
-  "include": ["shared", "scraper", "web/src", "vite.config.ts", "vitest.config.ts", "pwa-assets.config.ts"]
+  "include": ["shared", "scraper", "scripts", "web/src", "vite.config.ts", "vitest.config.ts", "pwa-assets.config.ts"]
 }
