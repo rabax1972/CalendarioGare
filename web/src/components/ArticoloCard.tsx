@@ -27,7 +27,14 @@ export function ArticoloCard({ a, conData = false }: { a: Articolo; conData?: bo
   return (
     <article className="card articolo">
       <p className="articolo-testa">
-        <span className="articolo-fonte">{testata?.nome ?? a.testata}</span>
+        <span className="articolo-fonte">
+          {testata?.nome ?? a.testata}
+          {a.video && (
+            <span className="etichetta-video">
+              <Icona nome="video" /> Servizio TG
+            </span>
+          )}
+        </span>
         {(conData || a.ora) && (
           <span className="dettaglio">
             {conData ? dataBreve(a.data) : ''}

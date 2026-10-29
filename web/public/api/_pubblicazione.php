@@ -25,6 +25,7 @@ const TIPI_FILE = [
     'png' => 'image/png',
     'ico' => 'image/x-icon',
     'webp' => 'image/webp',
+    'ics' => 'text/calendar; charset=utf-8',
 ];
 /** Dimensione massima di un pezzo dello zip (sotto il post_max_size di PHP). */
 const PEZZO_BYTE = 4 * 1024 * 1024;

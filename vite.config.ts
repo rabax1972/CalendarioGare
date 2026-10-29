@@ -3,10 +3,28 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import { calendarioSquadra } from './shared/ics.ts';
+import type { Campionato, Meta, Partita, Squadra } from './shared/model.ts';
 
 const DATA_DIR = path.resolve(import.meta.dirname, 'data');
 /** File di /data pubblicati con l'app (gli snapshot delle fonti e i file di configurazione restano fuori). */
 const FILE_DATI = ['campionati.json', 'squadre.json', 'partite.json', 'classifiche.json', 'meta.json', 'rose.json', 'rassegna.json'];
+
+/** Calendario .ics di ogni squadra di Parma (shared/ics.ts), generato dai JSON di /data: id squadra → contenuto. */
+function calendari(): Map<string, string> {
+  const leggi = <T,>(f: string) => JSON.parse(readFileSync(path.join(DATA_DIR, f), 'utf8')) as T;
+  const squadre = leggi<Squadra[]>('squadre.json');
+  const partite = leggi<Partita[]>('partite.json');
+  const campionati = new Map(leggi<Campionato[]>('campionati.json').map((c) => [c.id, c]));
+  const { generatoIl } = leggi<Meta>('meta.json');
+  const nomi = new Map(squadre.map((s) => [s.id, s.nome]));
+  const nomeSquadra = (id: string) => nomi.get(id) ?? id;
+  return new Map(
+    squadre
+      .filter((s) => s.parmense)
+      .map((s) => [s.id, calendarioSquadra({ squadra: s, partite, campionati, nomeSquadra, generatoIl })]),
+  );
+}
 
 /** Serve /data in sviluppo e lo copia nella build: l'app legge solo questi JSON statici. */
 function datiStatici(): Plugin {
@@ -14,6 +32,13 @@ function datiStatici(): Plugin {
     name: 'dati-statici',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
+        const ics = /\/data\/calendari\/([\w-]+)\.ics(\?.*)?$/.exec(req.url ?? '');
+        if (ics) {
+          const cal = calendari().get(ics[1]);
+          res.statusCode = cal ? 200 : 404;
+          res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
+          return res.end(cal ?? '');
+        }
         const json = /\/data\/([\w-]+\.json)(\?.*)?$/.exec(req.url ?? '');
         const logo = /\/data\/loghi\/([\w-]+\.webp)(\?.*)?$/.exec(req.url ?? '');
         const file = json && FILE_DATI.includes(json[1]) ? json[1] : logo ? `loghi/${logo[1]}` : null;
@@ -31,6 +56,7 @@ function datiStatici(): Plugin {
       for (const f of FILE_DATI) {
         this.emitFile({ type: 'asset', fileName: `data/${f}`, source: readFileSync(path.join(DATA_DIR, f)) });
       }
+      for (const [id, cal] of calendari()) this.emitFile({ type: 'asset', fileName: `data/calendari/${id}.ics`, source: cal });
       const dirLoghi = path.join(DATA_DIR, 'loghi');
       if (!existsSync(dirLoghi)) return;
       for (const f of readdirSync(dirLoghi).filter((x) => x.endsWith('.webp'))) {
@@ -73,7 +99,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,webmanifest,woff2}'],
         globIgnores: ['splash/**', 'data/**'],
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,

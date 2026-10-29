@@ -9,6 +9,7 @@ import {
   pertinente,
   riconosciSquadre,
   testoSemplice,
+  titoloLeggibile,
   unisci,
   urlRicerca,
   type ArticoloGrezzo,
@@ -77,6 +78,7 @@ describe('lettura dei feed', () => {
   it('toglie la dicitura automatica di WordPress e tronca l’estratto a una parola intera', () => {
     expect(testoSemplice(parseFeed(FEED_WP)[0].descrizione)).toBe('');
     expect(testoSemplice('<p>Gran partita al PalaRaschi [&hellip;]</p>')).toBe('Gran partita al PalaRaschi');
+    expect(testoSemplice('<p>La tradizione pallavolistica parmense ... Leggi tutto</p>')).toBe('La tradizione pallavolistica parmense');
     expect(estratto('')).toBeNull();
     expect(estratto('uno due tre quattro', 12)).toBe('uno due tre…');
   });
@@ -93,6 +95,20 @@ describe('lettura dei feed', () => {
   it('mesi della stagione da luglio a oggi; data e ora italiane', () => {
     expect(mesiStagione(2026, new Date('2026-10-29T10:00:00Z'))).toEqual(['2026-07', '2026-08', '2026-09', '2026-10']);
     expect(dataOraRoma('2026-10-24T22:30:00.000Z')).toEqual({ data: '2026-10-25', ora: '00:30' });
+  });
+});
+
+describe('titoli tutti in maiuscolo', () => {
+  const nomi = ['club italia', 'minerva', 'parma', 'palaraschi'];
+
+  it('forma normale con nomi, sigle e categorie; i titoli già normali restano', () => {
+    expect(titoloLeggibile('VOLLEY B2 FEMMINILE, IL MINERVA RIPARTE: SFIDA AL PALARASCHI', nomi)).toBe(
+      'Volley B2 femminile, il Minerva riparte: sfida al PalaRaschi',
+    );
+    expect(titoloLeggibile('GLI 80 ANNI DELLA FIPAV, A PARMA UNA FESTA. IL CLUB ITALIA IN SERIE A2', nomi)).toBe(
+      'Gli 80 anni della FIPAV, a Parma una festa. Il Club Italia in serie A2',
+    );
+    expect(titoloLeggibile('Club Italia, quarta vittoria', nomi)).toBe('Club Italia, quarta vittoria');
   });
 });
 

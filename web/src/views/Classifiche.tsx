@@ -1,8 +1,42 @@
+import type { RigaClassifica, ZoneClassifica } from '../../../shared/model.ts';
+import { Forma } from '../components/Forma.tsx';
 import { Stemma } from '../components/Stemma.tsx';
 import { BadgeCampionato, Icona, TitoloPagina, Vuoto, stileTinta } from '../components/ui.tsx';
 import { useDati } from '../lib/dati.tsx';
 import { usePreferiti } from '../lib/preferiti.ts';
 import { link } from '../lib/router.ts';
+
+type Zona = 'promozione' | 'playoff' | 'playout' | 'retrocessione';
+
+const NOMI_ZONE: Record<Zona, string> = {
+  promozione: 'Promozione',
+  playoff: 'Playoff',
+  playout: 'Playout',
+  retrocessione: 'Retrocessione',
+};
+
+function zona(posizione: number, totale: number, z: ZoneClassifica | undefined): Zona | null {
+  if (!z) return null;
+  if (z.promozione && posizione <= z.promozione) return 'promozione';
+  if (z.retrocessione && posizione > totale - z.retrocessione) return 'retrocessione';
+  if (z.playoff && posizione >= z.playoff[0] && posizione <= z.playoff[1]) return 'playoff';
+  if (z.playout && posizione >= z.playout[0] && posizione <= z.playout[1]) return 'playout';
+  return null;
+}
+
+/** ▲2 / ▼1 rispetto alla giornata precedente; niente se la posizione non è cambiata o non è nota. */
+function Variazione({ r }: { r: RigaClassifica }) {
+  if (r.posizionePrecedente == null || r.posizionePrecedente === r.posizione) return null;
+  const su = r.posizionePrecedente > r.posizione;
+  const n = Math.abs(r.posizionePrecedente - r.posizione);
+  return (
+    <span className={`variazione ${su ? 'su' : 'giu'}`} title={`Era ${r.posizionePrecedente}°`}>
+      <span aria-hidden="true">{su ? '▲' : '▼'}</span>
+      {n}
+      <span className="sr-only">{su ? ` posizioni guadagnate` : ` posizioni perse`}</span>
+    </span>
+  );
+}
 
 export function Classifiche({ campionatoId, girone }: { campionatoId?: string; girone?: string }) {
   const d = useDati();
@@ -62,13 +96,24 @@ export function Classifiche({ campionatoId, girone }: { campionatoId?: string; g
             <tbody>
               {cl.righe.map((r) => {
                 const s = d.squadra.get(r.squadraId);
+                const z = zona(r.posizione, cl.righe.length, c.zone);
                 return (
-                  <tr key={r.squadraId} className={`${s?.parmense ? 'parmense' : ''}${seguita(r.squadraId) ? ' seguita' : ''}`}>
-                    <td>{r.posizione}</td>
+                  <tr
+                    key={r.squadraId}
+                    className={[s?.parmense && 'parmense', seguita(r.squadraId) && 'seguita', z && `zona-${z}`].filter(Boolean).join(' ')}
+                  >
+                    <td className="cella-posizione">
+                      {r.posizione}
+                      <Variazione r={r} />
+                      {z && <span className="sr-only"> ({NOMI_ZONE[z]})</span>}
+                    </td>
                     <th scope="row" className="sinistra">
                       <span className="cella-squadra">
                         <Stemma squadra={s} />
-                        {s ? <a href={link('squadra', s.id)}>{r.nome}</a> : r.nome}
+                        <span className="cella-nome">
+                          {s ? <a href={link('squadra', s.id)}>{r.nome}</a> : r.nome}
+                          <Forma squadraId={r.squadraId} />
+                        </span>
                       </span>
                       {seguita(r.squadraId) && (
                         <span className="stellina" aria-label="(seguita)">
@@ -88,8 +133,20 @@ export function Classifiche({ campionatoId, girone }: { campionatoId?: string; g
             </tbody>
           </table>
         </div>
+        {c.zone && (
+          <ul className="legenda-zone" aria-label="Zone della classifica">
+            {(Object.keys(NOMI_ZONE) as Zona[])
+              .filter((z) => c.zone![z])
+              .map((z) => (
+                <li key={z} className={`zona-${z}`}>
+                  {NOMI_ZONE[z]}
+                </li>
+              ))}
+          </ul>
+        )}
         <p className="nota">
-          In grassetto le squadre di Parma e provincia.{' '}
+          In grassetto le squadre di Parma e provincia. Le frecce indicano la variazione rispetto alla giornata precedente, i
+          pallini gli ultimi 5 risultati (V vinta, P persa).{' '}
           <a href={cl.fonteUrl} target="_blank" rel="noopener noreferrer">
             Classifica alla fonte <Icona nome="esterno" />
           </a>

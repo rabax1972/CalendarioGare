@@ -1,11 +1,36 @@
 import { ArticoloCard } from '../components/ArticoloCard.tsx';
+import { Forma } from '../components/Forma.tsx';
 import { ListaPerGiorno } from '../components/ListaPerGiorno.tsx';
 import { RosaSquadra } from '../components/RosaSquadra.tsx';
 import { Stemma } from '../components/Stemma.tsx';
 import { BadgeCampionato, Icona, PulsanteSegui, Vuoto, stileTinta } from '../components/ui.tsx';
+import { forma, serie } from '../lib/analisi.ts';
 import { useDati } from '../lib/dati.tsx';
 import { oggiIso } from '../lib/date.ts';
 import { link } from '../lib/router.ts';
+
+/** Iscrizione al calendario della squadra (data/calendari/<id>.ics, generato dalla build). */
+function MenuCalendario({ id }: { id: string }) {
+  const url = new URL(`${import.meta.env.BASE_URL}data/calendari/${id}.ics`, location.href).href;
+  const webcal = url.replace(/^https?:/, 'webcal:');
+  return (
+    <details className="menu-calendario">
+      <summary className="segui">
+        <Icona nome="calendario" /> Aggiungi al calendario
+      </summary>
+      <div className="menu-calendario-voci">
+        <a href={webcal}>iPhone, Mac e Outlook</a>
+        <a href={`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`} target="_blank" rel="noopener noreferrer">
+          Google Calendar <Icona nome="esterno" />
+        </a>
+        <a href={url} download={`${id}.ics`}>
+          Scarica il file .ics
+        </a>
+        <p className="nota">Con l'iscrizione le gare si aggiornano da sole, anche quando cambiano data o orario.</p>
+      </div>
+    </details>
+  );
+}
 
 export function Squadra({ id }: { id: string }) {
   const d = useDati();
@@ -30,6 +55,7 @@ export function Squadra({ id }: { id: string }) {
   const c = d.campionato.get(s.campionati[0]);
   const rosa = d.rosa.get(id);
   const articoli = d.rassegna?.articoli.filter((a) => a.squadre.includes(id)) ?? [];
+  const inSerie = serie(forma(id, d.partite, d));
 
   return (
     <article className="scheda-squadra">
@@ -43,8 +69,17 @@ export function Squadra({ id }: { id: string }) {
           </div>
           <h1>{s.nome}</h1>
           <p className="sotto">{[s.societa && s.societa !== s.nome ? s.societa : null, s.comune].filter(Boolean).join(' · ')}</p>
+          <p className="forma-squadra">
+            <Forma squadraId={s.id} etichetta />
+            {Math.abs(inSerie) >= 2 && (
+              <span className="serie">
+                {Math.abs(inSerie)} {inSerie > 0 ? 'vittorie' : 'sconfitte'} di fila
+              </span>
+            )}
+          </p>
           <div className="azioni-squadra">
             <PulsanteSegui id={s.id} nome={s.nome} />
+            {s.parmense && <MenuCalendario id={s.id} />}
             {rosa && (
               <button
                 type="button"

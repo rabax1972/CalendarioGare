@@ -25,6 +25,19 @@ export interface Campionato {
   /** Campionato senza dati propri: si consulta solo alla fonte esterna. */
   soloLinkEsterno?: boolean;
   nota?: string;
+  /** Zone della classifica (da data/zone-classifiche.json): posizioni da evidenziare. */
+  zone?: ZoneClassifica;
+}
+
+export interface ZoneClassifica {
+  /** Prime N posizioni: promozione diretta. */
+  promozione?: number;
+  /** Posizioni da…a (comprese): playoff. */
+  playoff?: [number, number];
+  /** Posizioni da…a (comprese): playout. */
+  playout?: [number, number];
+  /** Ultime N posizioni: retrocessione diretta. */
+  retrocessione?: number;
 }
 
 export interface Squadra {
@@ -79,6 +92,8 @@ export interface RigaClassifica {
   setPersi: number;
   puntiFatti: number | null;
   puntiSubiti: number | null;
+  /** Posizione prima dell'ultima giornata giocata (per le frecce ▲▼), se nota. */
+  posizionePrecedente?: number;
 }
 
 export interface Classifica {
@@ -143,6 +158,8 @@ export interface Articolo {
   /** Ora locale HH:MM, se nota. */
   ora: string | null;
   estratto: string | null;
+  /** Servizio video (es. TG di 12 TV Parma). */
+  video?: boolean;
   /** Squadre di Parma citate (id di squadre.json). */
   squadre: string[];
 }

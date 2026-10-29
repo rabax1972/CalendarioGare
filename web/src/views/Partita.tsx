@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import type { Partita as TPartita } from '../../../shared/model.ts';
-import { StatoPartita, testoSpostata } from '../components/PartitaCard.tsx';
+import { BadgeDerby, StatoPartita, testoSpostata } from '../components/PartitaCard.tsx';
 import { Stemma } from '../components/Stemma.tsx';
 import { BadgeCampionato, Icona, PulsanteSegui, Vuoto, stileTinta } from '../components/ui.tsx';
+import { isDerby } from '../lib/analisi.ts';
 import { useDati } from '../lib/dati.tsx';
+import { creaImmagine } from '../lib/immagine.ts';
 import { dataBreve, titoloGiorno } from '../lib/date.ts';
 import { link } from '../lib/router.ts';
 
@@ -16,6 +18,7 @@ function urlMappa(p: TPartita): string | null {
 export function Partita({ id }: { id: string }) {
   const d = useDati();
   const [avviso, setAvviso] = useState<string | null>(null);
+  const [preparo, setPreparo] = useState(false);
   const p = d.partita.get(id);
   if (!p) {
     return (
@@ -51,11 +54,39 @@ export function Partita({ id }: { id: string }) {
     }
   }
 
+  async function condividiImmagine() {
+    setPreparo(true);
+    setAvviso(null);
+    try {
+      const sito = (location.host + location.pathname).replace(/^www\./, '').replace(/\/(index\.html)?$/, '');
+      const blob = await creaImmagine({ p: p!, campionato: c, casa, ospite, sito });
+      const nome = `${[casa?.nome, ospite?.nome].join(' ').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`;
+      const file = new File([blob], nome, { type: 'image/png' });
+      if (navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], title: `${casa?.nome ?? ''} – ${ospite?.nome ?? ''}` });
+      } else {
+        // Computer o browser senza condivisione di file: si scarica l'immagine.
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = nome;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 10_000);
+        setAvviso('Immagine scaricata');
+      }
+    } catch (e) {
+      if ((e as DOMException)?.name !== 'AbortError') setAvviso('Immagine non creata');
+    } finally {
+      setPreparo(false);
+    }
+  }
+
   return (
     <article className="scheda-partita">
       <header className="testata tinta" style={stileTinta(c)}>
         <div className="testata-badge">
           <BadgeCampionato c={c} esteso />
+          {isDerby(p, d) && <BadgeDerby />}
           <StatoPartita p={p} />
         </div>
         <p className="sotto">
@@ -170,6 +201,9 @@ export function Partita({ id }: { id: string }) {
       <div className="azioni-partita">
         <button type="button" className="pulsante primario" onClick={condividi}>
           <Icona nome="condividi" /> Condividi
+        </button>
+        <button type="button" className="pulsante secondario" onClick={condividiImmagine} disabled={preparo}>
+          <Icona nome="immagine" /> {preparo ? 'Preparo…' : p.punteggio ? 'Immagine del risultato' : 'Locandina'}
         </button>
         <a className="pulsante secondario" href={p.fonteUrl} target="_blank" rel="noopener noreferrer">
           Vedi alla fonte <Icona nome="esterno" />

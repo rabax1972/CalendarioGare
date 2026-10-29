@@ -21,6 +21,28 @@ interface SquadraInCostruzione extends Squadra {
   logoFonte: string | false | null;
 }
 
+/**
+ * Posizione precedente in classifica, per le frecce ▲▼. Quando una classifica avanza (aumentano le gare giocate in totale)
+ * la posizione di prima diventa quella "precedente"; finché non avanza resta quella già calcolata.
+ * Serve la classifica pubblicata la volta prima: le fonti danno solo quella attuale.
+ */
+export function applicaVariazioni(classifiche: Classifica[], precedenti: Classifica[]): void {
+  const chiave = (c: Classifica) => `${c.campionatoId}|${c.girone ?? ''}`;
+  const prima = new Map(precedenti.map((c) => [chiave(c), c]));
+  const giocate = (c: Classifica) => c.righe.reduce((n, r) => n + r.giocate, 0);
+  for (const cl of classifiche) {
+    const vecchia = prima.get(chiave(cl));
+    if (!vecchia) continue;
+    const avanzata = giocate(cl) > giocate(vecchia);
+    const righePrima = new Map(vecchia.righe.map((r) => [r.squadraId, r]));
+    for (const r of cl.righe) {
+      const v = righePrima.get(r.squadraId);
+      const precedente = avanzata ? v?.posizione : v?.posizionePrecedente;
+      if (precedente != null) r.posizionePrecedente = precedente;
+    }
+  }
+}
+
 /** Crea il riconoscitore partendo dalle squadre dei campionati provinciali. */
 export function creaRiconoscitore(snapshots: Snapshot[], config: Configurazione): RiconoscitoreParma {
   const alias = new TabellaAlias(config.alias);

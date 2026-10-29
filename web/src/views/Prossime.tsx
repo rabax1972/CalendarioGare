@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { BarraFiltri } from '../components/BarraFiltri.tsx';
 import { ListaPerGiorno } from '../components/ListaPerGiorno.tsx';
+import { Riepilogo } from '../components/Riepilogo.tsx';
 import { TitoloPagina, Vuoto } from '../components/ui.tsx';
 import { useDati } from '../lib/dati.tsx';
 import { intervallo, oggiIso, type Periodo } from '../lib/date.ts';
@@ -30,6 +31,7 @@ export function Prossime() {
 
   return (
     <>
+      <Riepilogo onPeriodo={setPeriodo} />
       <TitoloPagina>Prossime gare</TitoloPagina>
       <BarraFiltri periodo={periodo} onPeriodo={setPeriodo} totale={partite.length} />
       {partite.length ? (

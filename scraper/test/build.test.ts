@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Partita } from '../../shared/model.ts';
 import type { Configurazione } from '../src/alias.ts';
-import { applicaSpostamenti, costruisci } from '../src/build.ts';
+import { applicaSpostamenti, applicaVariazioni, costruisci } from '../src/build.ts';
 import type { PartitaGrezza, Snapshot } from '../src/types.ts';
 
 const configBase = (over: Partial<Configurazione> = {}): Configurazione => ({
@@ -153,5 +153,30 @@ describe('gare spostate', () => {
     const nuove = [{ ...base }];
     applicaSpostamenti(nuove, [prima]);
     expect(nuove[0].spostata).toBeUndefined();
+  });
+});
+
+describe('variazioni di posizione in classifica', () => {
+  const riga = (squadraId: string, posizione: number, giocate: number, posizionePrecedente?: number) => ({
+    posizione, squadraId, nome: squadraId, punti: 0, giocate, vinte: 0, perse: 0, setVinti: 0, setPersi: 0,
+    puntiFatti: null, puntiSubiti: null, ...(posizionePrecedente != null ? { posizionePrecedente } : {}),
+  });
+  const cl = (righe: ReturnType<typeof riga>[]) => ({ campionatoId: 'c', girone: 'A', titolo: 'C', fonteUrl: '', righe });
+
+  it('dopo una giornata la posizione di prima diventa la precedente; senza giornate nuove resta', () => {
+    const prima = cl([riga('a', 1, 1), riga('b', 2, 1)]);
+    const dopo = cl([riga('b', 1, 2), riga('a', 2, 2)]);
+    applicaVariazioni([dopo], [prima]);
+    expect(dopo.righe.map((r) => [r.squadraId, r.posizionePrecedente])).toEqual([['b', 2], ['a', 1]]);
+
+    const ancora = cl([riga('b', 1, 2), riga('a', 2, 2)]);
+    applicaVariazioni([ancora], [dopo]);
+    expect(ancora.righe.map((r) => r.posizionePrecedente)).toEqual([2, 1]);
+  });
+
+  it('senza classifica precedente non inventa nulla', () => {
+    const nuova = cl([riga('a', 1, 1)]);
+    applicaVariazioni([nuova], []);
+    expect(nuova.righe[0].posizionePrecedente).toBeUndefined();
   });
 });

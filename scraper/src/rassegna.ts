@@ -140,7 +140,8 @@ export function testoSemplice(html: string): string {
     testo
       .replace(/L['’]articolo .+? proviene da .+?\.?$/s, '')
       .replace(/The post .+? appeared first on .+?\.?$/s, '')
-      .replace(/\[(…|\.\.\.|&hellip;)\]|Continua a leggere.*$/gs, ''),
+      .replace(/\[(…|\.\.\.|&hellip;)\]|Continua a leggere.*$/gs, '')
+      .replace(/\s*(…|\.\.\.)?\s*Leggi tutto\W*$/i, ''),
   );
 }
 
@@ -175,6 +176,37 @@ export function pertinente(a: Pick<ArticoloGrezzo, 'titolo' | 'testo' | 'testata
   if (testata?.locale) return true;
   const t = normalizza(testo);
   return riconosciSquadre(testo, voci).length > 0 || CONTESTO_PARMA.some((p) => contiene(t, p));
+}
+
+/** Sigle e nomi con una grafia fissa nei titoli rimessi in minuscolo. */
+const GRAFIE: Record<string, string> = {
+  fipav: 'FIPAV', csen: 'CSEN', cus: 'CUS', tg: 'TG', cev: 'CEV', asd: 'ASD', palaraschi: 'PalaRaschi', italia: 'Italia',
+  superlega: 'SuperLega', supercoppa: 'Supercoppa', velasco: 'Velasco',
+};
+
+/**
+ * Titolo tutto in maiuscolo (es. i servizi di 12 TV Parma) in forma normale: minuscolo, iniziale maiuscola e dopo il
+ * punto, maiuscole restituite a nomi di squadre e luoghi, sigle e categorie (A2, B2, U17…). I titoli già in forma normale
+ * restano come sono.
+ */
+export function titoloLeggibile(titolo: string, nomiPropri: string[]): string {
+  if (/\p{Ll}/u.test(titolo)) return titolo;
+  let t = titolo.toLowerCase();
+  const maiuscola = (p: string) => p.replace(/(^|[\s'’(-])(\p{L})/gu, (_, a: string, b: string) => a + b.toUpperCase());
+  const escape = (p: string) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  for (const nome of [...nomiPropri].sort((a, b) => b.length - a.length)) {
+    const n = nome.toLowerCase().trim();
+    if (!n) continue;
+    const re = new RegExp(`(^|[^\\p{L}\\p{N}])(${escape(n)})(?=$|[^\\p{L}\\p{N}])`, 'gu');
+    t = t.replace(re, (_, a: string, b: string) => a + maiuscola(b));
+  }
+  t = t
+    .replace(/\p{L}+/gu, (p) => GRAFIE[p.toLowerCase()] ?? p)
+    .replace(/\b(serie|under) ([a-d]\d?|\d\d)\b/g, (_, a: string, b: string) => `${a} ${b.toUpperCase()}`)
+    .replace(/\b([a-d][1-3]|u\d\d)\b/g, (p) => p.toUpperCase());
+  return t
+    .replace(/^(\P{L}*)(\p{L})/u, (_, a: string, b: string) => a + b.toUpperCase())
+    .replace(/([.!?] +)(\p{L})/gu, (_, a: string, b: string) => a + b.toUpperCase());
 }
 
 /** Data e ora locali italiane di un istante ISO. */
@@ -312,6 +344,8 @@ export function costruisciRassegna(
   inizio: string,
 ): Omit<Rassegna, 'aggiornataIl'> {
   const esclusi = new Set(config.escludi);
+  // Nomi da rimettere in maiuscolo nei titoli: parole chiave delle squadre, luoghi della provincia, testate.
+  const nomiPropri = [...config.squadre.flatMap((v) => v.parole), ...CONTESTO_PARMA, 'parma', ...TESTATE.map((t) => t.nome)];
   const testate = new Map<string, Testata>(TESTATE.map(({ id, nome, url }) => [id, { id, nome, url }]));
   const articoli: Articolo[] = [];
 
@@ -321,12 +355,15 @@ export function costruisciRassegna(
     if (data < inizio) continue;
     articoli.push({
       id: idArticolo(a.url),
-      titolo: a.titolo,
+      titolo: titoloLeggibile(a.titolo, nomiPropri),
       url: a.url,
       testata: a.testata,
       data,
       ora,
-      estratto: estratto(a.testo),
+      // Ripulito anche qui: vale per gli articoli salvati prima di una nuova regola di pulizia.
+      estratto: estratto(testoSemplice(a.testo)),
+      // I servizi dei TG di 12 TV Parma stanno sotto /puntata/: sono video.
+      ...(a.testata === '12tvparma' && a.url.includes('/puntata/') ? { video: true } : {}),
       squadre: risolviSquadre(riconosciSquadre(`${a.titolo} ${a.testo}`, config.squadre), squadre),
     });
   }

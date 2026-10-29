@@ -1,8 +1,8 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import type { Meta, Partita, Rassegna, StatoFonte } from '../../shared/model.ts';
+import type { Classifica, Meta, Partita, Rassegna, StatoFonte, ZoneClassifica } from '../../shared/model.ts';
 import { caricaConfigurazione } from './alias.ts';
-import { costruisci, creaRiconoscitore } from './build.ts';
+import { applicaVariazioni, costruisci, creaRiconoscitore } from './build.ts';
 import { DATA_DIR, SNAPSHOT_DIR, etichettaStagione, stagioneCorrente } from './config.ts';
 import { statisticheHttp } from './http.ts';
 import { aggiornaLoghi } from './loghi.ts';
@@ -120,6 +120,10 @@ async function main() {
   const extra = fonteFipavParma.abilitata ? [] : campionatiSoloLink(stagione);
   const precedenti = (await leggiJson<Partita[]>(path.join(DATA_DIR, 'partite.json'))) ?? [];
   const r = costruisci(elenco, config, extra, precedenti);
+  applicaVariazioni(r.classifiche, (await leggiJson<Classifica[]>(path.join(DATA_DIR, 'classifiche.json'))) ?? []);
+  // Zone delle classifiche (promozione, playoff, retrocessione): solo dove sono state indicate a mano.
+  const zone = (await leggiJson<{ campionati: Record<string, ZoneClassifica> }>(path.join(DATA_DIR, 'zone-classifiche.json')))?.campionati ?? {};
+  for (const c of r.campionati) if (zone[c.id]) c.zone = zone[c.id];
   try {
     await aggiornaLoghi(r.squadre, r.campionati, r.candidatiLogo, { scaricare: !soloBuild, log });
   } catch (e) {

@@ -1,4 +1,5 @@
 import type { Partita } from '../../../shared/model.ts';
+import { isDerby } from '../lib/analisi.ts';
 import { useDati } from '../lib/dati.tsx';
 import { dataBreve, oggiIso } from '../lib/date.ts';
 import { usePreferiti } from '../lib/preferiti.ts';
@@ -12,6 +13,14 @@ export function StatoPartita({ p }: { p: Partita }) {
   if (p.stato === 'da_giocare' && p.data && p.data < oggi) return <span className="stato stato-attesa">Risultato non disponibile</span>;
   if (p.spostata) return <span className="stato stato-spostata">Spostata</span>;
   return null;
+}
+
+export function BadgeDerby() {
+  return (
+    <span className="badge-derby" title="Sfida tra due squadre di Parma">
+      Derby
+    </span>
+  );
 }
 
 export function testoSpostata(p: Partita): string | null {
@@ -30,15 +39,17 @@ export function PartitaCard({ p, mostraData = false }: { p: Partita; mostraData?
   const vinceCasa = giocata && p.punteggio!.casa > p.punteggio!.ospite;
   const vinceOspite = giocata && p.punteggio!.ospite > p.punteggio!.casa;
   const spostata = testoSpostata(p);
+  const derby = isDerby(p, d);
 
   const quando = [mostraData && p.data ? dataBreve(p.data) : null, p.ora].filter(Boolean).join(' · ');
 
   return (
-    <a className="card partita tinta" style={stileTinta(c)} href={link('partita', p.id)}>
+    <a className={`card partita tinta${derby ? ' derby' : ''}`} style={stileTinta(c)} href={link('partita', p.id)}>
       <div className="partita-testa">
         <BadgeCampionato c={c} />
         {p.girone && <span className="dettaglio">Gir. {p.girone}</span>}
         {p.giornata != null && <span className="dettaglio">G{p.giornata}</span>}
+        {derby && <BadgeDerby />}
         <StatoPartita p={p} />
         <span className="partita-ora">{giocata ? (mostraData && p.data ? dataBreve(p.data) : '') : quando || '—'}</span>
       </div>

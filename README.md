@@ -85,6 +85,19 @@ genere, squadra e comune, pagina della singola squadra, classifiche, "Le mie squ
 dettaglio gara con parziali, mappa e link alla fonte, condivisione (Web Share API, altrimenti copia negli appunti), gare
 rinviate e spostate in evidenza, rassegna stampa (anche nella pagina della squadra), tema chiaro/scuro automatico, legenda colori sempre a portata di mano.
 
+In più:
+- **home**: riepilogo del weekend (gare, quante in provincia, derby) e prossima gara delle squadre seguite con conto alla rovescia;
+- **derby** (due squadre di Parma in un campionato regionale o nazionale) evidenziati nelle card e nel dettaglio;
+- **forma**: ultimi 5 risultati (V/P) nelle classifiche e nella pagina squadra, con la serie in corso;
+- **classifiche**: frecce ▲▼ rispetto alla giornata precedente (calcolate confrontando con la classifica pubblicata prima,
+  `scraper/src/build.ts` → `applicaVariazioni`) e zone colorate da `data/zone-classifiche.json`;
+- **calendario della squadra**: la build scrive `data/calendari/<id>.ics` per ogni squadra di Parma (`shared/ics.ts`); dalla
+  pagina squadra ci si iscrive (iPhone/Mac/Outlook con `webcal://`, Google Calendar) o si scarica il file;
+- **immagine da condividere** (1080×1080, `web/src/lib/immagine.ts`): risultato con parziali o locandina della prossima gara,
+  con loghi e colore del campionato, condivisa con la Web Share API o scaricata;
+- titoli della rassegna scritti tutti in maiuscolo riportati in forma normale, servizi dei TG segnalati come video;
+- font Barlow Condensed (`@fontsource`, incluso nell'app e disponibile offline) per titoli, punteggi e numeri.
+
 PWA: installabile (manifest, icone, splash iOS), offline con gli ultimi dati (*stale-while-revalidate* sui JSON: quando
 arrivano dati nuovi l'app li ricarica da sola) e avviso "Nuova versione disponibile".
 
@@ -214,6 +227,22 @@ Ti conviene impostarlo prima di pubblicare l'app. Dopo una modifica: `npm run sc
 - `articoli`: articoli aggiunti a mano, per esempio dalle testate che non si possono leggere in automatico. `squadre`
   è facoltativo: se manca si ricava dal titolo.
 - `escludi`: URL da non mostrare.
+
+### `data/zone-classifiche.json` – zone delle classifiche
+
+Le regole di promozione e retrocessione cambiano per campionato e stagione, quindi si indicano a mano (vuoto = nessuna zona):
+
+```json
+{
+  "campionati": {
+    "crer-serie-c-m": { "promozione": 1, "playoff": [2, 4], "retrocessione": 2 },
+    "naz-b2-f": { "promozione": 1, "playout": [9, 10], "retrocessione": 3 }
+  }
+}
+```
+
+`promozione` e `retrocessione` sono il numero di posizioni in testa e in coda, `playoff` e `playout` un intervallo di
+posizioni. Gli id dei campionati sono in `data/campionati.json`. Dopo una modifica: `npm run scrape -- --solo-build`.
 
 ### `data/colori.json` – colori dei campionati
 
