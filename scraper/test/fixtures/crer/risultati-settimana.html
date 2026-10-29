@@ -1,0 +1,2101 @@
+<!--
+CId=
+StId=2415
+-->
+
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><link href="/js/jquery/jquery-ui.css" type="text/css" rel="stylesheet" /><link href="/css/base.min.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" type="text/css" href="/css/modal-menu.css" /><link rel="stylesheet" type="text/css" href="/js/lightslider/css/lightslider.css" /><link rel="stylesheet" type="text/css" href="/js/slicknav/slicknav.css" /><link rel="stylesheet" type="text/css" href="/js/slicknav/slicknav-style.css" /><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.ashx" />
+
+    <script src="/js/jquery/jquery-3.1.0.min.js"></script>
+    <script src="/js/jquery/jquery-ui.js"></script>
+    <script type="text/javascript">
+        jQuery.noConflict();
+    </script>
+    <script src="/js/mootools-core-1.5.1.js" type="text/javascript"></script>
+    <script src="/js/mootools-more-1.5.1.js" type="text/javascript"></script>
+    <!--[if (gte IE 6)&(lte IE 8)]>
+      <script type="text/javascript" src="/js/selectivizr.js?nocache=20141120a"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/js/checkform.js?nocache=20160616a"></script>
+    <script type="text/javascript" src="/js/jsManager.js?nocache=20160708a"></script>
+    <script type="text/javascript" src="/js/slideshow.js?nocache=20141120a"></script>
+    <script type="text/javascript" src="/js/MenuMatic_0.68.4.js?nocache=20160616a"></script>
+    <script type="text/javascript" src="/js/cerabox/cerabox.min.js?nocache=20141120a"></script>
+    <script type="text/javascript" src="/js/mediabox/mediaboxAdvanced.js?nocaches=2023"></script>
+    <script type="text/javascript" src="/js/DatePicker/DatePickerFull.js?nocache=20141120a"></script>
+    <script type="text/javascript" src="/js/lightslider/js/lightslider.js"></script>
+    <script type="text/javascript" src="/js/slicknav/jquery.slicknav.min.js"></script>
+    
+    <script type="text/javascript">
+        Locale.use('it-IT');
+
+        window.addEvent('load', function () {
+            equalize('#layout-area2, #layout-area3, #layout-area4');
+            equalize('#layout-area3 .col');
+            $$('.popup-image').cerabox({ group: false, displayTitle: false });
+
+            jQuery('.cerabox-close').click(function () {
+                jQuery('body').css('overflow','')
+            })
+            //console.log('');
+
+
+          
+          getMyBingMaps();
+
+        });
+        window.addEvent('domready', function () {
+            paginazioneBoxAfter();
+
+        });
+        function paginazioneBoxAfter() {
+            $$('.box-file-multipli').cerabox({ group: false, displayTitle: true, mobileView: false });
+            $$('.box-page-ricerca-multipli').cerabox({ group: false, displayTitle: true, mobileView: false });
+            $$('.box-rassegna-multipli').cerabox({ group: false, displayTitle: true, mobileView: false });
+            $$('.aps-cer').cerabox({ group: false, displayTitle: true, mobileView: false });
+        }
+
+    </script>
+
+
+
+    
+    <script type="text/javascript">
+        function Stagione(SId) {
+            CaricaPaginaGet('/risultati-classifiche.aspx?act=settimana', 'SId=' + SId, 'lbSettimana');
+            CaricaPaginaGet('/risultati-classifiche.aspx?act=campionato', 'SId=' + SId, 'lbCampionato', 'Campionato(' + SId + ', \'\');');
+        }
+        function Campionato(SId, CId) {
+            CaricaPaginaGet('/risultati-classifiche.aspx?act=societa', 'SId=' + SId + '&CId=' + CId, 'lbSocieta');
+        }
+        function EsportaXls(ff) {
+            var pp = window.open('about:blank', 'popXls');
+            ff.target = 'popXls';
+            var xAction = ff.action;
+            ff.action = 'esporta-risultati.aspx';
+            ff.submit();
+            ff.target = '';
+            ff.action = xAction;
+            pp.focus();
+        }
+    </script>
+<link href="/files/2312/0/Css/1384/stile.css" type="text/css" rel="stylesheet" /><meta property="og:title" content="FIPAV CRER - Pagine Pubbliche | Risultati e classifiche" /><meta property="og:type" content="article" /><meta property="og:url" content="https://crer.portalefipav.net/risultati-classifiche.aspx?PId=29422" /><meta property="og:image" content="http://crer.portalefipav.net/files/2312/Logo/" /><meta property="og:site_name" content="FIPAV CRER - Pagine Pubbliche" /><meta property="og:description" content="" /><meta property="fb:app_id" content="576743645751508" /><title>
+	FIPAV CRER - Pagine Pubbliche | Risultati e classifiche
+</title></head>
+<body>
+    
+	
+<div id="layout-container" class=" desktop clsP_29422">
+	<div id="layout-area1" style="width:100%">
+		<div class="col col-4">
+			
+<div id="BoxId_69832" name="BoxId_69832" class="box box-4">
+	<div class=""style="background: transparent;"><div class="box-menu-back"><div class="box-menu menu-horizontal" id="box_menu_hor_69832" style="height: 45px;"></div></div>
+
+<script type="text/javascript">
+//<![CDATA[
+if(document.getElementById('nav')){var myMenu = new MenuMatic({ matchWidthMode: true, hideDelay: 200, stretchMainMenu:true });$('box_menu_hor_69832').setStyle('height','');}
+// ]]>
+</script>
+	</div>
+</div>
+		</div>
+	</div>
+	<div id="layout-area-corpo">
+	<div id="layout-area3" style="width:100%">
+		<div class="col col-4">
+	<h1>Risultati e classifiche delle gare</h1>
+<div id="BoxId_69834" class="box box-4">
+	<div class="box-padding">
+	<form id="filtro" method="get" action="/risultati-classifiche.aspx">
+		<input type="hidden" name="ComitatoId" value="35">
+		<label>
+			Stagione sportiva:<br />
+			<select name="StId" tabindex="1" class="input-select" onchange="Stagione(this.options[this.selectedIndex].value)">
+				<option value="2415" selected="selected">Stagione Sportiva 2026 / 2027</option>
+				<option value="2297">Stagione Sportiva 2025 / 2026</option>
+				<option value="2178">Stagione Sportiva 2024 / 2025</option>
+				<option value="2060">Stagione Sportiva 2023 / 2024</option>
+				<option value="1942">Stagione Sportiva 2022 / 2023</option>
+				<option value="1823">Stagione Sportiva 2021 / 2022</option>
+				<option value="1704">Stagione Sportiva 2020 / 2021</option>
+				<option value="1585">Stagione Sportiva 2019 / 2020</option>
+				<option value="1466">Stagione Sportiva 2018 / 2019</option>
+				<option value="1347">Stagione Sportiva 2017 / 2018</option>
+				<option value="1228">Stagione Sportiva 2016 / 2017</option>
+				<option value="1109">Stagione Sportiva 2015 / 2016</option>
+				<option value="990">Stagione Sportiva 2014 / 2015</option>
+				<option value="871">Stagione Sportiva 2013 / 2014</option>
+				<option value="752">Stagione Sportiva 2012 / 2013</option>
+				<option value="646">Stagione Sportiva 2011 / 2012</option>
+				<option value="157">Stagione Sportiva 2010 / 2011</option>
+				<option value="121">Stagione Sportiva 2009 / 2010</option>
+			</select>
+		</label>
+		<label id="lbSettimana">
+			Settimana: <br />
+			<select name="DataDa" class="input-select" tabindex="2">
+				<option value="">Tutte le date..</option>
+				<option value="01/07/2026">dal 01/07/2026 al 05/07/2026</option>
+				<option value="06/07/2026">dal 06/07/2026 al 12/07/2026</option>
+				<option value="13/07/2026">dal 13/07/2026 al 19/07/2026</option>
+				<option value="20/07/2026">dal 20/07/2026 al 26/07/2026</option>
+				<option value="27/07/2026">dal 27/07/2026 al 02/08/2026</option>
+				<option value="03/08/2026">dal 03/08/2026 al 09/08/2026</option>
+				<option value="10/08/2026">dal 10/08/2026 al 16/08/2026</option>
+				<option value="17/08/2026">dal 17/08/2026 al 23/08/2026</option>
+				<option value="24/08/2026">dal 24/08/2026 al 30/08/2026</option>
+				<option value="31/08/2026">dal 31/08/2026 al 06/09/2026</option>
+				<option value="07/09/2026">dal 07/09/2026 al 13/09/2026</option>
+				<option value="14/09/2026">dal 14/09/2026 al 20/09/2026</option>
+				<option value="21/09/2026">dal 21/09/2026 al 27/09/2026</option>
+				<option value="28/09/2026">dal 28/09/2026 al 04/10/2026</option>
+				<option value="05/10/2026">dal 05/10/2026 al 11/10/2026</option>
+				<option value="12/10/2026">dal 12/10/2026 al 18/10/2026</option>
+				<option value="19/10/2026" selected="selected" style=>dal 19/10/2026 al 25/10/2026</option>
+				<option value="26/10/2026">dal 26/10/2026 al 01/11/2026</option>
+				<option value="02/11/2026">dal 02/11/2026 al 08/11/2026</option>
+				<option value="09/11/2026">dal 09/11/2026 al 15/11/2026</option>
+				<option value="16/11/2026">dal 16/11/2026 al 22/11/2026</option>
+				<option value="23/11/2026">dal 23/11/2026 al 29/11/2026</option>
+				<option value="30/11/2026">dal 30/11/2026 al 06/12/2026</option>
+				<option value="07/12/2026">dal 07/12/2026 al 13/12/2026</option>
+				<option value="14/12/2026">dal 14/12/2026 al 20/12/2026</option>
+				<option value="21/12/2026">dal 21/12/2026 al 27/12/2026</option>
+				<option value="28/12/2026">dal 28/12/2026 al 03/01/2027</option>
+				<option value="04/01/2027">dal 04/01/2027 al 10/01/2027</option>
+				<option value="11/01/2027">dal 11/01/2027 al 17/01/2027</option>
+				<option value="18/01/2027">dal 18/01/2027 al 24/01/2027</option>
+				<option value="25/01/2027">dal 25/01/2027 al 31/01/2027</option>
+				<option value="01/02/2027">dal 01/02/2027 al 07/02/2027</option>
+				<option value="08/02/2027">dal 08/02/2027 al 14/02/2027</option>
+				<option value="15/02/2027">dal 15/02/2027 al 21/02/2027</option>
+				<option value="22/02/2027">dal 22/02/2027 al 28/02/2027</option>
+				<option value="01/03/2027">dal 01/03/2027 al 07/03/2027</option>
+				<option value="08/03/2027">dal 08/03/2027 al 14/03/2027</option>
+				<option value="15/03/2027">dal 15/03/2027 al 21/03/2027</option>
+				<option value="22/03/2027">dal 22/03/2027 al 28/03/2027</option>
+				<option value="29/03/2027">dal 29/03/2027 al 04/04/2027</option>
+				<option value="05/04/2027">dal 05/04/2027 al 11/04/2027</option>
+				<option value="12/04/2027">dal 12/04/2027 al 18/04/2027</option>
+				<option value="19/04/2027">dal 19/04/2027 al 25/04/2027</option>
+				<option value="26/04/2027">dal 26/04/2027 al 02/05/2027</option>
+				<option value="03/05/2027">dal 03/05/2027 al 09/05/2027</option>
+				<option value="10/05/2027">dal 10/05/2027 al 16/05/2027</option>
+				<option value="17/05/2027">dal 17/05/2027 al 23/05/2027</option>
+				<option value="24/05/2027">dal 24/05/2027 al 30/05/2027</option>
+				<option value="31/05/2027">dal 31/05/2027 al 06/06/2027</option>
+				<option value="07/06/2027">dal 07/06/2027 al 13/06/2027</option>
+				<option value="14/06/2027">dal 14/06/2027 al 20/06/2027</option>
+				<option value="21/06/2027">dal 21/06/2027 al 27/06/2027</option>
+				<option value="28/06/2027">dal 28/06/2027 al 30/06/2027</option>
+			</select>
+		</label>
+		<label class="size-0_5">
+			Stato gara:<br />
+			<select name="StatoGara" class="input-select-0_5" tabindex="3">
+				<option value="">Tutti..</option>
+				<option value="1">Disputate</option>
+				<option value="0">Da disputare</option>
+			</select>
+		</label>
+		<label id="lbCampionato" class="size-3">
+			Campionato:<br />
+			<select name="CId" class="input-select-3" tabindex="4" onchange="Campionato(2415, this.options[this.selectedIndex].value)">
+					<option value="">Tutti i campionati..</option>
+				</optgroup>
+				<optgroup label="Serie C Maschile">
+					<option value="92487">CM Gir. A</option>
+					<option value="92488">CM Gir. B</option>
+				</optgroup>
+				<optgroup label="Serie C Femminile">
+					<option value="92489">CF Gir. A</option>
+					<option value="92490">CF Gir. B</option>
+					<option value="92491">CF Gir. C</option>
+				</optgroup>
+				<optgroup label="Serie D Maschile">
+					<option value="92492">DM Gir. A</option>
+					<option value="92493">DM Gir. B</option>
+					<option value="92494">DM Gir. C</option>
+				</optgroup>
+				<optgroup label="Serie D Femminile">
+					<option value="92495">DF Gir. A</option>
+					<option value="92496">DF Gir. B</option>
+					<option value="92497">DF Gir. C</option>
+					<option value="92498">DF Gir. D</option>
+					<option value="92499">DF Gir. E</option>
+				</optgroup>
+				<optgroup label="Under 15F ER">
+					<option value="93810">15FA</option>
+					<option value="93812">15FB</option>
+					<option value="93813">15FC</option>
+				</optgroup>
+				<optgroup label="Under 17F ER">
+					<option value="93820">17FA</option>
+					<option value="93821">17FB</option>
+					<option value="93822">17FC</option>
+				</optgroup>
+				<optgroup label="Under 17M ER">
+					<option value="93778">17MA</option>
+				</optgroup>
+				<optgroup label="Under 19F ER">
+					<option value="93757">19FA</option>
+				</optgroup>
+				<optgroup label="CAMPIONATI NAZIONALI">
+					<option value="92450">CAMPIONATI NAZIONALI</option>
+			</select>
+		</label>
+		<label id="lbSocieta" class="size-2">
+			Società:<br />
+			<select name="SId" class="input-select-2" tabindex="5">
+					<option value="">Tutte le societ&agrave;..</option>
+					<option value="4719">A.P.D. NETTUNIA</option>
+					<option value="4732">A.S. VOLLEY CASTELLO</option>
+					<option value="3999">A.S.D. 4 TORRI 1947</option>
+					<option value="4713">A.S.D. ANZOLAVOLLEY BOLOGNA</option>
+					<option value="4570">A.S.D. BASSER VOLLEY</option>
+					<option value="4752">A.S.D. DECIMA VOLLEY</option>
+					<option value="3102">A.S.D. DINAMO PALLAVOLO BELLARIA IGEA MARINA</option>
+					<option value="4468">A.S.D. GALAXY VOLLEY</option>
+					<option value="4737">A.S.D. GRANAROLO VOLLEY</option>
+					<option value="3119">A.S.D. IDEA VOLLEY</option>
+					<option value="4793">A.S.D. JOVI VOLLEY</option>
+					<option value="4780">A.S.D. O.S.G.B.</option>
+					<option value="3942">A.S.D. PALLAVOLO FIORENZUOLA</option>
+					<option value="4819">A.S.D. PGS PRIMAVERA LIFE</option>
+					<option value="5597">A.S.D. QUIVOLLEY</option>
+					<option value="5087">A.S.D. RIVIERA VOLLEY</option>
+					<option value="4812">A.S.D. ROSTA VOLLEY TEAM</option>
+					<option value="5591">A.S.D. SAN POLO VOLLEY</option>
+					<option value="4680">A.S.D. VIRTUS MASSESE</option>
+					<option value="3630">A.S.D. VOLLEY ACADEMY</option>
+					<option value="3956">A.S.D. VOLLEY TEAM 03 PIACENZA</option>
+					<option value="3987">A.S.PALLAVOLO ARGENTA</option>
+					<option value="3656">ACERBOLI VOLLEY SANTARCANGELO ASD</option>
+					<option value="4777">APD GS BOCA BARCO</option>
+					<option value="3990">ASD BENEDETTO VOLLEY</option>
+					<option value="4591">ASD G.S.SPEZZANESE            </option>
+					<option value="5561">ASD PALLAVOLO GALLONESE</option>
+					<option value="5578">ASD POL.COOP PARMA 1964</option>
+					<option value="5312">ASD POLISPORTIVA I CARE</option>
+					<option value="4502">ASD POLISPORTIVA PONTEVECCHIO</option>
+					<option value="5560">ASD VOLLEY MODENA</option>
+					<option value="4010">ASD VOLLEY OSTELLATO</option>
+					<option value="4784">ASD VOLLEY ROTEGLIA</option>
+					<option value="5553">ASS. POL. DIL. NAZARENO</option>
+					<option value="4513">ASS. SPORT CORLO              </option>
+					<option value="3884">ATHENA RIMINI A.S.D.</option>
+					<option value="4794">BASSA REGGIANA VOLLEY A.S.D.</option>
+					<option value="3115">BEACH & PARK VOLLEY</option>
+					<option value="5225">BOGASPORT ASS. SPORT. DILETT.</option>
+					<option value="5569">BORGOVOLLEY TEAM ASD</option>
+					<option value="4567">C.S.D.JACQUES MARITAIN        </option>
+					<option value="4729">CALDERARA VOLAVOLLEY ASD</option>
+					<option value="3937">CARPANETO VOLLEY</option>
+					<option value="4735">CASTENASO VOLLEY AS DILETTANTI</option>
+					<option value="3103">CATTOLICA VOLLEY</option>
+					<option value="4825">CENTRO VOLLEY REGGIANO ASD</option>
+					<option value="1921">CERVIA VOLLEY S.S.D. a R.L.</option>
+					<option value="4503">CLAI IMOLA VOLLEY</option>
+					<option value="4789">CORREGGIO VOLLEY</option>
+					<option value="4736">CREVAVOLLEY.NET A.S.D.</option>
+					<option value="4163">DREAM VOLLEY RAVENNA A.S.D.</option>
+					<option value="4722">ELLEPPI VOLLEY</option>
+					<option value="4186">ENERGY VOLLEY</option>
+					<option value="4580">G.S. ARTIGLIO</option>
+					<option value="4537">G.S. LIBERTAS FIORANO         </option>
+					<option value="4807">G.S. VV.F. MAURIZIO MARCONI RE</option>
+					<option value="4782">G.S.VIRTUS CASALGRANDE ASD</option>
+					<option value="4515">GRUPPO SPORTIVO PALL. VIGNOLA A.S.D.</option>
+					<option value="4260">GRUPPO SPORTIVO SAN PIO X ASD</option>
+					<option value="5021">GS PORTO ROBUR COSTA 2030</option>
+					<option value="4720">IDEA VOLLEY A.S.D.</option>
+					<option value="3606">INVOLLEY SSD ARL</option>
+					<option value="4470">ISOMEC GREEN INZANI</option>
+					<option value="4514">L.A. MURATORI VOLLEY VIGNOLA  </option>
+					<option value="5592">LA SALLE SPORT CENTER A.S.D.</option>
+					<option value="3955">LIBERTAS SAN PAOLO</option>
+					<option value="3471">LIBERTAS VOLLEY FORLI' A.S.D.</option>
+					<option value="5556">MODENA VOLLEY PUNTO ZERO SSDRL</option>
+					<option value="4595">MONDIAL QUARTIROLO</option>
+					<option value="5039">NEW VOLLEY ACADEMY FORLI</option>
+					<option value="5743">NEWCASTLE SPORT</option>
+					<option value="3826">NUOVA POL. CONSOLINI ASD</option>
+					<option value="5575">OASI PALLAVOLO NOCETO ASD</option>
+					<option value="2829">OLIMPIA TEODORA</option>
+					<option value="4718">P.G.S. BELLARIA</option>
+					<option value="4543">P.G.S. FIDES                  </option>
+					<option value="4524">PALL. CAVEZZO                 </option>
+					<option value="1912">PALLAVOLO ALFONSINE</option>
+					<option value="4877">PALLAVOLO BOLOGNA SSD A R L</option>
+					<option value="4727">PALLAVOLO BUDRIO A.S.D.</option>
+					<option value="4792">PALLAVOLO FABBRICO ASD</option>
+					<option value="1926">PALLAVOLO FAENZA A.S.D.</option>
+					<option value="1937">PALLAVOLO MASSALOMBARDA</option>
+					<option value="4748">PALLAVOLO MORDANO ASD</option>
+					<option value="4750">PALLAVOLO OZZANO A.S.D.</option>
+					<option value="4738">PALLAVOLO SESTO IMOLESE A.S.D.</option>
+					<option value="4155">PALLAVOLO VISERBA SSD</option>
+					<option value="3951">PIACENZA VOLLEY S.S.D. A R.L.</option>
+					<option value="4823">PIEVE VOLLEY A.S.D.</option>
+					<option value="4616">PODIUM TEAM VOLLEY A.S.D.     </option>
+					<option value="3108">POL. ADOLFO CONSOLINI S.S.D ARL</option>
+					<option value="4512">POL.NONANTOLA SETT. PALLAVOLO</option>
+					<option value="1913">POL.VA FULGUR PALLAVOLO AD</option>
+					<option value="4529">POLISPORT.CASTELFRANCO EMILIA </option>
+					<option value="4183">POLISPORTIVA AUDAX PARMA</option>
+					<option value="5349">POLISPORTIVA BAGANZOLA ASD</option>
+					<option value="4730">POLISPORTIVA G.MASI A.S.D.</option>
+					<option value="4799">POLISPORTIVA L'ARENA A.S.D.</option>
+					<option value="4563">POLISPORTIVA MODENA EST A.S.D.</option>
+					<option value="4552">POLISPORTIVA POLIVALENTE MARANELLO ASD</option>
+					<option value="4498">PROGRESSO VOLLEY ASD</option>
+					<option value="5088">RAINBOW</option>
+					<option value="3961">RIVER VOLLEY 2001 A.S.D.</option>
+					<option value="3953">RM VOLLEY PIACENZA ASD</option>
+					<option value="3200">RUBICONE IN VOLLEY - RIV</option>
+					<option value="5588">SALSO VOLLEY</option>
+					<option value="5791">SANTARCANGELO ASD</option>
+					<option value="4499">SAVENA VOLLEY A.S.D.</option>
+					<option value="4586">SC.PALL.ANDERLINI S.COOP.SSD</option>
+					<option value="4560">SCUOLA DI PALLAVOLO ANDERLINI</option>
+					<option value="4672">SOLIERA VOLLEY 150 ASD APS</option>
+					<option value="5160">SPORT CLUB PARMA</option>
+					<option value="4742">SPORT UP S.S.D. A R.L.</option>
+					<option value="4532">STADIUM PALL.MIRANDOLA SSD ARL</option>
+					<option value="4012">TEAM VOLLEY</option>
+					<option value="1939">TEODORA SETTORE GIOVANILE ASD</option>
+					<option value="4724">TRIUMVIRATO ATLET. PALL. G.S.D</option>
+					<option value="5579">U.S. MONTEBELLO</option>
+					<option value="4833">U.S. RUBIERESE VOLLEY SSDRL</option>
+					<option value="4800">U.S.D. AUDAX POVIGLIO</option>
+					<option value="4678">UNIVOLLEY A.S.D.              </option>
+					<option value="4001">USD A.C.L.I S.LUCA S.GIORGIO</option>
+					<option value="3944">VII CASTELLI GAZZOLESI SSD a.r.l.</option>
+					<option value="4734">VILLANOVA VOLLEY</option>
+					<option value="5535">VIVA VILLA VOLLEY ASD</option>
+					<option value="5018">VOLLEY ACADEMY PIACENZA SSD A RL</option>
+					<option value="5315">VOLLEY ART PIACENZA</option>
+					<option value="3958">VOLLEY BALL PODENZANO</option>
+					<option value="4835">VOLLEY BALL SAN MARTINO</option>
+					<option value="5554">VOLLEY CASTELVETRO  A.S.D.</option>
+					<option value="3480">VOLLEY CESENATICO ASD</option>
+					<option value="3199">VOLLEY CLUB CESENA ASD</option>
+					<option value="3472">VOLLEY SAMMARTINESE A.S.D.</option>
+					<option value="4627">VOLLEY SASSUOLO A.S.D.        </option>
+					<option value="4840">VOLLEY SCANDIANO</option>
+					<option value="4589">VOLLEY STADIUM</option>
+					<option value="4726">VOLLEY TEAM BOLOGNA S.S.D.AR.L</option>
+					<option value="4803">VOLLEY TRICOLORE RE ASD SRL</option>
+					<option value="4436">YOU ENERGY VOLLEY</option>
+					<option value="4508">YZ VOLLEY A.S.DILETTANTISTICA</option>
+			</select>
+		</label>
+		<label class="size-0_5">
+			&nbsp;<br />
+			<input type="hidden" name="PId" value="29422" />
+			<input type="submit" name="btFiltro" value="CERCA" class="button bt-search" style="width:100px;" />
+		</label>
+		<label class="size-0_5">
+			&nbsp;<br />
+			<input type="button" name="btXls" onclick="EsportaXls(this.form);" value="Esporta" class="button bt-excel" style="width:100px;" />
+		</label>
+	</form>
+<table class="tbl tbl-risultati">
+	<caption>CM Gir. A<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=6356637E7A6C7A6C727E6A5C662E3337213A24" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92487','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92487" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">8</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:15</td>
+			<td title="POLISPORTIVA MODENA EST A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4563/Loghi/LogoS4563.png" alt="">POLISPORTIVA MODENA EST MO</td>
+			<td title="VOLLEY BALL SAN MARTINO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4835/Loghi/LogoS4835.jpg" alt="">AMA VOLLEY BALL SAN MARTINO RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626246">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626246"><span class="parziali">25-16</span><span class="parziali">21-25</span><span class="parziali">23-25</span><span class="parziali">20-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626246"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA SEGHEDONI  CAMPO A&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA INDIPENDENZA 25&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: GRAZIAN&lt;br&gt;2&#176; arbitro: MONARI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">9</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:00</td>
+			<td title="ISOMEC GREEN INZANI"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4470/Loghi/LogoS4470.jpg" alt="">ISOMEC GREEN INZANI PR</td>
+			<td title="ASD PALLAVOLO GALLONESE"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5561/Loghi/LogoS5561.png" alt="">ASD PALLAVOLO GALLONESE MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626247">3 - 2</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626247"><span class="parziali">26-24</span><span class="parziali">20-25</span><span class="parziali">27-29</span><span class="parziali">25-22</span><span class="parziali">15-10</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626247"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA CASALINI CAMPO B - GRANDE&lt;/b&gt;&lt;br /&gt; PARMA PR&lt;br /&gt;VIA LARGO BECCARIA&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SOLAZZI&lt;br&gt;2&#176; arbitro: BELLINI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">10</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:30</td>
+			<td title="ASS. SPORT CORLO              "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4513/Loghi/LogoS4513.jpg" alt="">AS CORLO HYDRA ITALIA MO</td>
+			<td title="G.S. ARTIGLIO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4580/Loghi/LogoS4580.jpg" alt="">MARKING PRODUCTS ARTIGLIO MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626248">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626248"><span class="parziali">22-25</span><span class="parziali">16-25</span><span class="parziali">17-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626248"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA COMUNALE - CORLO&lt;/b&gt;&lt;br /&gt; FORMIGINE MO&lt;br /&gt;VIA CORLETTO 1&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ROSSI&lt;br&gt;2&#176; arbitro: PIPOLA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">11</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:00</td>
+			<td title="LIBERTAS SAN PAOLO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3955/Loghi/LogoS3955.jpg" alt="">LIBERTAS STERILTOM PC</td>
+			<td title="SOLIERA VOLLEY 150 ASD APS"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4672/Loghi/LogoS4672.jpg" alt="">JACK SOFT SOLIERA 150 MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626249">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626249"><span class="parziali">25-21</span><span class="parziali">20-25</span><span class="parziali">25-19</span><span class="parziali">25-16</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626249"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAGAMBARDELLA&lt;/b&gt;&lt;br /&gt; PIACENZA PC&lt;br /&gt;VIA ALBERICI 3&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MUSI&lt;br&gt;2&#176; arbitro: SQUILLACI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">13</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 20:45</td>
+			<td title="POLISPORTIVA AUDAX PARMA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4183/Loghi/LogoS4183.jpg" alt="">POL. AUDAX PARMA PR</td>
+			<td title="MONDIAL QUARTIROLO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4595/Loghi/LogoS4595.jpg" alt="">MONDIAL WI-EN MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626251">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626251"><span class="parziali">25-23</span><span class="parziali">25-23</span><span class="parziali">24-26</span><span class="parziali">25-19</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626251"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA SCUOLE ELEMENTARI COCCONI&lt;/b&gt;&lt;br /&gt; PARMA PR&lt;br /&gt;STRADA DEL QUARTIERE 1D&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CANFORA&lt;br&gt;2&#176; arbitro: SELMANI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">14</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 21:00</td>
+			<td title="ENERGY VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4186/Loghi/LogoS4186.jpg" alt="">TECHCAB ENERGY VOLLEY PARMA PR</td>
+			<td title="UNIVOLLEY A.S.D.              "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4678/Loghi/LogoS4678.png" alt="">UNIVOLLEY CARPI MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626252">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626252"><span class="parziali">24-26</span><span class="parziali">30-32</span><span class="parziali">19-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626252"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;OLTRETORRENTE GRANDE&lt;/b&gt;&lt;br /&gt; PARMA PR&lt;br /&gt;VIA PINTOR 7/A&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: VITO&lt;br&gt;2&#176; arbitro: CAROTA&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>CM Gir. B<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=C7F2C7DADEC8DEC8D6DACEF8C28A9793859E8F" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92488','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92488" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">190</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 20:45</td>
+			<td title="DREAM VOLLEY RAVENNA A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4163/Loghi/LogoS4163.jpg" alt="">PIETRO PEZZI RA</td>
+			<td title="ELLEPPI VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4722/Loghi/LogoS4722.png" alt="">ELLEPPI VOLLEY BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626428">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626428"><span class="parziali">25-18</span><span class="parziali">25-23</span><span class="parziali">25-23</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626428"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALACOSTA&lt;/b&gt;&lt;br /&gt; RAVENNA RA&lt;br /&gt;Piazza Caduti sul lavoro 11&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CATALANO&lt;br&gt;2&#176; arbitro: AVANZOLINI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">191</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:30</td>
+			<td title="IDEA VOLLEY A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4720/Loghi/LogoS4720.jpg" alt="">S.C.SERVIZI ZINELLA BOLOGNA BO</td>
+			<td title="PALLAVOLO VISERBA SSD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4155/Loghi/LogoS4155.jpg" alt="">MAR PALLAVOLO VISERBA RN</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626429">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626429"><span class="parziali">25-15</span><span class="parziali">25-14</span><span class="parziali">25-23</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626429"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PalaMargelli&lt;/b&gt;&lt;br /&gt; BOLOGNA BO&lt;br /&gt;Via Corticella 180/4&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MAZZOLI&lt;br&gt;2&#176; arbitro: GRILLO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">193</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:30</td>
+			<td title="GS PORTO ROBUR COSTA 2030"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5021/Loghi/LogoS5021.png" alt="">PRC 2030 - FASSA BORTOLO RA</td>
+			<td title="PALLAVOLO SESTO IMOLESE A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4738/Loghi/LogoS4738.jpg" alt="">PALLAVOLO SESTO IMOLESE BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626431">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626431"><span class="parziali">19-25</span><span class="parziali">20-25</span><span class="parziali">19-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626431"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALACOSTA&lt;/b&gt;&lt;br /&gt; RAVENNA RA&lt;br /&gt;Piazza Caduti sul lavoro 11&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: NEGRO&lt;br&gt;2&#176; arbitro: BRUNELLI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">194</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 21:00</td>
+			<td title="A.S.D. 4 TORRI 1947"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3999/Loghi/LogoS3999.png" alt="">LE STAGIONI D'ITALIA 4TORRI FE</td>
+			<td title="VOLLEY CESENATICO ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3480/Loghi/LogoS3480.jpg" alt="">VOLLEY CESENATICO FC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626432">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626432"><span class="parziali">15-25</span><span class="parziali">14-25</span><span class="parziali">24-26</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626432"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA T.BONATI&lt;/b&gt;&lt;br /&gt; FERRARA FE&lt;br /&gt;VIA POLETTI 65&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: DE MARE&lt;br&gt;2&#176; arbitro: COCCHI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">195</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:30</td>
+			<td title="SCUOLA DI PALLAVOLO ANDERLINI"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/theme/newb/no-image.png" alt="">BECA TENSPED MO</td>
+			<td title="PALLAVOLO BOLOGNA SSD A R L"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4877/Loghi/LogoS4877.jpg" alt="">PALLAVOLO BOLOGNA BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626433">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626433"><span class="parziali">25-18</span><span class="parziali">25-12</span><span class="parziali">25-19</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626433"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA ANDERLINI B&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA MARIO VELLANI MARCHI, 106&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CANFORA&lt;br&gt;2&#176; arbitro: ROLI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">196</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 21:00</td>
+			<td title="A.S.D. DINAMO PALLAVOLO BELLARIA IGEA MARINA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3102/Loghi/LogoS3102.png" alt="">ROMAGNA BANCA BELLARIA I.M. RN</td>
+			<td title="GRUPPO SPORTIVO SAN PIO X ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4260/Loghi/LogoS4260.png" alt="">ARREDO UNO SPX FE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626434">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626434"><span class="parziali">27-25</span><span class="parziali">22-25</span><span class="parziali">22-25</span><span class="parziali">26-24</span><span class="parziali">15-17</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626434"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO DELLO SPORT BELLARIA IGEA MARINA&lt;/b&gt;&lt;br /&gt; BELLARIA-IGEA MARINA RN&lt;br /&gt;Via Ennio 1 - Igea Marina&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: COMANDINI&lt;br&gt;2&#176; arbitro: CRESCENTINI&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>CF Gir. A<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=2015203D392F392F313D291F256D7074627969" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92489','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92489" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">407</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:15</td>
+			<td title="OASI PALLAVOLO NOCETO ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5575/Loghi/LogoS5575.jpg" alt="">OASI ENERGY NOCETO PR</td>
+			<td title="VOLLEY BALL SAN MARTINO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4835/Loghi/LogoS4835.jpg" alt="">AMA VOLLEY BALL SAN MARTINO RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624306">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624306"><span class="parziali">23-25</span><span class="parziali">24-26</span><span class="parziali">20-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624306"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO DELLO SPORT 7 FRATELLI CERVI&lt;/b&gt;&lt;br /&gt; NOCETO PR&lt;br /&gt;VIA PASSO BUOLE&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: LAMOURE&lt;br&gt;2&#176; arbitro: FEIJO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">408</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:00</td>
+			<td title="VOLLEY ACADEMY PIACENZA SSD A RL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5018/Loghi/LogoS5018.png" alt="">DM IDROSANITARIA VAP PC</td>
+			<td title="CORREGGIO VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4789/Loghi/LogoS4789.jpg" alt="">POLIESPANSE-NUTRISTAR RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624307">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624307"><span class="parziali">25-17</span><span class="parziali">25-13</span><span class="parziali">25-19</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624307"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA SCUOLA RODARI&lt;/b&gt;&lt;br /&gt; ROTTOFRENO PC&lt;br /&gt;VIA ALDO SERENA&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SINGH&lt;br&gt;2&#176; arbitro: SALCONE&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">409</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 19:00</td>
+			<td title="PIACENZA VOLLEY S.S.D. A R.L."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3951/Loghi/LogoS3951.png" alt="">BFT BURZONI PIACE VOLLEY PC</td>
+			<td title="ASD VOLLEY ROTEGLIA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4784/Loghi/LogoS4784.png" alt="">VOLLEY ROTEGLIA MARINER SPA RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624308">3 - 2</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624308"><span class="parziali">25-15</span><span class="parziali">18-25</span><span class="parziali">27-25</span><span class="parziali">22-25</span><span class="parziali">15-10</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624308"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA VINCENZO PENNA&lt;/b&gt;&lt;br /&gt; PIACENZA PC&lt;br /&gt;VIA STRADELLA 51&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: FERRARI&lt;br&gt;2&#176; arbitro: BERNINI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">411</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:00</td>
+			<td title="VOLLEY STADIUM"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4589/Loghi/LogoS4589.jpg" alt="">VOLLEY STADIUM MO</td>
+			<td title="MONDIAL QUARTIROLO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4595/Loghi/LogoS4595.jpg" alt="">MONDIAL HOLACHECK MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624310">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624310"><span class="parziali">25-22</span><span class="parziali">23-25</span><span class="parziali">18-25</span><span class="parziali">18-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624310"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Palazzetto Walter Bonatti - campo centrale&lt;/b&gt;&lt;br /&gt; MIRANDOLA MO&lt;br /&gt;Via Barozzi&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BRUSCHI&lt;br&gt;2&#176; arbitro: TARTARI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">412</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:30</td>
+			<td title="G.S. ARTIGLIO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4580/Loghi/LogoS4580.jpg" alt="">SOFTECH SRL ARTIGLIO MO</td>
+			<td title="POLISPORTIVA L'ARENA A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4799/Loghi/LogoS4799.png" alt="">POLISPORTIVA L'ARENA RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624311">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624311"><span class="parziali">32-30</span><span class="parziali">22-25</span><span class="parziali">25-22</span><span class="parziali">24-26</span><span class="parziali">5-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624311"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA PAROCCHIALE E.DE ANGELIS - CAMPO INTERO&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA SANTA CATERINA 55&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: DELL&#39;ALBANI&lt;br&gt;2&#176; arbitro: VITILLO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">413</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 21:00</td>
+			<td title="A.S.D. O.S.G.B."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4780/Loghi/LogoS4780.jpg" alt="">RENUSI-MOGLIA/CAMPAGNOLA RE</td>
+			<td title="A.S.D. VOLLEY TEAM 03 PIACENZA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3956/Loghi/LogoS3956.jpg" alt="">EMMEZETA MAXMOTO SRT PC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624312">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624312"><span class="parziali">25-15</span><span class="parziali">25-18</span><span class="parziali">25-13</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624312"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Palasport A. Faroni di Moglia&lt;/b&gt;&lt;br /&gt; MOGLIA MN&lt;br /&gt;Via Nuvolari 6&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: FALAVIGNA&lt;br&gt;2&#176; arbitro: BARBIERI&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>CF Gir. B<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=FECBFEE3E7F1E7F1EFE3F7C1FBB3AEAABCA6BE" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92490','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92490" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">590</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:15</td>
+			<td title="VOLLEY CASTELVETRO  A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5554/Loghi/LogoS5554.jpg" alt="">VOLLEY CASTELVETRO MO</td>
+			<td title="POL.NONANTOLA SETT. PALLAVOLO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4512/Loghi/LogoS4512.jpg" alt="">GIACOBAZZI VINI NONANTOLA MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626611">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626611"><span class="parziali">13-25</span><span class="parziali">16-25</span><span class="parziali">19-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626611"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA  G. MORANDI CAMPO INTERO&lt;/b&gt;&lt;br /&gt; CASTELVETRO DI MODENA MO&lt;br /&gt;VIA PALONA 5&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ROLI&lt;br&gt;2&#176; arbitro: MAIELLANO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">591</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 20:30</td>
+			<td title="GRUPPO SPORTIVO SAN PIO X ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4260/Loghi/LogoS4260.png" alt="">ARREDO UNO SPX FE</td>
+			<td title="GRUPPO SPORTIVO PALL. VIGNOLA A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4515/Loghi/LogoS4515.jpg" alt="">GRUPPO FABBRI PALL. VIGNOLA MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626612">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626612"><span class="parziali">18-25</span><span class="parziali">25-27</span><span class="parziali">24-26</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626612"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA COMUNALE PONTELAGOSCURO&lt;/b&gt;&lt;br /&gt;PONTELAGOSCURO FERRARA FE&lt;br /&gt;VIA VENEZIA&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: DIEGOLI&lt;br&gt;2&#176; arbitro: PASTORE&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">592</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 20:45</td>
+			<td title="A.S.D. ANZOLAVOLLEY BOLOGNA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4713/Loghi/LogoS4713.jpg" alt="">ANZOLAVOLLEY BO</td>
+			<td title="PROGRESSO VOLLEY ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4498/Loghi/LogoS4498.jpg" alt="">PROGRESSO VOLLEY BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626613">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626613"><span class="parziali">16-25</span><span class="parziali">15-25</span><span class="parziali">19-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626613"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pal.Scuola Media G.Pascoli&lt;/b&gt;&lt;br /&gt; ANZOLA DELL&#39;EMILIA BO&lt;br /&gt;Via XXV Aprile 6&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MILAZZO&lt;br&gt;2&#176; arbitro: DELLA ROCCA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">593</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 19:30</td>
+			<td title="A.S.D. DECIMA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4752/Loghi/LogoS4752.jpeg" alt="">DV MOTORI BONORA BO</td>
+			<td title="SOLIERA VOLLEY 150 ASD APS"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4672/Loghi/LogoS4672.jpg" alt="">G.F.S. SOLIERA VOLLEY 150 MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626614">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626614"><span class="parziali">15-25</span><span class="parziali">26-24</span><span class="parziali">25-18</span><span class="parziali">22-25</span><span class="parziali">6-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626614"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Sc.Mezzacasa&lt;/b&gt;&lt;br /&gt;SAN MATTEO DELLA DECIMA SAN GIOVANNI IN PERSICETO BO&lt;br /&gt;Via Nuova 27/c  &lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: AVOLIO&lt;br&gt;2&#176; arbitro: TASSINARI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">594</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:30</td>
+			<td title="SC.PALL.ANDERLINI S.COOP.SSD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4586/Loghi/LogoS4586.png" alt="">MOMA ANDERLINI MO</td>
+			<td title="ASD POLISPORTIVA PONTEVECCHIO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4502/Loghi/LogoS4502.jpg" alt="">PV BOLOGNA LUNA BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626615">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626615"><span class="parziali">25-17</span><span class="parziali">23-25</span><span class="parziali">25-22</span><span class="parziali">21-25</span><span class="parziali">13-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626615"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA ANDERLINI A&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA MARIO VELLANI MARCHI, 106&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: DI MICCO&lt;br&gt;2&#176; arbitro: RUSSO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">595</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:00</td>
+			<td title="ASD VOLLEY MODENA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5560/Loghi/LogoS5560.jpg" alt="">VOLLEY MODENA MO</td>
+			<td title="TRIUMVIRATO ATLET. PALL. G.S.D"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4724/Loghi/LogoS4724.jpg" alt="">TRIUMVIRATO BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626616">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626616"><span class="parziali">14-25</span><span class="parziali">21-25</span><span class="parziali">21-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626616"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA IST.G.GUARINI CAMPO CENTRALE&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIALE CORASSORI&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: PEROTTA &lt;br&gt;2&#176; arbitro: GUIDETTI&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>CF Gir. C<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=DBEEDBC6C2D4C2D4CAC6D2E4DE968B8F99839A" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92491','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92491" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">771</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:00</td>
+			<td title="A.S.D. RIVIERA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5087/Loghi/LogoS5087.jpg" alt="">EMANUEL RIVIERA VOLLEY RN</td>
+			<td title="A.S. VOLLEY CASTELLO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4732/Loghi/LogoS4732.jpg" alt="">VOLLEY CASTELLO BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626058">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626058"><span class="parziali">25-19</span><span class="parziali">25-18</span><span class="parziali">25-12</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626058"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;CASA DEL VOLLEY&lt;/b&gt;&lt;br /&gt; RIMINI RN&lt;br /&gt;VIA BIDENTE - RIMINI&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: VALERIO&lt;br&gt;2&#176; arbitro: ROSSI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">772</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 19:00</td>
+			<td title="PALLAVOLO BUDRIO A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4727/Loghi/LogoS4727.png" alt="">PALL.BUDRIO CARR.NOVA BO</td>
+			<td title="CATTOLICA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3103/Loghi/LogoS3103.jpg" alt="">CATTOLICA VOLLEY RN</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626059">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626059"><span class="parziali">25-10</span><span class="parziali">25-18</span><span class="parziali">25-16</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626059"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pala Marani&lt;/b&gt;&lt;br /&gt; BUDRIO BO&lt;br /&gt;Via Partengo 13&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CENEDESE&lt;br&gt;2&#176; arbitro: QUARANTA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">773</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:00</td>
+			<td title="PALLAVOLO VISERBA SSD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4155/Loghi/LogoS4155.jpg" alt="">PALLAVOLO VISERBA RN</td>
+			<td title="TEAM VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4012/Loghi/LogoS4012.jpg" alt="">C.P.M. PORTOMAGGIORE FE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626060">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626060"><span class="parziali">25-19</span><span class="parziali">25-22</span><span class="parziali">23-25</span><span class="parziali">18-25</span><span class="parziali">10-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626060"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA VALTER RINALDI &lt;/b&gt;&lt;br /&gt; RIMINI RN&lt;br /&gt;Via Egisto Morri, 10&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SARTINI&lt;br&gt;2&#176; arbitro: VANDI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">774</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 19:00</td>
+			<td title="BEACH & PARK VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3115/Loghi/LogoS3115.jpg" alt="">BEACH&PARK VOLLEY RSM</td>
+			<td title="ATHENA RIMINI A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3884/Loghi/LogoS3884.png" alt="">PROJECT SYSTEM RIMINI RN</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626061">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626061"><span class="parziali">25-23</span><span class="parziali">23-25</span><span class="parziali">16-25</span><span class="parziali">21-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626061"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Palestra A. Casadei&lt;/b&gt;&lt;br /&gt; SERRAVALLE SM&lt;br /&gt;Via Rancaglia 22&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: FORMICOLA&lt;br&gt;2&#176; arbitro: TRAMONTANO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">775</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 19:30</td>
+			<td title="PALLAVOLO BOLOGNA SSD A R L"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4877/Loghi/LogoS4877.jpg" alt="">PALLAVOLO BOLOGNA BO</td>
+			<td title="PALLAVOLO MASSALOMBARDA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/1937/Loghi/LogoS1937.jpg" alt="">MASSAVOLLEY RA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626062">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626062"><span class="parziali">25-21</span><span class="parziali">25-23</span><span class="parziali">25-21</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626062"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pal.Kennedy&lt;/b&gt;&lt;br /&gt; SAN LAZZARO DI SAVENA BO&lt;br /&gt;Via Kennedy 63&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: FACCHINI&lt;br&gt;2&#176; arbitro: CAGNAZZO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">776</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td title="RAINBOW"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5088/Loghi/LogoS5088.png" alt="">RAINBOW FSE PROGETTI FC</td>
+			<td title="LIBERTAS VOLLEY FORLI' A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3471/Loghi/LogoS3471.jpg" alt="">LIBERTAS VOLLEY FORLI' FC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626063">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626063"><span class="parziali">25-22</span><span class="parziali">25-21</span><span class="parziali">25-13</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626063"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA PICCI&lt;/b&gt;&lt;br /&gt; FORLIMPOPOLI FC&lt;br /&gt;Via del Tulipano, 4&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: GRECO&lt;br&gt;2&#176; arbitro: FANUCCI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">777</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:00</td>
+			<td title="ASD VOLLEY OSTELLATO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4010/Loghi/LogoS4010.png" alt="">VOLLEY OSTELLATO FE</td>
+			<td title="PALLAVOLO OZZANO A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4750/Loghi/LogoS4750.jpg" alt="">FATRO OZZANO BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131626064">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131626064"><span class="parziali">17-25</span><span class="parziali">20-25</span><span class="parziali">21-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131626064"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO DELLO SPORT&lt;/b&gt;&lt;br /&gt; OSTELLATO FE&lt;br /&gt;VIA MARCAVALLO 35-B&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ANTONELLINI&lt;br&gt;2&#176; arbitro: DI BERNARDO&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>DM Gir. A<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=142114090D1B0D1B05091D2B11594440564C56" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92492','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92492" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">1008</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:00</td>
+			<td title="PIACENZA VOLLEY S.S.D. A R.L."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3951/Loghi/LogoS3951.png" alt="">PIACE VOLLEY PC</td>
+			<td title="POLISPORTIVA BAGANZOLA ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5349/Loghi/LogoS5349.jpg" alt="">POLISPORTIVA BAGANZOLA PR</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624853">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624853"><span class="parziali">27-29</span><span class="parziali">19-25</span><span class="parziali">26-28</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624853"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA DE GASPERI&lt;/b&gt;&lt;br /&gt; PIACENZA PC&lt;br /&gt;VIA STRADELLA&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ANGIONE&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1009</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">22/10/26 21:00</td>
+			<td title="LA SALLE SPORT CENTER A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/theme/newb/no-image.png" alt="">LA SALLE SPORT CENTER PR</td>
+			<td title="VOLLEY BALL SAN MARTINO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4835/Loghi/LogoS4835.jpg" alt="">MONKEYDU VBSM RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624854">3 - 2</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624854"><span class="parziali">24-26</span><span class="parziali">25-19</span><span class="parziali">22-25</span><span class="parziali">25-21</span><span class="parziali">15-10</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624854"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA  DE LA SALLE&lt;/b&gt;&lt;br /&gt; PARMA PR&lt;br /&gt;VIA BERZIOLI 20 - Parma&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: LUNARDINI &lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1010</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:00</td>
+			<td title="PALLAVOLO FABBRICO ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4792/Loghi/LogoS4792.png" alt="">PALLAVOLO FABBRICO RE</td>
+			<td title="A.S.D. QUIVOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5597/Loghi/LogoS5597.jpeg" alt="">QUIVOLLEY MEDIAL TRADE MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624855">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624855"><span class="parziali">23-25</span><span class="parziali">19-25</span><span class="parziali">13-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624855"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Palazzetto Dello Sport Campo Centrale&lt;/b&gt;&lt;br /&gt; FABBRICO RE&lt;br /&gt;Via Dello Sport 7&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: COLOMBI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1011</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">22/10/26 21:00</td>
+			<td title="A.S.D. PGS PRIMAVERA LIFE"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4819/Loghi/LogoS4819.jpg" alt="">NAYTES VANETON MENTANI RE</td>
+			<td title="A.S.D. GALAXY VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4468/Loghi/LogoS4468.jpg" alt="">GALAXY VOLLEY COLLECCHIO PR</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624856">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624856"><span class="parziali">25-19</span><span class="parziali">16-25</span><span class="parziali">22-25</span><span class="parziali">19-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624856"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pal. Sandro Pertini A&lt;/b&gt;&lt;br /&gt; REGGIO NELL&#39;EMILIA RE&lt;br /&gt;Via Medaglie D&#39;Oro della Resistenza, 4&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CROCIALI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1012</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 20:30</td>
+			<td title="BASSA REGGIANA VOLLEY A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4794/Loghi/LogoS4794.jpg" alt="">BASSA REGGIANA VOLLEY RE</td>
+			<td title="PIEVE VOLLEY A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4823/Loghi/LogoS4823.png" alt="">PIEVE VOLLEY RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624857">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624857"><span class="parziali">25-18</span><span class="parziali">25-16</span><span class="parziali">25-19</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624857"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pal. Comunale&lt;/b&gt;&lt;br /&gt; LUZZARA RE&lt;br /&gt;Largo Dante Via De Gasperi, 8&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MALPIGHI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1013</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td title="ENERGY VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4186/Loghi/LogoS4186.jpg" alt="">ENERGY VOLLEY PARMA PR</td>
+			<td title="VOLLEY SCANDIANO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4840/Loghi/LogoS4840.png" alt="">VOLLEY SCANDIANO ASD</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131624858">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131624858"><span class="parziali">16-25</span><span class="parziali">10-25</span><span class="parziali">21-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131624858"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;OLTRETORRENTE GRANDE&lt;/b&gt;&lt;br /&gt; PARMA PR&lt;br /&gt;VIA PINTOR 7/A&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: DI PASQUALE&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>DM Gir. B<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=E7D2E7FAFEE8FEE8F6FAEED8E2AAB7B3A5BFA4" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92493','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92493" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">1189</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:00</td>
+			<td title="MODENA VOLLEY PUNTO ZERO SSDRL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5556/Loghi/LogoS5556.jpg" alt="">MODENA VOLLEY MO</td>
+			<td title="ASD BENEDETTO VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3990/Loghi/LogoS3990.jpg" alt="">PASQUALI SRL FE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625034">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625034"><span class="parziali">27-25</span><span class="parziali">29-31</span><span class="parziali">25-21</span><span class="parziali">22-25</span><span class="parziali">15-17</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625034"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PAL. G.MARCONI&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA DEI LANCILLOTTO 10&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SANDRI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1190</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">21/10/26 21:30</td>
+			<td title="G.S. LIBERTAS FIORANO         "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4537/Loghi/LogoS4537.jpg" alt="">GS LIBERTAS FIORANO</td>
+			<td title="C.S.D.JACQUES MARITAIN        "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/theme/newb/no-image.png" alt="">HOLACHECK-MARITAIN MODENA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625035">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625035"><span class="parziali">21-25</span><span class="parziali">23-25</span><span class="parziali">25-21</span><span class="parziali">18-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625035"><img src="/img/statogara/stato5.png" class="tips ris-img" alt="statogara" title="gara omologata" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO DELLO SPORT ANTONIO MAGLIO&lt;/b&gt;&lt;br /&gt; FIORANO MODENESE MO&lt;br /&gt;via tamigi 41&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: GARDELLA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1191</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 20:00</td>
+			<td title="VIVA VILLA VOLLEY ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5535/Loghi/LogoS5535.jpg" alt="">DALPASSO VILLA D'ORO</td>
+			<td title="L.A. MURATORI VOLLEY VIGNOLA  "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4514/Loghi/LogoS4514.jpg" alt="">LA MURATORI V. BERGONZINI MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625036">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625036"><span class="parziali">30-28</span><span class="parziali">25-22</span><span class="parziali">25-20</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625036"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PAL. G.MARCONI&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA DEI LANCILLOTTO 10&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BIANCHINI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1192</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td title="UNIVOLLEY A.S.D.              "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4678/Loghi/LogoS4678.png" alt="">UNIVOLLEY CARPI MO</td>
+			<td title="PALL. CAVEZZO                 "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4524/Loghi/LogoS4524.jpeg" alt="">3M CAVEZZO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625037">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625037"><span class="parziali">25-22</span><span class="parziali">26-24</span><span class="parziali">23-25</span><span class="parziali">22-25</span><span class="parziali">9-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625037"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO M.HACK PAD.A - CIBENO&lt;/b&gt;&lt;br /&gt; CARPI MO&lt;br /&gt;VIA CANALVECCHIO 3/B&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: FRATELLINI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1193</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 20:45</td>
+			<td title="CREVAVOLLEY.NET A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4736/Loghi/LogoS4736.png" alt="">AUTOMOTOR CREVAVOLLEY.NET</td>
+			<td title="VOLLEY SASSUOLO A.S.D.        "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4627/Loghi/LogoS4627.jpg" alt="">BULLONERIA EMILIANA V.SASSUOLO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625038">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625038"><span class="parziali">22-25</span><span class="parziali">25-23</span><span class="parziali">19-25</span><span class="parziali">25-16</span><span class="parziali">17-19</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625038"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Sc.Lodi&lt;/b&gt;&lt;br /&gt; CREVALCORE BO&lt;br /&gt;Via VVX Aprile, 55&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SANTANGELO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1194</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 20:30</td>
+			<td title="ASD G.S.SPEZZANESE            "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4591/Loghi/LogoS4591.jpeg" alt="">SPEZZANESE ANDERLINI MO</td>
+			<td title="STADIUM PALL.MIRANDOLA SSD ARL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4532/Loghi/LogoS4532.png" alt="">STADIUM PALL. MIRANDOLA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625039">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625039"><span class="parziali">19-25</span><span class="parziali">23-25</span><span class="parziali">22-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625039"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA SELMI CORNI CAMPO C&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;Via Nobili 300&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: AIT EL BACHIR&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>DM Gir. C<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=C6F3C6DBDFC9DFC9D7DBCFF9C38B9692849E82" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92494','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92494" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">1371</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:30</td>
+			<td title="NUOVA POL. CONSOLINI ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3826/Loghi/LogoS3826.jpg" alt="">FOM INDUSTRIE RN</td>
+			<td title="DREAM VOLLEY RAVENNA A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4163/Loghi/LogoS4163.jpg" alt="">PIETRO PEZZI RA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625216">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625216"><span class="parziali">25-14</span><span class="parziali">20-25</span><span class="parziali">22-25</span><span class="parziali">25-17</span><span class="parziali">12-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625216"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Palazzetto dello Sport&lt;/b&gt;&lt;br /&gt; SAN GIOVANNI IN MARIGNANO RN&lt;br /&gt;Via Fornace, 70&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MARCHETTI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1372</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:00</td>
+			<td title="PALLAVOLO FAENZA A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/1926/Loghi/LogoS1926.jpg" alt="">FENIX FAENZA RA</td>
+			<td title="A.S.PALLAVOLO ARGENTA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3987/Loghi/LogoS3987.png" alt="">ARGENTA VOLLEY FE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625217">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625217"><span class="parziali">25-19</span><span class="parziali">20-25</span><span class="parziali">25-13</span><span class="parziali">25-16</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625217"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA SCOLASTICA - GRANAROLO&lt;/b&gt;&lt;br /&gt; FAENZA RA&lt;br /&gt;PIAZZA MARTIRI DI FELISIO - GRANAROLO FAENTINO&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: DI LEO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1373</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">22/10/26 21:15</td>
+			<td title="GRUPPO SPORTIVO SAN PIO X ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4260/Loghi/LogoS4260.png" alt="">ARREDO UNO SPX FE</td>
+			<td title="VOLLEY CLUB CESENA ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3199/Loghi/LogoS3199.png" alt="">BCC ROMAGNOLO CESENA FC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625218">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625218"><span class="parziali">30-28</span><span class="parziali">25-17</span><span class="parziali">27-29</span><span class="parziali">25-21</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625218"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA T.BONATI&lt;/b&gt;&lt;br /&gt; FERRARA FE&lt;br /&gt;VIA POLETTI 65&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CAGNAZZO&lt;br&gt;2&#176; arbitro: CAVALLARI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1374</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:15</td>
+			<td title="RAINBOW"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5088/Loghi/LogoS5088.png" alt="">RAINBOW EMMECI FC</td>
+			<td title="SAVENA VOLLEY A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4499/Loghi/LogoS4499.png" alt="">CPMI SAVENA VOLLEY PB BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625219">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625219"><span class="parziali">22-25</span><span class="parziali">21-25</span><span class="parziali">25-15</span><span class="parziali">22-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625219"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA PICCI&lt;/b&gt;&lt;br /&gt; FORLIMPOPOLI FC&lt;br /&gt;Via del Tulipano, 4&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: PAGLIARI&lt;br&gt;2&#176; arbitro: ROSSI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1375</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 21:00</td>
+			<td title="BOGASPORT ASS. SPORT. DILETT."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5225/Loghi/LogoS5225.png" alt="">BOGASPORT A.S.D. BO</td>
+			<td title="NEW VOLLEY ACADEMY FORLI"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5039/Loghi/LogoS5039.png" alt="">NEW VOLLEY ACADEMY FORLI' FC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625220">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625220"><span class="parziali">25-23</span><span class="parziali">16-25</span><span class="parziali">26-24</span><span class="parziali">18-25</span><span class="parziali">13-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625220"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Sc.Copernico &lt;/b&gt;&lt;br /&gt; BOLOGNA BO&lt;br /&gt;VIA GARAVAGLIA 11 - ZONA FIERA&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BENEVENTI&lt;br&gt;2&#176; arbitro: MAROCCI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1376</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 21:00</td>
+			<td title="TEAM VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4012/Loghi/LogoS4012.jpg" alt="">SA.MA PORTOMAGGIORE FE</td>
+			<td title="PALLAVOLO BOLOGNA SSD A R L"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4877/Loghi/LogoS4877.jpg" alt="">PALLAVOLO BOLOGNA BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625221">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625221"><span class="parziali">25-13</span><span class="parziali">25-16</span><span class="parziali">25-20</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625221"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA POLO SCOLASTICO FALCONE-BORSELLINO&lt;/b&gt;&lt;br /&gt; PORTOMAGGIORE FE&lt;br /&gt;PIAZZALE DEGLI STUDENTI 4&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BABINI&lt;br&gt;2&#176; arbitro: MAGNANI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1377</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:00</td>
+			<td title="A.S.D. DINAMO PALLAVOLO BELLARIA IGEA MARINA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3102/Loghi/LogoS3102.png" alt="">SENZASPINE DINAMO BIM RN</td>
+			<td title="BEACH & PARK VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3115/Loghi/LogoS3115.jpg" alt="">PIUME' SAN MARINO RSM</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625222">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625222"><span class="parziali">25-13</span><span class="parziali">25-15</span><span class="parziali">25-22</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625222"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALASPORT BELLARIA I.M. - LATO MONTE&lt;/b&gt;&lt;br /&gt; BELLARIA-IGEA MARINA RN&lt;br /&gt;Via Ennio 1 - Igea Marina&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SPAMPINATO&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>DF Gir. A<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=E6D3E6FBFFE9FFE9F7FBEFD9E3ABB6B2A4BEA3" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92495','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92495" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">1606</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 20:30</td>
+			<td title="RM VOLLEY PIACENZA ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3953/Loghi/LogoS3953.jpg" alt="">RM VOLLEY PC</td>
+			<td title="ASD POL.COOP PARMA 1964"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5578/Loghi/LogoS5578.jpg" alt="">ASD POL. COOP PARMA 1964 PR</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625397">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625397"><span class="parziali">25-22</span><span class="parziali">17-25</span><span class="parziali">25-23</span><span class="parziali">25-21</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625397"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA INCAMPUS&lt;/b&gt;&lt;br /&gt; PIACENZA PC&lt;br /&gt;Strada Anselma 7&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SCHIAVETTA&lt;br&gt;2&#176; arbitro: MUTTI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1607</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:00</td>
+			<td title="SPORT CLUB PARMA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5160/Loghi/LogoS5160.jpg" alt="">SPORT CLUB PARMA PR</td>
+			<td title="LIBERTAS SAN PAOLO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3955/Loghi/LogoS3955.jpg" alt="">LIBERTAS STERILTOM PC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625398">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625398"><span class="parziali">25-15</span><span class="parziali">25-10</span><span class="parziali">25-18</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625398"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;COMPLESSO RENZO DEL CHICCA SALA VOLLEY&lt;/b&gt;&lt;br /&gt; PARMA PR&lt;br /&gt;VIA PINTOR 7/A&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: GUIDETTI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1608</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:00</td>
+			<td title="BORGOVOLLEY TEAM ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5569/Loghi/LogoS5569.jpg" alt="">LAVEZZINI ISOLANTI BORGOV PR</td>
+			<td title="VOLLEY BALL PODENZANO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3958/Loghi/LogoS3958.jpg" alt="">SERR.LUZZOLI VBPODENZANO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625399">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625399"><span class="parziali">20-25</span><span class="parziali">18-25</span><span class="parziali">20-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625399"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALASPORT PRATIZZOLI&lt;/b&gt;&lt;br /&gt; FIDENZA PR&lt;br /&gt;VIA TOGLIATTI 38&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ASCONE&lt;br&gt;2&#176; arbitro: TRONCI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1609</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:15</td>
+			<td title="RIVER VOLLEY 2001 A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3961/Loghi/LogoS3961.jpg" alt="">DECALACQUE RIVER PC</td>
+			<td title="A.S.D. JOVI VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4793/Loghi/LogoS4793.JPG" alt="">ASD JOVI VOLLEY RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625400">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625400"><span class="parziali">25-23</span><span class="parziali">20-25</span><span class="parziali">25-21</span><span class="parziali">26-24</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625400"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAREBECCHI&lt;/b&gt;&lt;br /&gt; RIVERGARO PC&lt;br /&gt;VIA BONISTALLI 6&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: TASSELLI&lt;br&gt;2&#176; arbitro: SQUILLACI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1610</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:00</td>
+			<td title="U.S.D. AUDAX POVIGLIO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4800/Loghi/LogoS4800.jpg" alt="">MAXIMA AUDAX POVIGLIO RE</td>
+			<td title="SALSO VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5588/Loghi/LogoS5588.jpg" alt="">SALSOVOLLEY PALLEX PR</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625401">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625401"><span class="parziali">25-16</span><span class="parziali">21-25</span><span class="parziali">18-25</span><span class="parziali">18-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625401"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Tensostruttura&lt;/b&gt;&lt;br /&gt; POVIGLIO RE&lt;br /&gt;Via Bologna&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BERNINI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1611</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:15</td>
+			<td title="CARPANETO VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3937/Loghi/LogoS3937.JPG" alt="">SAVI ITALO CARPANETO VOLLEY PC</td>
+			<td title="A.S.D. PALLAVOLO FIORENZUOLA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3942/Loghi/LogoS3942.png" alt="">PAVIDEA ARDAVOLLEY FIORE PC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625402">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625402"><span class="parziali">25-21</span><span class="parziali">25-13</span><span class="parziali">25-20</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625402"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO&lt;/b&gt;&lt;br /&gt; CARPANETO PIACENTINO PC&lt;br /&gt;Via San Lazzaro&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BELLINI&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>DF Gir. B<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=B88DB8A5A1B7A1B7A9A5B187BDF5E8ECFAE0FE" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92496','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92496" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">1738</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 20:00</td>
+			<td title="ASS. POL. DIL. NAZARENO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5553/Loghi/LogoS5553.jpg" alt="">POLISPORTIVA NAZARENO</td>
+			<td title="SOLIERA VOLLEY 150 ASD APS"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4672/Loghi/LogoS4672.jpg" alt="">TECNOARMET SOLIERA 150 MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625529">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625529"><span class="parziali">15-25</span><span class="parziali">25-18</span><span class="parziali">15-25</span><span class="parziali">21-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625529"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO DELLO SPORT E. FERRARI&lt;/b&gt;&lt;br /&gt; CARPI MO&lt;br /&gt;VIA DELLO SPORT 3&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BERARDIS&lt;br&gt;2&#176; arbitro: FALLICA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1739</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:00</td>
+			<td title="VOLLEY BALL SAN MARTINO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4835/Loghi/LogoS4835.jpg" alt="">S.E.A DI LADURINI A. VBSM RE</td>
+			<td title="A.S.D. VIRTUS MASSESE"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4680/Loghi/LogoS4680.png" alt="">A.S.D. VIRTUS MASSESE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625530">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625530"><span class="parziali">25-21</span><span class="parziali">25-16</span><span class="parziali">25-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625530"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Bombonera&lt;/b&gt;&lt;br /&gt; SAN MARTINO IN RIO RE&lt;br /&gt;Piazza Carnevali&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: AMATO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1740</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 21:00</td>
+			<td title="UNIVOLLEY A.S.D.              "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4678/Loghi/LogoS4678.png" alt="">CARPI VOLLEY MO</td>
+			<td title="G.S.VIRTUS CASALGRANDE ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4782/Loghi/LogoS4782.png" alt="">VIRTUS CASALGRANDE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625531">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625531"><span class="parziali">10-25</span><span class="parziali">23-25</span><span class="parziali">25-21</span><span class="parziali">25-7</span><span class="parziali">13-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625531"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO M.HACK PAD.A - CIBENO&lt;/b&gt;&lt;br /&gt; CARPI MO&lt;br /&gt;VIA CANALVECCHIO 3/B&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ALESSANDRIA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1741</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:30</td>
+			<td title="APD GS BOCA BARCO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4777/Loghi/LogoS4777.jpg" alt="">ADVANTIS GS BOCA BARCO</td>
+			<td title="ASD POLISPORTIVA I CARE"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5312/Loghi/LogoS5312.JPG" alt="">POLISPORTIVA ICARE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625532">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625532"><span class="parziali">25-18</span><span class="parziali">25-20</span><span class="parziali">25-16</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625532"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Palazzetto dello Sport&lt;/b&gt;&lt;br /&gt; BIBBIANO RE&lt;br /&gt;Via Fratelli Corradini 62/b&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SOFI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1742</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:30</td>
+			<td title="PALL. CAVEZZO                 "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4524/Loghi/LogoS4524.jpeg" alt="">IRBE SERRAMENTI CAVEZZO</td>
+			<td title="PODIUM TEAM VOLLEY A.S.D.     "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4616/Loghi/LogoS4616.jpg" alt="">TRUZZI MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625533">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625533"><span class="parziali">23-25</span><span class="parziali">25-21</span><span class="parziali">25-19</span><span class="parziali">25-17</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625533"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA COMUNALE&lt;/b&gt;&lt;br /&gt; CAVEZZO MO&lt;br /&gt;VIA ALLENDE&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: Previtali&lt;br&gt;2&#176; arbitro: MAZZOLI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">1743</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td title="CENTRO VOLLEY REGGIANO ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4825/Loghi/LogoS4825.jpg" alt="">CVR R-EVOLUTION RE</td>
+			<td title="A.S.D. ROSTA VOLLEY TEAM"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4812/Loghi/LogoS4812.jpg" alt="">FORTLAN DIBI MENTANI </td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625534">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625534"><span class="parziali">25-18</span><span class="parziali">19-25</span><span class="parziali">25-20</span><span class="parziali">25-20</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625534"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pal. Nuova Rivalta Campo Centrale&lt;/b&gt;&lt;br /&gt;Rivalta REGGIO NELL&#39;EMILIA RE&lt;br /&gt;Via Pascal 73&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CARMINELLI&lt;br&gt;2&#176; arbitro: TRIPOLI&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>DF Gir. C<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=D0E5D0CDC9DFC9DFC1CDD9EFD59D8084928897" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92497','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92497" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">1869</td>
+			<td style="text-align:center">1</td>
+			<td style="text-align:center">20/10/26 21:15</td>
+			<td title="POL.NONANTOLA SETT. PALLAVOLO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4512/Loghi/LogoS4512.jpg" alt="">TST IMPIANTI NONANTOLA MO</td>
+			<td title="CALDERARA VOLAVOLLEY ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4729/Loghi/LogoS4729.png" alt="">CALDERA VOLAVOLLEY</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625660">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625660"><span class="parziali">25-19</span><span class="parziali">19-25</span><span class="parziali">25-19</span><span class="parziali">25-20</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625660"><img src="/img/statogara/stato5.png" class="tips ris-img" alt="statogara" title="gara omologata" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA PICCININI&lt;/b&gt;&lt;br /&gt; NONANTOLA MO&lt;br /&gt;VIA MAZZINI 34&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BUFFAGNI&lt;br&gt;2&#176; arbitro: GRILLO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr class="dispari">
+			<td style="text-align:center">1870</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:00</td>
+			<td title="CALDERARA VOLAVOLLEY ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4729/Loghi/LogoS4729.png" alt="">CALDERA VOLAVOLLEY</td>
+			<td title="G.S. LIBERTAS FIORANO         "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4537/Loghi/LogoS4537.jpg" alt="">GS LIBERTAS FIORANO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625661">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625661"><span class="parziali">19-25</span><span class="parziali">15-25</span><span class="parziali">17-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625661"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pal.Morello&lt;/b&gt;&lt;br /&gt; CALDERARA DI RENO BO&lt;br /&gt;Via Grandi 2/a&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: QUADRI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr class="dispari">
+			<td style="text-align:center">1871</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 20:00</td>
+			<td title="ASD BENEDETTO VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3990/Loghi/LogoS3990.jpg" alt="">PASQUALI SRL FE</td>
+			<td title="YZ VOLLEY A.S.DILETTANTISTICA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4508/Loghi/LogoS4508.jpg" alt="">YZ VOLLEY</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625662">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625662"><span class="parziali">26-24</span><span class="parziali">25-16</span><span class="parziali">25-21</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625662"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA ISIT NUOVA&lt;/b&gt;&lt;br /&gt; CENTO FE&lt;br /&gt;VIA SCARLATTI&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MAZZETTO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr class="dispari">
+			<td style="text-align:center">1872</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td title="MODENA VOLLEY PUNTO ZERO SSDRL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5556/Loghi/LogoS5556.jpg" alt="">MODENA VOLLEY MO</td>
+			<td title="POLISPORTIVA POLIVALENTE MARANELLO ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/theme/newb/no-image.png" alt="">VOLLEY MARANELLO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625663">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625663"><span class="parziali">25-21</span><span class="parziali">25-23</span><span class="parziali">25-23</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625663"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAMADIBA&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;via canaletto 110/b&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SOGGIA&lt;br&gt;2&#176; arbitro: PELUCCHI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr class="dispari">
+			<td style="text-align:center">1873</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:30</td>
+			<td title="VOLLEY SASSUOLO A.S.D.        "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4627/Loghi/LogoS4627.jpg" alt="">BURGER KING SASSUOLO MO</td>
+			<td title="POL.NONANTOLA SETT. PALLAVOLO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4512/Loghi/LogoS4512.jpg" alt="">TST IMPIANTI NONANTOLA MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625664">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625664"><span class="parziali">25-14</span><span class="parziali">21-25</span><span class="parziali">25-15</span><span class="parziali">25-23</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625664"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO PAGANELLI&lt;/b&gt;&lt;br /&gt; SASSUOLO MO&lt;br /&gt;VIA I.NIEVO 22&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MARANO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr class="dispari">
+			<td style="text-align:center">1874</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:00</td>
+			<td title="POLISPORT.CASTELFRANCO EMILIA "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4529/Loghi/LogoS4529.jpg" alt="">B.P.R. CASTELFRANCO EMILIA MO</td>
+			<td title="USD A.C.L.I S.LUCA S.GIORGIO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4001/Loghi/LogoS4001.png" alt="">2MD SISTEMI FE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625665">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625665"><span class="parziali">26-24</span><span class="parziali">25-21</span><span class="parziali">25-18</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625665"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALASPORT REGGIANI CAMPO B&lt;/b&gt;&lt;br /&gt; CASTELFRANCO EMILIA MO&lt;br /&gt;VIA MAGENTA 12&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: BELARDO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr class="dispari">
+			<td style="text-align:center">1875</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">22/10/26 21:30</td>
+			<td title="NEWCASTLE SPORT"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5743/Loghi/LogoS5743.png" alt="">NEWCASTLE VOLLEY CLUB </td>
+			<td title="ASD G.S.SPEZZANESE            "><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4591/Loghi/LogoS4591.jpeg" alt="">GS SPEZZANESE MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625666">3 - 2</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625666"><span class="parziali">26-24</span><span class="parziali">25-23</span><span class="parziali">18-25</span><span class="parziali">21-25</span><span class="parziali">15-8</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625666"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA S.M. VEZIO MAGAGNI&lt;/b&gt;&lt;br /&gt; CASTELNUOVO RANGONE MO&lt;br /&gt;PIAZZA BRODOLINI 3&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: FRAULINI&lt;br&gt;2&#176; arbitro: FACCHINI&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>DF Gir. D<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=92A7928F8B9D8B9D838F9BAD97DFC2C6D0CADA" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92498','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92498" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">2002</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 19:30</td>
+			<td title="SPORT UP S.S.D. A R.L."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4742/Loghi/LogoS4742.jpg" alt="">IMOLA VOLLEY</td>
+			<td title="A.P.D. NETTUNIA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4719/Loghi/LogoS4719.jpg" alt="">NETTUNIA BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625793">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625793"><span class="parziali">21-25</span><span class="parziali">25-15</span><span class="parziali">25-15</span><span class="parziali">25-9</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625793"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pal.Ruscello&lt;/b&gt;&lt;br /&gt; IMOLA BO&lt;br /&gt;Via Volta 11&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MIRANDA DA SILVA&lt;br&gt;2&#176; arbitro: PICCOTTI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2003</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 21:00</td>
+			<td title="P.G.S. BELLARIA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4718/Loghi/LogoS4718.jpg" alt="">PGS BELLARIA</td>
+			<td title="CLAI IMOLA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4503/Loghi/LogoS4503.jpg" alt="">CLAI IMOLA VOLLEY BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625794">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625794"><span class="parziali">25-15</span><span class="parziali">25-22</span><span class="parziali">25-17</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625794"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Pal.Don Bosco&lt;/b&gt;&lt;br /&gt; BOLOGNA BO&lt;br /&gt;Via B.M. Dal Monte 14&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: POLUZZI&lt;br&gt;2&#176; arbitro: FALCO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2004</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 20:30</td>
+			<td title="CASTENASO VOLLEY AS DILETTANTI"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4735/Loghi/LogoS4735.jpg" alt="">RIBANI - CASTENASO VOLLEY</td>
+			<td title="PALLAVOLO MORDANO ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4748/Loghi/LogoS4748.jpg" alt="">PALLAVOLO MORDANO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625795">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625795"><span class="parziali">25-18</span><span class="parziali">25-20</span><span class="parziali">25-17</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625795"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Sc.M.Gozzadini&lt;/b&gt;&lt;br /&gt; CASTENASO BO&lt;br /&gt;Via Marconi 3/2&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ABAGNALE&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2005</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 20:45</td>
+			<td title="PALLAVOLO FAENZA A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/1926/Loghi/LogoS1926.jpg" alt="">FENIX FAENZA RA</td>
+			<td title="A.S.D. GRANAROLO VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4737/Loghi/LogoS4737.jpg" alt="">GRANAROLO VOLLEY</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625796">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625796"><span class="parziali">24-26</span><span class="parziali">25-9</span><span class="parziali">25-17</span><span class="parziali">25-12</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625796"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA IVO BADIALI (EX CAVALLERIZZA)&lt;/b&gt;&lt;br /&gt; FAENZA RA&lt;br /&gt;PIAZZA DANTE, 8&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: VALERI&lt;br&gt;2&#176; arbitro: CRESCENTINI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2006</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:00</td>
+			<td title="VOLLEY TEAM BOLOGNA S.S.D.AR.L"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4726/Loghi/LogoS4726.png" alt="">VOLLEY TEAM BOLOGNA BO</td>
+			<td title="VILLANOVA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4734/Loghi/LogoS4734.jpg" alt="">CLOWN 2.0 VIVO VILLANOVA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625797">0 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625797"><span class="parziali">14-25</span><span class="parziali">11-25</span><span class="parziali">16-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625797"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALARCOVEGGIO&lt;/b&gt;&lt;br /&gt; BOLOGNA BO&lt;br /&gt;VIA ARCOVEGGIO 47/5&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: D&#39;AGOSTA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2007</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td title="INVOLLEY SSD ARL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3606/Loghi/LogoS3606.jpg" alt="">VBR LIVERANI RA</td>
+			<td title="POL.VA FULGUR PALLAVOLO AD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/1913/Loghi/LogoS1913.png" alt="">FULGUR MIXER BAGNACAVALLO RA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625798">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625798"><span class="parziali">25-17</span><span class="parziali">25-15</span><span class="parziali">25-19</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625798"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA LUMAGNI&lt;/b&gt;&lt;br /&gt; LUGO RA&lt;br /&gt;Via Lumagni, 32&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: FILAZZOLA&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>DF Gir. E<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=D7E2D7CACED8CED8C6CADEE8D29A8783958F9E" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=92499','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=92499" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">2134</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 18:00</td>
+			<td title="ATHENA RIMINI A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3884/Loghi/LogoS3884.png" alt="">FIGURELLA RIMINI VOLLEY RN</td>
+			<td title="TEODORA SETTORE GIOVANILE ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/1939/Loghi/LogoS1939.jpg" alt="">CONSAR TEODORA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625925">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625925"><span class="parziali">25-20</span><span class="parziali">25-20</span><span class="parziali">25-20</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625925"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA RODARI&lt;/b&gt;&lt;br /&gt; RIMINI RN&lt;br /&gt;Via Quagliati 2&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: NEGRO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2135</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 19:00</td>
+			<td title="OLIMPIA TEODORA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/2829/Loghi/LogoS2829.jpeg" alt="">VOLLEY ACADEMY OLIMPIA RA</td>
+			<td title="VOLLEY CLUB CESENA ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3199/Loghi/LogoS3199.png" alt="">BCC ROMAGNOLO CESENA FC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625926">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625926"><span class="parziali">25-14</span><span class="parziali">25-19</span><span class="parziali">19-25</span><span class="parziali">25-17</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625926"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Palestra Dante&lt;/b&gt;&lt;br /&gt;Lido Adriano RAVENNA RA&lt;br /&gt;Via Tono Zancanaro&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ANGELOCOLA&lt;br&gt;2&#176; arbitro: BARDUCCI&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2136</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 20:30</td>
+			<td title="ACERBOLI VOLLEY SANTARCANGELO ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3656/Loghi/LogoS3656.jpg" alt="">ACERBOLI VOLLEY FISIOKINETICA</td>
+			<td title="A.S.D. IDEA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3119/Loghi/LogoS3119.JPG" alt="">GUT CHEMICAL BELLARIA I.M. RN</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625927">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625927"><span class="parziali">25-20</span><span class="parziali">28-26</span><span class="parziali">25-21</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625927"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA FRANCHINI&lt;/b&gt;&lt;br /&gt; SANTARCANGELO DI ROMAGNA RN&lt;br /&gt;Via Orsini 21&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: D&#39;ELIA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2137</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td title="RUBICONE IN VOLLEY - RIV"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3200/Loghi/LogoS3200.png" alt="">NEXT VOLLEY</td>
+			<td title="PALLAVOLO ALFONSINE"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/1912/Loghi/LogoS1912.jpg" alt="">PALLAVOLO ALFONSINE </td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625928">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625928"><span class="parziali">25-14</span><span class="parziali">20-25</span><span class="parziali">25-22</span><span class="parziali">25-20</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625928"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALASPORT SAN MAURO PASCOLI&lt;/b&gt;&lt;br /&gt; SAN MAURO PASCOLI FC&lt;br /&gt;Via P. Togliatti 1&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: FABBRI&lt;br&gt;2&#176; arbitro: D&#39;ELIA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2138</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td title="CERVIA VOLLEY S.S.D. a R.L."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/1921/Loghi/LogoS1921.jpg" alt="">CERVIA VOLLEY</td>
+			<td title="POL. ADOLFO CONSOLINI S.S.D ARL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3108/Loghi/LogoS3108.png" alt="">MT UNICA RN</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625929">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625929"><span class="parziali">25-23</span><span class="parziali">25-9</span><span class="parziali">25-23</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625929"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;CENTRO SPORTIVO LE ROVERI - PISIGNANO&lt;/b&gt;&lt;br /&gt; CERVIA RA&lt;br /&gt;VIA ZAVATTINA&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MATRONE&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2139</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">23/10/26 21:15</td>
+			<td title="NEW VOLLEY ACADEMY FORLI"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5039/Loghi/LogoS5039.png" alt="">SALFEP VOLLEY ACADEMY FORLI'FC</td>
+			<td title="VOLLEY SAMMARTINESE A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3472/Loghi/LogoS3472.jpg" alt="">SAMMA PROJECT SALFEP FC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131625930">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131625930"><span class="parziali">25-11</span><span class="parziali">25-15</span><span class="parziali">25-12</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131625930"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Centro Polisportivo Giulianini - Villafranca di Forl&#236;&lt;/b&gt;&lt;br /&gt; FORLI&#39; FC&lt;br /&gt;Via XIII Novembre 129&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: VALERIO&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>15FC<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=CDF8CDD0D4C2D4C2DCD0C4F2C8809D98839D8E" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=93813','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=93813" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">2813</td>
+			<td style="text-align:center">1</td>
+			<td style="text-align:center">25/10/26 10:30</td>
+			<td title="SANTARCANGELO ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/theme/newb/no-image.png" alt="">SANTARCANGELO VOLLEY FC</td>
+			<td title="LIBERTAS VOLLEY FORLI' A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3471/Loghi/LogoS3471.jpg" alt="">LIBERTAS VOLLEY FORLI FC</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131657464">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131657464">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131657464"><img src="/img/statogara/statodesignata.png" class="tips ris-img" alt="statogara" title="da disputare&lt;br /&gt;Arbitro designato&lt;br&gt;1&#176; arbitro: PESARESI" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALASPORT SAN MAURO PASCOLI&lt;/b&gt;&lt;br /&gt; SAN MAURO PASCOLI FC&lt;br /&gt;Via P. Togliatti 1&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: PESARESI&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>17FB<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=2C192C31352335233D31251329617C79627F6D" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=93821','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=93821" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">2957</td>
+			<td style="text-align:center">1</td>
+			<td style="text-align:center">25/10/26 16:00</td>
+			<td title="USD A.C.L.I S.LUCA S.GIORGIO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4001/Loghi/LogoS4001.png" alt="">SAN LUCA PALLAVOLO FERRARA FE</td>
+			<td title="GRUPPO SPORTIVO SAN PIO X ASD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4260/Loghi/LogoS4260.png" alt="">WORBAS SPX 17 FE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131658100">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131658100">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131658100"><img src="/img/statogara/statodesignata.png" class="tips ris-img" alt="statogara" title="da disputare&lt;br /&gt;Arbitro designato&lt;br&gt;1&#176; arbitro: SANTANGELO" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA DE PISIS&lt;/b&gt;&lt;br /&gt; FERRARA FE&lt;br /&gt;VIALE KRASNODAR, 112&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: SANTANGELO&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>17FC<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=794C796460766076686470467C34292C372A3B" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a onclick="window.open('/classifica.aspx?tipo=avulsa&CId=93822','_blank','height=800,width=1000');" href="#" class="link_classificas"><img src="/img/classifica-avulsa.gif" alt="classifica"></a><a href="/classifica.aspx?CId=93822" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">3012</td>
+			<td style="text-align:center">1</td>
+			<td style="text-align:center">21/10/26 19:30</td>
+			<td title="ASD VOLLEY OSTELLATO"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4010/Loghi/LogoS4010.png" alt="">VOLLEY OSTELLATO FE</td>
+			<td title="CLAI IMOLA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4503/Loghi/LogoS4503.jpg" alt="">CLAI IMOLA VOLLEY BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131658359">3 - 1</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131658359"><span class="parziali">15-25</span><span class="parziali">25-18</span><span class="parziali">25-22</span><span class="parziali">25-20</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131658359"><img src="/img/statogara/stato5.png" class="tips ris-img" alt="statogara" title="gara omologata" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZETTO DELLO SPORT&lt;/b&gt;&lt;br /&gt; OSTELLATO FE&lt;br /&gt;VIA MARCAVALLO 35-B&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CIBIEN&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">3013</td>
+			<td style="text-align:center">1</td>
+			<td style="text-align:center">21/10/26 20:30</td>
+			<td title="OLIMPIA TEODORA"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/2829/Loghi/LogoS2829.jpeg" alt="">VOLLEY ACADEMY OLIMPIA RA</td>
+			<td title="INVOLLEY SSD ARL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3606/Loghi/LogoS3606.jpg" alt="">VBR MORINI SERVICE RA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131658360">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131658360"><span class="parziali">25-9</span><span class="parziali">25-14</span><span class="parziali">25-12</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131658360"><img src="/img/statogara/stato5.png" class="tips ris-img" alt="statogara" title="gara omologata" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Palestra Dante&lt;/b&gt;&lt;br /&gt;Lido Adriano RAVENNA RA&lt;br /&gt;Via Tono Zancanaro&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: DE NISCO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">3015</td>
+			<td style="text-align:center">1</td>
+			<td style="text-align:center">19/10/26 20:45</td>
+			<td title="CATTOLICA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3103/Loghi/LogoS3103.jpg" alt="">DAVE&SUN CATTOLICA RN</td>
+			<td title="PALLAVOLO FAENZA A.S.D."><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/1926/Loghi/LogoS1926.jpg" alt="">FENIX FAENZA RA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131658362">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131658362"><span class="parziali">25-22</span><span class="parziali">25-12</span><span class="parziali">25-21</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131658362"><img src="/img/statogara/stato5.png" class="tips ris-img" alt="statogara" title="gara omologata" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA SCUOLA MEDIA FILIPPINI&lt;/b&gt;&lt;br /&gt; CATTOLICA RN&lt;br /&gt;Via del Partigiano, 10&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: ROSSI&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>17MA<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=3104312C283E283E202C380E347C6164706779" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a href="/classifica.aspx?CId=93778" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">2606</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">20/10/26 19:30</td>
+			<td title="VOLLEY TRICOLORE RE ASD SRL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4803/Loghi/LogoS4803.png" alt="">MO.RE VOLLEY RE</td>
+			<td title="A.S.D. 4 TORRI 1947"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3999/Loghi/LogoS3999.png" alt="">FVA 4T U17 NIAGARA FE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131656131">1 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131656131"><span class="parziali">14-25</span><span class="parziali">26-24</span><span class="parziali">14-25</span><span class="parziali">23-25</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131656131"><img src="/img/statogara/stato5.png" class="tips ris-img" alt="statogara" title="gara omologata" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA ANDERLINI B&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA MARIO VELLANI MARCHI, 106&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: Previtali&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center">2607</td>
+			<td style="text-align:center">2</td>
+			<td style="text-align:center">21/10/26 20:00</td>
+			<td title="PALLAVOLO BOLOGNA SSD A R L"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4877/Loghi/LogoS4877.jpg" alt="">PALLAVOLO BOLOGNA BO</td>
+			<td title="GS PORTO ROBUR COSTA 2030"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5021/Loghi/LogoS5021.png" alt="">PRC 2030 - FASSA BORTOLO RA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131656132">2 - 3</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131656132"><span class="parziali">16-25</span><span class="parziali">25-22</span><span class="parziali">20-25</span><span class="parziali">25-19</span><span class="parziali">9-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131656132"><img src="/img/statogara/stato5.png" class="tips ris-img" alt="statogara" title="gara omologata" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;Sc.Copernico &lt;/b&gt;&lt;br /&gt; BOLOGNA BO&lt;br /&gt;VIA GARAVAGLIA 11 - ZONA FIERA&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: DI LEO&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>19FA<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=2316233E3A2C3A2C323E2A1C266E7376627764" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a><a href="/classifica.aspx?CId=93757" class="link_classifica"><img src="/img/classifica.gif" alt="classifica"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align:center">2263</td>
+			<td style="text-align:center">1</td>
+			<td style="text-align:center">21/10/26 20:30</td>
+			<td title="VOLLEY ACADEMY PIACENZA SSD A RL"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/5018/Loghi/LogoS5018.png" alt="">MERISANA VAP PC</td>
+			<td title="CATTOLICA VOLLEY"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/3103/Loghi/LogoS3103.jpg" alt="">CATTOLICA VOLLEY RN</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131652892">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131652892"><span class="parziali">25-13</span><span class="parziali">25-16</span><span class="parziali">25-15</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131652892"><img src="/img/statogara/stato3.png" class="tips ris-img" alt="statogara" title="documenti gara mancanti" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA SCUOLA RODARI&lt;/b&gt;&lt;br /&gt; ROTTOFRENO PC&lt;br /&gt;VIA ALDO SERENA&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: CAROTA&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr class="dispari">
+			<td style="text-align:center">2305</td>
+			<td style="text-align:center">10</td>
+			<td style="text-align:center">22/10/26 19:30</td>
+			<td title="SC.PALL.ANDERLINI S.COOP.SSD"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4586/Loghi/LogoS4586.png" alt="">MOMA ANDERLINI MO</td>
+			<td title="VOLLEY TEAM BOLOGNA S.S.D.AR.L"><img style="object-fit: contain;width: 40px;height: 40px;border: 1px solid #b7b7b7;padding: 3px;margin: 4px;" src="/mngArea/Societa/img/4726/Loghi/LogoS4726.png" alt="">VOLLEY TEAM BOLOGNA BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131652934">3 - 0</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131652934"><span class="parziali">27-25</span><span class="parziali">25-17</span><span class="parziali">25-18</span></td>
+			<td style="text-align:center">
+				<span id="StatoGara_131652934"><img src="/img/statogara/stato1.png" class="tips ris-img" alt="statogara" title="risultato ufficioso" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALA ANDERLINI A&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA MARIO VELLANI MARCHI, 106&lt;/p&gt;&lt;p class=&quot;designazione&quot;&gt;&lt;b&gt;Designazioni&lt;/b&gt;&lt;br&gt;1&#176; arbitro: MAZZETTO&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="tbl tbl-risultati">
+	<caption>CAMPIONATI NAZIONALI<a style="margin-left:10px;" target="_blank" title="Aggiungi calendario gare a Google Calendar" href="https://www.portalefipav.net/CalendarioGare.asp?c=E7D2E7FAFEE8FEE8F6FAEED8E2AAB7B3A5B3A7" class="link_calendar"><img style="width:20px;" src="/img/icone/calendar.png" alt="calendario"></a></caption>
+	<thead>
+		<tr>
+			<th style="width:40px;">Gara</th>
+			<th style="width:20px;" title="Giornata">G</th>
+			<th style="width:90px;">Data / ora</th>
+			<th style="width:320px;">Squadra casa</th>
+			<th style="width:320px;">Squadra ospite</th>
+			<th style="width:50px;" title="Risultato">Risul.</th>
+			<th class="isMobile">Dettagli</th>
+			<th style="width:40px;">&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr*>
+			<td style="text-align:center"></td>
+			<td style="text-align:center"></td>
+			<td style="text-align:center">24/10/26 17:30</td>
+			<td style="text-align:center" colspan="2">6105 - A3 B - MODENA VOLLEY  MO vs BANCA ANNIA ADUNA WOMEN PD</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131614190">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131614190">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131614190"><img src="/img/statogara/stato0.png" class="tips ris-img" alt="statogara" title="da disputare" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZO DELLO SPORT GIUSEPPE PANINI&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;viale dello sport 25&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr*>
+			<td style="text-align:center"></td>
+			<td style="text-align:center"></td>
+			<td style="text-align:center">24/10/26 19:00</td>
+			<td style="text-align:center" colspan="2">9408 - B1 C - HYDROPLANTS MO vs MGS AREA SPORT PESCHIERA VR</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131614338">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131614338">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131614338"><img src="/img/statogara/stato0.png" class="tips ris-img" alt="statogara" title="da disputare" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA COMUNALE LOSCHI - CAMPO INTERO&lt;/b&gt;&lt;br /&gt; SOLIERA MO&lt;br /&gt;PIAZZALE LOSCHI 230&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr*>
+			<td style="text-align:center"></td>
+			<td style="text-align:center"></td>
+			<td style="text-align:center">24/10/26 20:30</td>
+			<td style="text-align:center" colspan="2">7610 - B D - MODENA VOLLEY PUNTO ZERO MO vs MO.RE VOLLEY  MO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131614812">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131614812">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131614812"><img src="/img/statogara/stato0.png" class="tips ris-img" alt="statogara" title="da disputare" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAZZO DELLO SPORT GIUSEPPE PANINI&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;viale dello sport 25&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr*>
+			<td style="text-align:center"></td>
+			<td style="text-align:center"></td>
+			<td style="text-align:center">24/10/26 18:30</td>
+			<td style="text-align:center" colspan="2">10808 - B2 E - GALAXY COLLECCHIO PR vs U.S.SATURNO-GUASTALLA RE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131615471">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131615471">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131615471"><img src="/img/statogara/stato0.png" class="tips ris-img" alt="statogara" title="da disputare" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALASPORT  LIONELLO LEONI - PRINCIPALE&lt;/b&gt;&lt;br /&gt; COLLECCHIO PR&lt;br /&gt;VIA DON MINZONI, 12&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr*>
+			<td style="text-align:center"></td>
+			<td style="text-align:center"></td>
+			<td style="text-align:center">24/10/26 18:00</td>
+			<td style="text-align:center" colspan="2">10810 - B2 E - ZEROSYSTEM MO vs MASI VOLLEY BO</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131615473">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131615473">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131615473"><img src="/img/statogara/stato0.png" class="tips ris-img" alt="statogara" title="da disputare" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALESTRA BORTOLAMASI - SAN DAMASO&lt;/b&gt;&lt;br /&gt; MODENA MO&lt;br /&gt;VIA GIAGGIOLO SAN DAMASO&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr*>
+			<td style="text-align:center"></td>
+			<td style="text-align:center"></td>
+			<td style="text-align:center">24/10/26 16:00</td>
+			<td style="text-align:center" colspan="2">3240 - A2  - CLUB ITALIA MI vs NARCONON VOLLEY  MELENDUGNO LE</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131635162">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131635162">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131635162"><img src="/img/statogara/stato0.png" class="tips ris-img" alt="statogara" title="da disputare" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALARASCHI&lt;/b&gt;&lt;br /&gt; PARMA PR&lt;br /&gt;via silvio pellico 14/a&lt;/p&gt;" />
+			</td>
+		</tr>
+		<tr*>
+			<td style="text-align:center"></td>
+			<td style="text-align:center"></td>
+			<td style="text-align:center">25/10/26 11:30</td>
+			<td style="text-align:center" colspan="2">20000 - SCSI  - CEDACRI GIOCOPARMA VCCESENA vs DREAM VOLLEY PISA</td>
+			<td style="text-align:center" class="risultato" id="Risultato_131640443">-</td>
+			<td class="risultato-dettagli isMobile" id="Parziali_131640443">&nbsp;</td>
+			<td style="text-align:center">
+				<span id="StatoGara_131640443"><img src="/img/statogara/stato0.png" class="tips ris-img" alt="statogara" title="da disputare" /></span>
+				<img src="/img/info_16.png" class="tips ris-img" alt="info" title="
+&lt;p&gt;&lt;b&gt;PALAPONTI&lt;/b&gt;&lt;br /&gt; PARMA PR&lt;br /&gt;VIA LUIGI ANEDDA 3&lt;/p&gt;" />
+			</td>
+		</tr>
+	</tbody>
+</table>
+<script type="text/javascript">
+	window.addEvent('domready', function () {
+		var tip = new Tips('.tips', { className: 'risultati-tips' });
+		$$('.link_classifica').each(function(el){ el.addEvent('click', function(){ Apri('','', this.href, 'cla');return false; }); });
+	});
+</script>
+	</div>
+	</div>
+		</div>
+	</div>
+	</div>
+	<div id="layout-area5" style="width:100%">
+		<div class="col col-4">
+		</div>
+	</div>
+</div>
+
+    <p class="pw-credito" style="text-align:center;margin:5px auto 15px;font-size:11px;">Sito realizzato con <a href="https://www.powersport.it" target="_blank">PowerSPORT</a> - gestionale per societ&agrave; sportive</p>
+
+<!--Pagina generata in 00:00:00.0781315 secondi-->
+</body>
+</html>
+

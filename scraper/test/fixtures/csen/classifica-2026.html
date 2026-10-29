@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sito ufficiale del Torneo di Pallavolo Misto CSEN: classifica aggiornata, calendario delle partite e squadre partecipanti." />
+    <title>Classifica - Torneo di Pallavolo Misto CSEN</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#2A2B67" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/site.css?v=pWPMAOAlyTB9WFIePxzGIIfHkzqukPmZUPcbXJD1nhA" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+          integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous" />
+    
+    <link rel="stylesheet" href="/TorneoVolley.Web.styles.css?v=WHpsHVYAjksBMbt6SV2lO9zjv4H7OyBFpPQEH793IRo" />
+</head>
+<body class="sito-pubblico">
+    <header b-iraztmw2r4>
+        <nav b-iraztmw2r4 class="navbar navbar-expand-xl navbar-toggleable-xl navbar-dark bg-primary border-bottom box-shadow mb-3">
+            <div b-iraztmw2r4 class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                    <picture b-iraztmw2r4>
+                        <source b-iraztmw2r4 srcset="/img/csen-logo-nav.avif" type="image/avif" />
+                        <img src="/img/csen-logo-nav.png" alt="CSEN Parma" height="40" class="d-inline-block" />
+                    </picture>
+                    Torneo Volley Misto CSEN
+                </a>
+                <button b-iraztmw2r4 class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span b-iraztmw2r4 class="navbar-toggler-icon"></span>
+                </button>
+                <div b-iraztmw2r4 class="navbar-collapse collapse d-xl-inline-flex justify-content-between">
+                    <ul b-iraztmw2r4 class="navbar-nav flex-grow-1 text-nowrap">
+                        <li b-iraztmw2r4 class="nav-item">
+                            <a class="nav-link text-white" href="/"><i b-iraztmw2r4 class="bi bi-house-door-fill me-1" aria-hidden="true"></i>Home</a>
+                        </li>
+                        <li b-iraztmw2r4 class="nav-item">
+                            <a class="nav-link text-white" href="/Classifica"><i b-iraztmw2r4 class="bi bi-bar-chart-fill me-1" aria-hidden="true"></i>Classifica</a>
+                        </li>
+                        <li b-iraztmw2r4 class="nav-item">
+                            <a class="nav-link text-white" href="/Calendario"><i b-iraztmw2r4 class="bi bi-calendar-event me-1" aria-hidden="true"></i>Calendario</a>
+                        </li>
+                        <li b-iraztmw2r4 class="nav-item">
+                            <a class="nav-link text-white" href="/Squadre"><i b-iraztmw2r4 class="bi bi-shield-shaded me-1" aria-hidden="true"></i>Squadre</a>
+                        </li>
+                        <li b-iraztmw2r4 class="nav-item">
+                            <a class="nav-link text-white" href="/Migliori"><i b-iraztmw2r4 class="bi bi-award-fill me-1" aria-hidden="true"></i>Migliori in campo</a>
+                        </li>
+                        <li b-iraztmw2r4 class="nav-item">
+                            <a class="nav-link text-white" href="/TotoMisto"><i b-iraztmw2r4 class="bi bi-trophy-fill me-1" aria-hidden="true"></i>TotoMisto</a>
+                        </li>
+                        <li b-iraztmw2r4 class="nav-item">
+                            <a class="nav-link text-white" href="/Annunci"><i b-iraztmw2r4 class="bi bi-megaphone-fill me-1" aria-hidden="true"></i>Annunci</a>
+                        </li>
+                        <li b-iraztmw2r4 class="nav-item dropdown">
+                            <a b-iraztmw2r4 class="nav-link dropdown-toggle text-white" href="#" id="menu-info" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i b-iraztmw2r4 class="bi bi-info-circle-fill me-1" aria-hidden="true"></i>Info</a>
+                            <ul b-iraztmw2r4 class="dropdown-menu" aria-labelledby="menu-info">
+                                <li b-iraztmw2r4><a class="dropdown-item" href="/LiveScore"><i b-iraztmw2r4 class="bi bi-broadcast me-1" aria-hidden="true"></i>Live score</a></li>
+                                <li b-iraztmw2r4><a class="dropdown-item" href="/Orari"><i b-iraztmw2r4 class="bi bi-clock-fill me-1" aria-hidden="true"></i>Palestre e orari</a></li>
+                                <li b-iraztmw2r4><a class="dropdown-item" href="/Documenti"><i b-iraztmw2r4 class="bi bi-file-earmark-text-fill me-1" aria-hidden="true"></i>Documenti utili</a></li>
+                                <li b-iraztmw2r4><a class="dropdown-item" href="/LinkUtili"><i b-iraztmw2r4 class="bi bi-link-45deg me-1" aria-hidden="true"></i>Link utili</a></li>
+                                <li b-iraztmw2r4><a class="dropdown-item" href="/Contatti"><i b-iraztmw2r4 class="bi bi-envelope-fill me-1" aria-hidden="true"></i>Contatti</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul b-iraztmw2r4 class="navbar-nav text-nowrap">
+                        <li b-iraztmw2r4 class="nav-item">
+                            <a class="nav-link text-white" href="/Admin"><i b-iraztmw2r4 class="bi bi-lock-fill me-1" aria-hidden="true"></i>Area riservata</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div b-iraztmw2r4 class="container">
+        <main b-iraztmw2r4 role="main" class="pb-3">
+            
+<div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+<h1 class="mb-0">Classifica</h1>
+    <div class="d-flex gap-2 ms-auto d-print-none" data-esporta-nome="Classifica 2026-27">
+    <button type="button" class="btn btn-sm btn-outline-danger" data-esporta-formato="pdf" title="Scarica le tabelle in PDF">&#8595; PDF</button>
+    <button type="button" class="btn btn-sm btn-outline-success" data-esporta-formato="excel" title="Scarica le tabelle in Excel">&#8595; Excel</button>
+</div>
+
+</div>
+
+
+    <form method="get" class="mb-4 d-flex align-items-center gap-2">
+        <label class="form-label mb-0">Stagione</label>
+        <select name="stagioneId" class="form-select w-auto" onchange="this.form.submit()"><option selected="selected" value="1">2026-27</option>
+<option value="2">2025-26</option>
+</select>
+        <noscript><button type="submit" class="btn btn-sm btn-primary">Filtra</button></noscript>
+    </form>
+
+
+            <h2 class="h4 mt-4">Girone A</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Squadra</th>
+                            <th class="text-center">Punti</th>
+                            <th class="text-center">Giocate</th>
+                            <th class="text-center">Vinte</th>
+                            <th class="text-center">Perse</th>
+                            <th class="text-center">Set a favore</th>
+                            <th class="text-center">Set contro</th>
+                            <th class="text-center">Differenza set</th>
+                            <th class="text-center">Punti a favore</th>
+                            <th class="text-center">Punti contro</th>
+                            <th class="text-center">Differenza punti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/2">BONGIO AZUL</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/4">CEDACRI GIOCOPARMA</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/5">Cral CHIESI</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/6">CRAL CR&#xC9;DIT AGRICOLE</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/41">CUS 3</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/8">CUS CUS</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/10">GZBO</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/13">ISOMEC INZANI PARMA ASFALTI</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/20">SHIRATORINZANI</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/21">VARANESE</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 class="h4 mt-4">Girone B</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Squadra</th>
+                            <th class="text-center">Punti</th>
+                            <th class="text-center">Giocate</th>
+                            <th class="text-center">Vinte</th>
+                            <th class="text-center">Perse</th>
+                            <th class="text-center">Set a favore</th>
+                            <th class="text-center">Set contro</th>
+                            <th class="text-center">Differenza set</th>
+                            <th class="text-center">Punti a favore</th>
+                            <th class="text-center">Punti contro</th>
+                            <th class="text-center">Differenza punti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/1">ALPINI</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/3">BONGIO BLUE</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/7">CUS</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/9">EMBOLO</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/11">GZBO 2</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/12">INZANITY</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/14">LAUMAS GIOCOPARMA</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/15">MONCHIO</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/16">MONTEBELLO</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>
+                                    <a href="/Squadre/Dettaglio/17">NOT NORMAL</a>
+                                </td>
+                                <td class="text-center fw-bold">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+    <p class="text-muted small">
+        Regole punteggio: vittoria 3-0 = 4 punti, vittoria 2-1 = 3 punti, sconfitta 1-2 = 1 punto, sconfitta 0-3 = 0 punti
+        (1 punto per ogni set vinto, più 1 punto extra per la vittoria della partita).
+        A parità di punti, l'ordine è deciso, nell'ordine, da: scontri diretti, numero di vittorie, differenza set,
+        maggior numero di set vinti, differenza punti, maggior numero di punti realizzati.
+    </p>
+
+
+
+        </main>
+    </div>
+
+    <footer b-iraztmw2r4 class="border-top footer text-muted">
+        <div b-iraztmw2r4 class="container d-flex flex-wrap align-items-center gap-2">
+            <picture b-iraztmw2r4>
+                <source b-iraztmw2r4 srcset="/img/csen-logo-nav.avif" type="image/avif" />
+                <img src="/img/csen-logo-nav.png" alt="CSEN Parma" height="24" />
+            </picture>
+            <span b-iraztmw2r4>&copy; 2026 - Torneo di Pallavolo Misto CSEN - Organizzato da CSEN Parma</span>
+            <span b-iraztmw2r4 class="ms-auto">
+                <a href="/Home/Privacy">Privacy e cookie</a>
+ &middot; 
+                    <a b-iraztmw2r4 href="#" class="cookie-preferenze-link">Preferenze cookie</a>
+                &middot; Sito realizzato da
+                <a b-iraztmw2r4 href="https://www.giacomorabaglia.com" target="_blank" rel="noopener">Giacomo Rabaglia</a>
+            </span>
+        </div>
+    </footer>
+
+        <div b-iraztmw2r4 id="cookie-banner" class="cookie-banner d-none">
+            <div b-iraztmw2r4 class="container d-flex flex-wrap align-items-center justify-content-between gap-3 py-3">
+                <p b-iraztmw2r4 class="mb-0 small">
+                    Questo sito usa Google Analytics per statistiche anonime sulle visite, solo con il tuo consenso.
+                    Puoi accettare, rifiutare o cambiare idea in qualsiasi momento dalla
+                    <a class="link-light" href="/Home/Privacy">Privacy e cookie policy</a>.
+                </p>
+                <div b-iraztmw2r4 class="d-flex gap-2 flex-shrink-0">
+                    <button b-iraztmw2r4 type="button" id="cookie-rifiuta" class="btn btn-outline-light btn-sm">Rifiuta</button>
+                    <button b-iraztmw2r4 type="button" id="cookie-accetta" class="btn btn-brand-gold btn-sm">Accetta</button>
+                </div>
+            </div>
+        </div>
+        <script src="/js/cookie-consent.js?v=z3UPU5_Ud48WtiPB3Rv9JSwmalSNYM2ZMZf-npLYNJI"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo"></script>
+    <script src="/js/esporta-tabelle.js?v=w0d_yoQZJPR7r6Gc1Nf1tarHAdT9K67vclm7_lPyvWw"></script>
+    
+</body>
+</html>

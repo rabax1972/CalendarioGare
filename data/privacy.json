@@ -1,0 +1,15 @@
+{
+  "_istruzioni": [
+    "Rose delle squadre: dati personali di atleti. Usa questo file per le richieste di rimozione.",
+    "contatto: email o link mostrato nell'app per chiedere la rimozione (lascialo vuoto finché non ne hai uno).",
+    "nascondiRose: squadre (nome o id) di cui non pubblicare la rosa.",
+    "nascondiAtleti: persone da togliere dalle rose, come 'Cognome Nome' (l'ordine non conta).",
+    "nascondiFoto: persone di cui non mostrare la foto.",
+    "Le foto dei minorenni, o di chi non ha una data di nascita verificabile alla fonte, non vengono mai mostrate.",
+    "Dopo una modifica: npm run scrape -- --solo-build"
+  ],
+  "contatto": "",
+  "nascondiRose": [],
+  "nascondiAtleti": [],
+  "nascondiFoto": []
+}

@@ -1,0 +1,205 @@
+[
+ {
+  "id": "csen-misto",
+  "nome": "Misto CSEN Parma",
+  "nomeBreve": "Misto CSEN",
+  "livello": "provinciale",
+  "federazione": "CSEN",
+  "genere": "misto",
+  "categoria": "Open misto",
+  "stagione": "2026/27",
+  "fonte": "csen",
+  "fonteUrl": "https://www.volleymistocsenparma.it/Calendario",
+  "gironi": [
+   "A",
+   "B"
+  ],
+  "colore": "#c2410c",
+  "coloreScuro": "#fdba74"
+ },
+ {
+  "id": "crer-serie-c-m",
+  "nome": "Serie C maschile",
+  "nomeBreve": "C M",
+  "livello": "regionale",
+  "federazione": "FIPAV",
+  "genere": "maschile",
+  "categoria": "Serie C",
+  "stagione": "2026/27",
+  "fonte": "crer",
+  "fonteUrl": "https://crer.portalefipav.net/risultati-classifiche.aspx?PId=29422",
+  "gironi": [
+   "A"
+  ],
+  "colore": "#854d0e",
+  "coloreScuro": "#fde047"
+ },
+ {
+  "id": "crer-serie-c-f",
+  "nome": "Serie C femminile",
+  "nomeBreve": "C F",
+  "livello": "regionale",
+  "federazione": "FIPAV",
+  "genere": "femminile",
+  "categoria": "Serie C",
+  "stagione": "2026/27",
+  "fonte": "crer",
+  "fonteUrl": "https://crer.portalefipav.net/risultati-classifiche.aspx?PId=29422",
+  "gironi": [
+   "A"
+  ],
+  "colore": "#9f1239",
+  "coloreScuro": "#fda4af"
+ },
+ {
+  "id": "crer-serie-d-m",
+  "nome": "Serie D maschile",
+  "nomeBreve": "D M",
+  "livello": "regionale",
+  "federazione": "FIPAV",
+  "genere": "maschile",
+  "categoria": "Serie D",
+  "stagione": "2026/27",
+  "fonte": "crer",
+  "fonteUrl": "https://crer.portalefipav.net/risultati-classifiche.aspx?PId=29422",
+  "gironi": [
+   "A"
+  ],
+  "colore": "#0f766e",
+  "coloreScuro": "#5eead4"
+ },
+ {
+  "id": "crer-serie-d-f",
+  "nome": "Serie D femminile",
+  "nomeBreve": "D F",
+  "livello": "regionale",
+  "federazione": "FIPAV",
+  "genere": "femminile",
+  "categoria": "Serie D",
+  "stagione": "2026/27",
+  "fonte": "crer",
+  "fonteUrl": "https://crer.portalefipav.net/risultati-classifiche.aspx?PId=29422",
+  "gironi": [
+   "A"
+  ],
+  "colore": "#6b21a8",
+  "coloreScuro": "#c4b5fd"
+ },
+ {
+  "id": "crer-u15-f",
+  "nome": "Under 15 femminile regionale",
+  "nomeBreve": "U15 F reg.",
+  "livello": "regionale",
+  "federazione": "FIPAV",
+  "genere": "femminile",
+  "categoria": "Under 15",
+  "stagione": "2026/27",
+  "fonte": "crer",
+  "fonteUrl": "https://crer.portalefipav.net/risultati-classifiche.aspx?PId=29422",
+  "gironi": [
+   "A"
+  ],
+  "colore": "#1d4ed8",
+  "coloreScuro": "#93c5fd"
+ },
+ {
+  "id": "crer-u17-f",
+  "nome": "Under 17 femminile regionale",
+  "nomeBreve": "U17 F reg.",
+  "livello": "regionale",
+  "federazione": "FIPAV",
+  "genere": "femminile",
+  "categoria": "Under 17",
+  "stagione": "2026/27",
+  "fonte": "crer",
+  "fonteUrl": "https://crer.portalefipav.net/risultati-classifiche.aspx?PId=29422",
+  "gironi": [
+   "A"
+  ],
+  "colore": "#0369a1",
+  "coloreScuro": "#7dd3fc"
+ },
+ {
+  "id": "crer-u17-m",
+  "nome": "Under 17 maschile regionale",
+  "nomeBreve": "U17 M reg.",
+  "livello": "regionale",
+  "federazione": "FIPAV",
+  "genere": "maschile",
+  "categoria": "Under 17",
+  "stagione": "2026/27",
+  "fonte": "crer",
+  "fonteUrl": "https://crer.portalefipav.net/risultati-classifiche.aspx?PId=29422",
+  "gironi": [
+   "A"
+  ],
+  "colore": "#b91c1c",
+  "coloreScuro": "#fca5a5"
+ },
+ {
+  "id": "naz-a2-f",
+  "nome": "Serie A2 femminile",
+  "nomeBreve": "A2 F",
+  "livello": "nazionale",
+  "federazione": "FIPAV",
+  "genere": "femminile",
+  "categoria": "Serie A2",
+  "stagione": "2026/27",
+  "fonte": "myvolley",
+  "fonteUrl": "https://www.federvolley.it/campionati/serie-a-b",
+  "gironi": [],
+  "colore": "#be185d",
+  "coloreScuro": "#f9a8d4"
+ },
+ {
+  "id": "naz-b-m",
+  "nome": "Serie B maschile",
+  "nomeBreve": "B M",
+  "livello": "nazionale",
+  "federazione": "FIPAV",
+  "genere": "maschile",
+  "categoria": "Serie B",
+  "stagione": "2026/27",
+  "fonte": "myvolley",
+  "fonteUrl": "https://www.federvolley.it/campionati/serie-a-b",
+  "gironi": [
+   "C"
+  ],
+  "colore": "#4338ca",
+  "coloreScuro": "#a5b4fc"
+ },
+ {
+  "id": "naz-b2-f",
+  "nome": "Serie B2 femminile",
+  "nomeBreve": "B2 F",
+  "livello": "nazionale",
+  "federazione": "FIPAV",
+  "genere": "femminile",
+  "categoria": "Serie B2",
+  "stagione": "2026/27",
+  "fonte": "myvolley",
+  "fonteUrl": "https://www.federvolley.it/campionati/serie-a-b",
+  "gironi": [
+   "E"
+  ],
+  "colore": "#15803d",
+  "coloreScuro": "#86efac"
+ },
+ {
+  "id": "fipav-parma",
+  "nome": "Campionati provinciali FIPAV Parma",
+  "nomeBreve": "FIPAV PR",
+  "livello": "provinciale",
+  "federazione": "FIPAV",
+  "genere": "misto",
+  "categoria": "Divisioni e giovanili",
+  "stagione": "2026/27",
+  "fonte": "fipav-parma",
+  "fonteUrl": "https://fipavonline.it/main/tutti_i_campionati/08038",
+  "gironi": [],
+  "soloLinkEsterno": true,
+  "nota": "Calendari, risultati e classifiche dei campionati provinciali FIPAV (Divisioni, Under, Open misto) sono pubblicati solo su fipavonline.it, che non ne consente il riuso automatico.",
+  "colore": "#44403c",
+  "coloreScuro": "#d6d3d1"
+ }
+]

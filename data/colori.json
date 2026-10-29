@@ -1,0 +1,4 @@
+{
+  "_istruzioni": "Facoltativo: forza il colore di un campionato (id → nome colore della palette in scraper/src/colors.ts).",
+  "campionati": {}
+}

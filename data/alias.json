@@ -1,0 +1,21 @@
+{
+  "_istruzioni": [
+    "Unifica i nomi con cui la stessa squadra compare nelle varie fonti o stagioni.",
+    "'nome' è il nome mostrato nell'app; 'varianti' sono gli altri nomi trovati nelle fonti.",
+    "Maiuscole, accenti, punteggiatura, forme giuridiche (ASD, SSD, POL…) e sigla provincia finale (… PR) non contano già di loro.",
+    "'comune' e 'societa' sono facoltativi e prevalgono su quanto dedotto dalle fonti.",
+    "Dopo una modifica: npm run scrape -- --solo-build per rigenerare i dati senza scaricare nulla."
+  ],
+  "squadre": [
+    {
+      "nome": "CLUB ITALIA",
+      "varianti": ["CLUB ITALIA MI"],
+      "comune": "Parma"
+    },
+    {
+      "nome": "CRAL CRÉDIT AGRICOLE",
+      "varianti": ["CREDIT AGRICOLE", "CRAL CREDIT AGRICOLE"],
+      "comune": "Parma"
+    }
+  ]
+}

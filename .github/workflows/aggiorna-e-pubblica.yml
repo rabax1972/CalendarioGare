@@ -1,0 +1,108 @@
+name: Aggiorna dati e pubblica
+
+on:
+  schedule:
+    # Orari in UTC (in Italia +1 d'inverno, +2 d'estate).
+    # Lunedì–venerdì: ogni 3 ore dalle 6 alle 23 circa.
+    - cron: '17 5-22/3 * * 1-5'
+    # Sabato e domenica: ogni ora dalle 9 alle 24 circa (le gare si concentrano nel weekend).
+    - cron: '17 7-22 * * 0,6'
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: aggiorna-e-pubblica
+  cancel-in-progress: false
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    outputs:
+      esito-scraper: ${{ steps.scraper.outputs.esito }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Test dei parser
+        run: npm test
+
+      # Cache HTTP (ETag) e stato della scoperta dei gironi: evita richieste inutili alle fonti.
+      - uses: actions/cache@v4
+        with:
+          path: .cache
+          key: scraper-${{ github.run_id }}
+          restore-keys: scraper-
+
+      - name: Scraping
+        id: scraper
+        if: github.event_name != 'push'
+        env:
+          SCRAPER_USER_AGENT: 'CalendarioGareParma/0.1 (+https://github.com/${{ github.repository }}; progetto non commerciale)'
+          SCRAPER_CACHE_MINUTI: '0'
+        run: |
+          set +e
+          npm run scrape
+          echo "esito=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Report squadre di Parma
+        if: github.event_name != 'push'
+        run: cat data/report-parma.md >> "$GITHUB_STEP_SUMMARY"
+
+      # Commit solo se è cambiato qualcosa oltre all'orario di generazione in meta.json.
+      - name: Salva i dati nel repository
+        if: github.event_name != 'push'
+        run: |
+          git add data
+          if git diff --cached --quiet -- . ':(exclude)data/meta.json'; then
+            echo "Nessuna variazione nei dati."
+            git reset -q
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -q -m "Aggiorna dati gare"
+            git push
+          fi
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build PWA
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  pubblica:
+    needs: aggiorna
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  # Se una fonte è fallita i dati precedenti restano pubblicati, ma l'esecuzione viene segnata come fallita.
+  segnala-errori:
+    needs: [aggiorna, pubblica]
+    if: always() && needs.aggiorna.outputs.esito-scraper != '' && needs.aggiorna.outputs.esito-scraper != '0'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "::error::Almeno una fonte non è stata aggiornata: vedi il log del passo 'Scraping'. Sono rimasti pubblicati gli ultimi dati validi."
+          exit 1

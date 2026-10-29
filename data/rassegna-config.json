@@ -1,0 +1,22 @@
+{
+  "squadre": [
+    { "parole": ["club italia"], "squadre": ["CLUB ITALIA"], "senza": ["maschil", "crai", "territorial"] },
+    { "parole": ["minerva"], "squadre": ["CIRCOLO MINERVA ASD"] },
+    { "parole": ["galaxy"], "squadre": ["GALAXY COLLECCHIO", "GALAXY VOLLEY"] },
+    { "parole": ["energy volley", "techcab"], "squadre": ["ENERGY VOLLEY"] },
+    { "parole": ["verdiano", "busseto volley"], "squadre": ["VERDIANO BUSSETO VOLLEY"] },
+    { "parole": ["inzani"], "squadre": ["ISOMEC GREEN INZANI"] },
+    { "parole": ["audax"], "squadre": ["POLISPORTIVA AUDAX PARMA"] },
+    { "parole": ["montebello"], "squadre": ["U.S. MONTEBELLO"] },
+    { "parole": ["san polo volley", "san polo simpel"], "squadre": ["A.S.D. SAN POLO VOLLEY"] },
+    { "parole": ["oasi energy", "oasi pallavolo", "noceto volley"], "squadre": ["OASI PALLAVOLO NOCETO ASD"] },
+    { "parole": ["borgovolley", "lavezzini"], "squadre": ["BORGOVOLLEY TEAM ASD"] },
+    { "parole": ["salsovolley", "salso volley"], "squadre": ["SALSO VOLLEY"] },
+    { "parole": ["la salle"], "squadre": ["LA SALLE SPORT CENTER A.S.D."] },
+    { "parole": ["baganzola"], "squadre": ["POLISPORTIVA BAGANZOLA ASD"] },
+    { "parole": ["sport club parma"], "squadre": ["SPORT CLUB PARMA"] },
+    { "parole": ["polcoop", "pol coop", "coop parma"], "squadre": ["ASD POL.COOP PARMA 1964"] }
+  ],
+  "articoli": [],
+  "escludi": []
+}

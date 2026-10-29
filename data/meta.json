@@ -1,0 +1,43 @@
+{
+ "generatoIl": "2026-10-29T13:15:11.356Z",
+ "stagione": "2026/27",
+ "fonti": [
+  {
+   "id": "csen",
+   "nome": "CSEN Parma – Torneo misto",
+   "abilitata": true,
+   "ok": true,
+   "ultimoSuccesso": "2026-10-29T13:12:31.628Z",
+   "ultimoTentativo": "2026-10-29T13:12:29.070Z",
+   "partite": 180
+  },
+  {
+   "id": "fipav-parma",
+   "nome": "FIPAV Parma – campionati provinciali",
+   "abilitata": false,
+   "ok": false,
+   "ultimoSuccesso": null,
+   "ultimoTentativo": null,
+   "partite": 0,
+   "errore": "Fonte disattivata: il sito non consente il riuso automatico dei dati"
+  },
+  {
+   "id": "crer",
+   "nome": "FIPAV Emilia-Romagna – campionati regionali",
+   "abilitata": true,
+   "ok": true,
+   "ultimoSuccesso": "2026-10-29T13:13:05.751Z",
+   "ultimoTentativo": "2026-10-29T13:12:31.636Z",
+   "partite": 756
+  },
+  {
+   "id": "myvolley",
+   "nome": "FIPAV – campionati nazionali (federvolley.it)",
+   "abilitata": true,
+   "ok": true,
+   "ultimoSuccesso": "2026-10-29T13:14:34.214Z",
+   "ultimoTentativo": "2026-10-29T13:13:05.762Z",
+   "partite": 610
+  }
+ ]
+}

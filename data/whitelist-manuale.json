@@ -1,0 +1,14 @@
+{
+  "_istruzioni": [
+    "Controlli manuali sul filtro 'squadre di Parma' dei campionati regionali e nazionali.",
+    "squadre: nomi da considerare di Parma anche se non riconosciuti in automatico.",
+    "codiciSocieta: prefissi di codice affiliazione FIPAV (08038… è già incluso).",
+    "idSocietaCrer: id società del portale regionale (numero nel logo LogoS<id>), vale per tutte le sue squadre.",
+    "escludi: nomi da NON considerare di Parma (falsi positivi).",
+    "Verifica il risultato in data/report-parma.md dopo ogni esecuzione."
+  ],
+  "squadre": ["CLUB ITALIA"],
+  "codiciSocieta": [],
+  "idSocietaCrer": [],
+  "escludi": []
+}
