@@ -135,6 +135,8 @@ export interface StatoFonte {
   ultimoSuccesso: string | null;
   ultimoTentativo: string | null;
   errore?: string;
+  /** Per le fonti aggiornate fuori dal controllo automatico. */
+  nota?: string;
   partite: number;
 }
 

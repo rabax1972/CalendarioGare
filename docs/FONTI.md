@@ -168,6 +168,10 @@ fuori regione, quindi **non** va usato come fonte nazionale.
 Sono gli stessi dati del sito ufficiale; il sito offre anche il download `calendario.xlsx`.
 `robots.txt` contiene solo il testo standard Cloudflare, senza restrizioni.
 
+Dal 30/10/2026 Cloudflare risponde **403** alle richieste dai server di GitHub Actions (IP di datacenter). Dal PC le stesse
+richieste, con lo stesso User-Agent, ricevono 200. Il blocco non si aggira (niente proxy, IP diversi o browser simulati):
+la fonte si aggiorna dal PC (README, «Campionati nazionali dal PC»).
+
 ### URL
 
 - Indice stagioni: `/public/json/index.json`

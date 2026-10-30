@@ -32,6 +32,7 @@ export function Info() {
                     ? `Aggiornata ${f.ultimoSuccesso ? quando(f.ultimoSuccesso) : ''} · ${f.partite} gare lette`
                     : `Ultimo aggiornamento non riuscito${f.ultimoSuccesso ? `: dati fermi a ${quando(f.ultimoSuccesso)}` : ''}`}
               </span>
+              {f.nota && <span className="sotto">{f.nota}</span>}
               {SITI[f.id] && (
                 <a href={SITI[f.id].url} target="_blank" rel="noopener noreferrer" className="link-icona">
                   {SITI[f.id].etichetta} <Icona nome="esterno" />

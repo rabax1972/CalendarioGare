@@ -20,6 +20,9 @@ const FONTI: Fonte[] = [fonteCsen, fonteFipavParma, fonteCrer, fonteMyvolley];
 const args = process.argv.slice(2);
 const soloBuild = args.includes('--solo-build');
 const soloFonte = args.find((a) => a.startsWith('--fonte='))?.split('=')[1];
+// Fonti aggiornate altrove (es. myvolley, che blocca gli IP dei server di GitHub): qui si usa solo l'ultimo snapshot.
+const saltate = new Set(args.find((a) => a.startsWith('--salta='))?.split('=')[1].split(',') ?? []);
+const GIORNI_AVVISO_SALTATE = 3;
 
 const log = (msg: string) => console.log(`[${new Date().toISOString().slice(11, 19)}] ${msg}`);
 
@@ -78,9 +81,20 @@ async function main() {
       ultimoTentativo: prima?.ultimoTentativo ?? null,
       partite: snapshots.get(fonte.id)?.partite.length ?? 0,
       ...(prima?.errore ? { errore: prima.errore } : {}),
+      // Chi aggiorna a parte una fonte saltata dal controllo automatico ne mantiene la nota.
+      ...(prima?.nota && soloFonte === fonte.id ? { nota: prima.nota } : {}),
     };
     if (!fonte.abilitata) {
       stato.errore = 'Fonte disattivata: il sito non consente il riuso automatico dei dati';
+      stati.push(stato);
+      continue;
+    }
+    if (saltate.has(fonte.id)) {
+      stato.nota = 'Aggiornata a parte, non a ogni controllo automatico';
+      const giorni = stato.ultimoSuccesso ? (Date.now() - Date.parse(stato.ultimoSuccesso)) / 86_400_000 : Infinity;
+      if (!stato.ok || giorni > GIORNI_AVVISO_SALTATE) {
+        console.warn(`::warning::${fonte.nome}: aggiornata a parte, ultimo aggiornamento riuscito ${stato.ultimoSuccesso ?? 'mai'}`);
+      }
       stati.push(stato);
       continue;
     }

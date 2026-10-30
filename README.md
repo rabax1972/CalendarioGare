@@ -48,6 +48,7 @@ npm install
 npm run scrape                     # tutte le fonti abilitate
 npm run scrape -- --fonte=csen     # una sola fonte (csen | crer | myvolley)
 npm run scrape -- --solo-build     # rigenera data/*.json dagli snapshot, senza scaricare nulla
+npm run scrape -- --salta=myvolley # non interroga le fonti indicate, usa il loro ultimo snapshot
 ```
 
 Cosa produce in `data/`:
@@ -121,6 +122,24 @@ automatico funziona come in Classifiche, senza FTP:
   l'email di GitHub). Il report delle squadre di Parma è nel riepilogo dell'esecuzione.
 
 `api/` e `web.config` non passano mai dalla pubblicazione automatica: si caricano a mano.
+
+### Campionati nazionali dal PC
+
+`media.myvolley.net` è dietro Cloudflare, che risponde **403 agli IP dei server di GitHub**. Da una connessione domestica
+invece risponde. L'Action quindi salta questa fonte (`--salta=myvolley`) e usa l'ultimo snapshot. Se è più vecchio di 3 giorni
+lo segnala con un avviso, senza far fallire l'esecuzione. Gli aggiornamenti arrivano dal PC:
+
+- [`scripts/aggiorna-nazionali.ps1`](scripts/aggiorna-nazionali.ps1) lavora in un clone dedicato
+  (`%LOCALAPPDATA%\CalendarioGare-nazionali`, riallineato a `origin/main` a ogni giro). Lancia
+  `npm run scrape -- --fonte=myvolley` e fa commit e push di `data/` se è cambiato qualcosa. Il push fa partire l'Action,
+  che pubblica su Aruba. Log in `%LOCALAPPDATA%\CalendarioGare-nazionali.log`;
+- [`scripts/installa-aggiorna-nazionali.ps1`](scripts/installa-aggiorna-nazionali.ps1) crea l'attività pianificata
+  *CalendarioGare - nazionali* (ogni sera alle 23:15, sabato e domenica anche alle 19:15; se il PC è spento all'ora
+  prevista parte appena possibile):
+
+  ```powershell
+  powershell -ExecutionPolicy Bypass -File scripts\installa-aggiorna-nazionali.ps1
+  ```
 
 ### Prima installazione
 

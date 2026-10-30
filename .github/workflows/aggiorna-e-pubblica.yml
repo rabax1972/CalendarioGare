@@ -48,7 +48,8 @@ jobs:
           SCRAPER_CACHE_MINUTI: '0'
         run: |
           set +e
-          npm run scrape
+          # myvolley.net (Cloudflare) risponde 403 agli IP di GitHub: si aggiorna dal PC con scripts/aggiorna-nazionali.ps1.
+          npm run scrape -- --salta=myvolley
           echo "esito=$?" >> "$GITHUB_OUTPUT"
 
       - name: Report squadre di Parma
@@ -67,7 +68,7 @@ jobs:
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git commit -q -m "Aggiorna dati gare"
-            git push
+            git push || echo "::warning::Push rifiutato: nel frattempo è arrivato un altro aggiornamento. I dati verranno rigenerati alla prossima esecuzione."
           fi
 
       # Pubblicazione su Aruba senza FTP (scripts/pubblica-aruba.ts): build e invio al server dei soli file cambiati.
