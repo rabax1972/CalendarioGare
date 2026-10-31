@@ -81,7 +81,7 @@ npm run build      # controllo tipi + build in dist/ (copia i JSON in dist/data/
 npm run preview    # prova la build, service worker compreso
 ```
 
-Funzioni: prossime gare per giorno (Oggi / Weekend / 7 giorni / Tutte), risultati recenti, filtri per campionato, livello,
+Funzioni: prossime gare per giorno (Oggi / Weekend / 7 giorni / Tutte) o in una griglia settimanale con le ore, come Google Calendar, risultati recenti, filtri per campionato, livello,
 genere, squadra e comune, pagina della singola squadra, classifiche, "Le mie squadre" (salvate in `localStorage`),
 dettaglio gara con parziali, mappa e link alla fonte, condivisione (Web Share API, altrimenti copia negli appunti), gare
 rinviate e spostate in evidenza, rassegna stampa (anche nella pagina della squadra), tema chiaro/scuro automatico, legenda colori sempre a portata di mano.

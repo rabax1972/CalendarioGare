@@ -1626,3 +1626,249 @@ abbr {
   width: 13px;
   height: 13px;
 }
+
+/* ---------- Vista settimanale (come Google Calendar) ---------- */
+.scelta-vista {
+  flex: none;
+}
+.scelta-vista .segmento {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 10px;
+}
+.scelta-vista .icona {
+  width: 16px;
+  height: 16px;
+}
+.icona-sola {
+  padding: 0;
+  width: 44px;
+}
+/* Su schermi larghi la settimana esce dalla colonna centrale: sette giorni hanno bisogno di spazio. */
+.settimana {
+  margin: 12px calc(50% - min(50vw - 16px, 620px)) 0;
+}
+.sett-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.sett-titolo {
+  flex: 1;
+  margin: 0 0 0 4px;
+  font-family: var(--font-sport);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.sett-scorri {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  background: var(--superficie);
+}
+.sett-griglia {
+  /* Larghezza del contenitore: se le larghezze minime dei giorni non ci stanno, le colonne sbordano e si scorre. */
+  display: grid;
+}
+.sett-angolo,
+.sett-ore,
+.sett-senza-ora-etichetta {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--superficie);
+}
+.sett-testa {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 0;
+  border-left: 1px solid var(--bordo);
+  border-bottom: 1px solid var(--bordo);
+  color: var(--testo-2);
+}
+.sett-angolo {
+  border-bottom: 1px solid var(--bordo);
+}
+.sett-testa-giorno {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sett-testa-numero {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-family: var(--font-sport);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--testo);
+}
+.sett-testa.passato .sett-testa-numero {
+  color: var(--testo-2);
+}
+.sett-testa.oggi {
+  color: var(--primario);
+}
+.sett-testa.oggi .sett-testa-numero {
+  background: var(--primario);
+  color: var(--su-primario);
+}
+.sett-senza-ora {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: 2px;
+  border-left: 1px solid var(--bordo);
+  border-bottom: 1px solid var(--bordo);
+}
+.sett-senza-ora-etichetta {
+  border-bottom: 1px solid var(--bordo);
+  padding-top: 6px;
+}
+.sett-ore {
+  position: sticky;
+}
+.sett-etichetta-ora {
+  position: absolute;
+  right: 6px;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  color: var(--testo-2);
+  white-space: nowrap;
+}
+.sett-senza-ora-etichetta.sett-etichetta-ora {
+  position: sticky;
+  transform: none;
+  text-align: right;
+  padding-right: 6px;
+}
+.sett-ore .sett-etichetta-ora:first-child {
+  transform: none;
+}
+.sett-colonna {
+  position: relative;
+  border-left: 1px solid var(--bordo);
+  /* Una riga per ogni ora (l'altezza della fascia arriva da background-size). */
+  background-image: linear-gradient(to bottom, var(--bordo) 1px, transparent 1px);
+}
+.sett-colonna.oggi {
+  background-color: color-mix(in srgb, var(--primario) 6%, transparent);
+}
+.sett-evento {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+  padding: 3px 5px;
+  border-radius: 6px;
+  border-left: 3px solid var(--tinta);
+  background: color-mix(in srgb, var(--tinta) 16%, var(--superficie));
+  color: var(--testo);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.sett-senza-ora .sett-evento {
+  position: static;
+}
+.sett-evento:hover {
+  background: color-mix(in srgb, var(--tinta) 28%, var(--superficie));
+}
+.sett-evento.giocata {
+  background: var(--superficie-2);
+}
+.sett-evento.rinviata .sett-evento-nome {
+  text-decoration: line-through;
+}
+.sett-evento.rinviata {
+  background: var(--rinviata-bg);
+}
+.sett-evento-testa {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  font-family: var(--font-sport);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.sett-evento-camp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--testo-2);
+}
+.sett-evento-nome {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.sett-adesso {
+  position: absolute;
+  left: -1px;
+  right: 0;
+  z-index: 1;
+  height: 2px;
+  background: #ea4335;
+  pointer-events: none;
+}
+.sett-adesso::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ea4335;
+}
+.sett-vuota {
+  text-align: center;
+}
+.sett-altre {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px dashed var(--testo-2);
+  border-radius: 6px;
+  background: var(--superficie-2);
+  color: var(--testo);
+  font-family: var(--font-sport);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sett-altre:hover {
+  background: var(--bordo);
+}
+.sett-chiudi {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--bordo);
+  border-radius: 50%;
+  background: var(--superficie);
+  color: var(--testo);
+  cursor: pointer;
+}
+.sett-chiudi .icona {
+  width: 16px;
+  height: 16px;
+}
