@@ -235,6 +235,17 @@ export function parseRosaCsen(html: string) {
     .filter((a) => a.nome || a.cognome);
 }
 
+/**
+ * La pagina Calendario mostra di default solo la giornata corrente: per avere tutte le gare serve
+ * `giornata=tutte`, insieme alla stagione selezionata nel filtro (null se la pagina non ha i filtri).
+ */
+export function urlCalendarioCompleto(html: string): string | null {
+  const $ = cheerio.load(html);
+  const stagione = $('#filtro-stagione option[selected]').attr('value') ?? $('#filtro-stagione option').first().attr('value');
+  if (!stagione || !$('#filtro-giornata option[value="tutte"]').length) return null;
+  return `${BASE}/Calendario?stagioneId=${encodeURIComponent(stagione)}&fase=&squadraId=&giornata=tutte`;
+}
+
 export const URL_SQUADRE_CSEN = `${BASE}/Squadre`;
 
 export function campionatoCsen(stagione: string, gironi: string[]): CampionatoGrezzo {
@@ -259,9 +270,11 @@ export const fonteCsen: Fonte = {
   abilitata: true,
   minimoPartite: 10,
   async esegui(ctx) {
-    const urlCal = `${BASE}/Calendario`;
+    const urlPredefinito = `${BASE}/Calendario`;
+    const predefinito = await scarica(urlPredefinito);
+    const urlCal = urlCalendarioCompleto(predefinito);
     const urlClass = `${BASE}/Classifica`;
-    const cal = parseCalendarioCsen(await scarica(urlCal), urlCal);
+    const cal = urlCal ? parseCalendarioCsen(await scarica(urlCal), urlCal) : parseCalendarioCsen(predefinito, urlPredefinito);
     const classifiche = parseClassificaCsen(await scarica(urlClass), urlClass);
     // I loghi sono un di più: se la pagina Squadre non risponde, calendario e classifiche valgono comunque.
     const loghi = await scarica(`${BASE}/Squadre`)

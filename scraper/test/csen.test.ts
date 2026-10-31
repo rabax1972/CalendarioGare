@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { interpretaLuogo, parseCalendarioCsen, parseClassificaCsen } from '../src/sources/csen.ts';
+import { interpretaLuogo, parseCalendarioCsen, parseClassificaCsen, urlCalendarioCompleto } from '../src/sources/csen.ts';
 import { fixture } from './helpers.ts';
 
 // Se questi test falliscono dopo aver aggiornato le fixture, il sito CSEN ha cambiato struttura.
@@ -64,5 +64,24 @@ describe('CSEN – luogo', () => {
     });
     expect(interpretaLuogo('Anna Frank, Strada Egidio Pini, 16, parma')).toMatchObject({ comune: 'Parma', provincia: null });
     expect(interpretaLuogo('Pala Casalini, Pala-Casalini')).toMatchObject({ palestra: 'Pala Casalini', comune: null });
+  });
+});
+
+describe('CSEN – pagina Calendario con i filtri', () => {
+  // Struttura dei filtri introdotta dal sito a fine ottobre 2026: di default mostra solo la giornata corrente.
+  const filtri = (stagioni: string) => `<form>
+    <select id="filtro-stagione" name="stagioneId">${stagioni}</select>
+    <select id="filtro-giornata" name="giornata">
+      <option value="tutte">Tutte le giornate</option><option value="1" selected="selected">Giornata 1</option>
+    </select></form>`;
+
+  it('chiede tutte le giornate della stagione selezionata', () => {
+    expect(urlCalendarioCompleto(filtri('<option selected="selected" value="1">2026-27</option><option value="2">2025-26</option>'))).toBe(
+      'https://www.volleymistocsenparma.it/Calendario?stagioneId=1&fase=&squadraId=&giornata=tutte',
+    );
+  });
+
+  it('senza filtri la pagina predefinita contiene già tutto', () => {
+    expect(urlCalendarioCompleto(fixture('csen/calendario-2026.html'))).toBeNull();
   });
 });
