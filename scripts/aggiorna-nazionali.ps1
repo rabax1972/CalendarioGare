@@ -53,7 +53,9 @@ try {
     if ($LASTEXITCODE -eq 1) { Scrivi 'Attenzione: myvolley non aggiornata (vedi sopra)' }
 
     Esegui git @('add', 'data')
-    & git diff --cached --quiet -- . ':(exclude)data/meta.json'
+    # meta.json conta: contiene l'esito e la data dell'ultimo aggiornamento della fonte, mostrati nella pagina Info.
+    # L'Action salta myvolley e non lo aggiorna, quindi senza questo commit il sito mostrerebbe dati "fermi".
+    & git diff --cached --quiet
     if ($LASTEXITCODE -eq 0) {
       Esegui git @('reset', '--quiet')
       Scrivi 'Nessuna variazione nei dati.'
