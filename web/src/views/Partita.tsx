@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { urlGoogleCalendar } from '../../../shared/ics.ts';
 import type { Partita as TPartita } from '../../../shared/model.ts';
 import { BadgeDerby, StatoPartita, testoSpostata } from '../components/PartitaCard.tsx';
 import { Stemma } from '../components/Stemma.tsx';
@@ -35,6 +36,9 @@ export function Partita({ id }: { id: string }) {
   const ospite = d.squadra.get(p.ospite);
   const mappa = urlMappa(p);
   const spostata = testoSpostata(p);
+  // Solo per le gare ancora da giocare: quelle passate non servono in agenda.
+  const google =
+    p.stato !== 'giocata' ? urlGoogleCalendar(p, d.campionato, (id) => d.squadra.get(id)?.nome ?? id, location.href) : null;
   const quando = p.data ? `${titoloGiorno(p.data)}${p.ora ? `, ore ${p.ora}` : ''}` : 'Data da definire';
 
   async function condividi() {
@@ -205,6 +209,11 @@ export function Partita({ id }: { id: string }) {
         <button type="button" className="pulsante secondario" onClick={condividiImmagine} disabled={preparo}>
           <Icona nome="immagine" /> {preparo ? 'Preparo…' : p.punteggio ? 'Immagine del risultato' : 'Locandina'}
         </button>
+        {google && (
+          <a className="pulsante secondario" href={google} target="_blank" rel="noopener noreferrer">
+            <Icona nome="calendario" /> Aggiungi a Google Calendar
+          </a>
+        )}
         <a className="pulsante secondario" href={p.fonteUrl} target="_blank" rel="noopener noreferrer">
           Vedi alla fonte <Icona nome="esterno" />
         </a>

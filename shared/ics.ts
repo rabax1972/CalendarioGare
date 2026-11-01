@@ -43,6 +43,60 @@ function piega(riga: string): string {
   return out.join('\r\n ');
 }
 
+/** Titolo, descrizione e luogo di una gara, uguali nel file .ics e nel link per Google Calendar. */
+function evento(p: Partita, campionati: Map<string, Campionato>, nomeSquadra: (id: string) => string) {
+  const c = campionati.get(p.campionatoId);
+  const casa = nomeSquadra(p.casa);
+  const ospite = nomeSquadra(p.ospite);
+  const risultato = p.stato === 'giocata' && p.punteggio ? ` ${p.punteggio.casa}-${p.punteggio.ospite} ` : ' – ';
+  const prefisso = p.stato === 'rinviata' ? 'RINVIATA: ' : '';
+  const titolo = `${prefisso}${casa}${risultato}${ospite}${c ? ` (${c.nomeBreve})` : ''}`;
+  const descrizione = [
+    c?.nome,
+    [p.girone && `Girone ${p.girone}`, p.giornata != null && `Giornata ${p.giornata}`].filter(Boolean).join(' · '),
+    p.set.length ? `Parziali: ${p.set.map(([a, b]) => `${a}-${b}`).join(', ')}` : '',
+    `Fonte: ${p.fonteUrl}`,
+  ].filter(Boolean).join('\n');
+  const luogo = [p.palestra, p.indirizzo, p.comune].filter(Boolean).join(', ');
+  return { titolo, descrizione, luogo };
+}
+
+/** Giorno dopo (YYYY-MM-DD): fine esclusa degli eventi di tutto il giorno. */
+function giornoDopo(data: string): string {
+  const [y, m, g] = data.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, g + 1)).toISOString().slice(0, 10);
+}
+
+/**
+ * Link "aggiungi a Google Calendar" per una gara (pagina di creazione evento già compilata).
+ * `pagina` è l'indirizzo della gara nell'app, aggiunto in fondo alla descrizione. Null se la data non è nota.
+ */
+export function urlGoogleCalendar(
+  p: Partita,
+  campionati: Map<string, Campionato>,
+  nomeSquadra: (id: string) => string,
+  pagina?: string,
+): string | null {
+  if (!p.data) return null;
+  const { titolo, descrizione, luogo } = evento(p, campionati, nomeSquadra);
+  let date: string;
+  if (p.ora) {
+    const inizio = utcDaRoma(p.data, p.ora);
+    date = `${formatoUtc(inizio)}/${formatoUtc(new Date(inizio.getTime() + DURATA_ORE * 3600_000))}`;
+  } else {
+    date = `${p.data.replace(/-/g, '')}/${giornoDopo(p.data).replace(/-/g, '')}`;
+  }
+  const q = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: titolo,
+    dates: date,
+    details: pagina ? `${descrizione}\n${pagina}` : descrizione,
+    ctz: 'Europe/Rome',
+  });
+  if (luogo) q.set('location', luogo);
+  return `https://calendar.google.com/calendar/render?${q}`;
+}
+
 export interface OpzioniIcs {
   squadra: Squadra;
   partite: Partita[];
@@ -67,28 +121,14 @@ export function calendarioSquadra({ squadra, partite, campionati, nomeSquadra, g
     'X-PUBLISHED-TTL:PT6H',
   ];
   for (const p of partite.filter((x) => (x.casa === squadra.id || x.ospite === squadra.id) && x.data)) {
-    const c = campionati.get(p.campionatoId);
-    const casa = nomeSquadra(p.casa);
-    const ospite = nomeSquadra(p.ospite);
-    const risultato = p.stato === 'giocata' && p.punteggio ? ` ${p.punteggio.casa}-${p.punteggio.ospite} ` : ' – ';
-    const prefisso = p.stato === 'rinviata' ? 'RINVIATA: ' : '';
-    const titolo = `${prefisso}${casa}${risultato}${ospite}${c ? ` (${c.nomeBreve})` : ''}`;
-    const descrizione = [
-      c?.nome,
-      [p.girone && `Girone ${p.girone}`, p.giornata != null && `Giornata ${p.giornata}`].filter(Boolean).join(' · '),
-      p.set.length ? `Parziali: ${p.set.map(([a, b]) => `${a}-${b}`).join(', ')}` : '',
-      `Fonte: ${p.fonteUrl}`,
-    ].filter(Boolean).join('\n');
-    const luogo = [p.palestra, p.indirizzo, p.comune].filter(Boolean).join(', ');
+    const { titolo, descrizione, luogo } = evento(p, campionati, nomeSquadra);
     righe.push('BEGIN:VEVENT', `UID:${p.id}@volley-parma`, `DTSTAMP:${stamp}`);
     if (p.ora) {
       const inizio = utcDaRoma(p.data!, p.ora);
       righe.push(`DTSTART:${formatoUtc(inizio)}`, `DTEND:${formatoUtc(new Date(inizio.getTime() + DURATA_ORE * 3600_000))}`);
     } else {
       // Ora non nota: evento di tutto il giorno.
-      const [y, m, g] = p.data!.split('-').map(Number);
-      const dopo = new Date(Date.UTC(y, m - 1, g + 1)).toISOString().slice(0, 10);
-      righe.push(`DTSTART;VALUE=DATE:${p.data!.replace(/-/g, '')}`, `DTEND;VALUE=DATE:${dopo.replace(/-/g, '')}`);
+      righe.push(`DTSTART;VALUE=DATE:${p.data!.replace(/-/g, '')}`, `DTEND;VALUE=DATE:${giornoDopo(p.data!).replace(/-/g, '')}`);
     }
     righe.push(`SUMMARY:${testo(titolo)}`, `DESCRIPTION:${testo(descrizione)}`);
     if (luogo) righe.push(`LOCATION:${testo(luogo)}`);

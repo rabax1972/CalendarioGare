@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Campionato, Partita, Squadra } from '../../shared/model.ts';
-import { calendarioSquadra, utcDaRoma } from '../../shared/ics.ts';
+import { calendarioSquadra, urlGoogleCalendar, utcDaRoma } from '../../shared/ics.ts';
 
 const squadra: Squadra = { id: 'minerva', nome: 'CIRCOLO MINERVA', societa: null, comune: 'Parma', parmense: true, campionati: ['b2'] };
 const campionati = new Map([['b2', { id: 'b2', nome: 'Serie B2 femminile', nomeBreve: 'B2 F' } as Campionato]]);
@@ -39,5 +39,27 @@ describe('calendario iCalendar della squadra', () => {
     expect(ics).toContain('STATUS:CANCELLED');
     expect(ics).toContain('LOCATION:PalaCasalini\\, Via Rossi\\, 1\\, Parma');
     for (const riga of ics.split('\r\n')) expect(Buffer.byteLength(riga)).toBeLessThanOrEqual(75);
+  });
+});
+
+describe('link per Google Calendar', () => {
+  const nome = (id: string) => (id === 'minerva' ? 'CIRCOLO MINERVA' : 'VOLLEY ALTRA');
+
+  it('evento di due ore in UTC, con luogo e link alla gara', () => {
+    const url = new URL(urlGoogleCalendar(gara({}), campionati, nome, 'https://app/#/partita/g1')!);
+    expect(url.origin + url.pathname).toBe('https://calendar.google.com/calendar/render');
+    expect(url.searchParams.get('action')).toBe('TEMPLATE');
+    expect(url.searchParams.get('text')).toBe('CIRCOLO MINERVA – VOLLEY ALTRA (B2 F)');
+    expect(url.searchParams.get('dates')).toBe('20261107T173000Z/20261107T193000Z');
+    expect(url.searchParams.get('location')).toBe('PalaCasalini, Via Rossi, 1, Parma');
+    expect(url.searchParams.get('details')).toBe(
+      'Serie B2 femminile\nGirone E · Giornata 3\nFonte: https://esempio.it/g1\nhttps://app/#/partita/g1',
+    );
+  });
+
+  it('senza ora: tutto il giorno; senza data: nessun link', () => {
+    const url = new URL(urlGoogleCalendar(gara({ ora: null }), campionati, nome)!);
+    expect(url.searchParams.get('dates')).toBe('20261107/20261108');
+    expect(urlGoogleCalendar(gara({ data: null }), campionati, nome)).toBeNull();
   });
 });
