@@ -1,5 +1,5 @@
 {
- "generatoIl": "2026-11-03T20:57:35.615Z",
+ "generatoIl": "2026-11-03T22:55:42.151Z",
  "stagione": "2026/27",
  "fonti": [
   {
@@ -7,8 +7,8 @@
    "nome": "CSEN Parma – Torneo misto",
    "abilitata": true,
    "ok": true,
-   "ultimoSuccesso": "2026-11-03T20:56:54.916Z",
-   "ultimoTentativo": "2026-11-03T20:56:51.128Z",
+   "ultimoSuccesso": "2026-11-03T22:55:03.420Z",
+   "ultimoTentativo": "2026-11-03T22:54:59.687Z",
    "partite": 180
   },
   {
@@ -26,8 +26,8 @@
    "nome": "FIPAV Emilia-Romagna – campionati regionali",
    "abilitata": true,
    "ok": true,
-   "ultimoSuccesso": "2026-11-03T20:57:12.568Z",
-   "ultimoTentativo": "2026-11-03T20:56:54.918Z",
+   "ultimoSuccesso": "2026-11-03T22:55:37.252Z",
+   "ultimoTentativo": "2026-11-03T22:55:03.422Z",
    "partite": 756
   },
   {
