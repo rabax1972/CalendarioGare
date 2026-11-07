@@ -243,18 +243,20 @@ Solo per le **squadre di Parma** e solo dove la fonte pubblica la rosa:
 | Fonte | Dove | Dati |
 |---|---|---|
 | CSEN | `/Squadre` (`.squadra-card`, link `/Squadre/Dettaglio/<id>`), poi la pagina della squadra: `<tr class="rosa-riga" data-nome data-cognome data-numero data-ruolo data-foto>` | nome, numero, ruolo, foto (`/Squadre/FotoGiocatore/<id>?v=…`). Nessuna data di nascita: è un torneo amatoriale per adulti |
-| Lega Volley Femminile | `https://www.legavolleyfemminile.it/club/<slug>/<id>/roster/` (`.scheda-giocatrice-squadra`), profilo `/player/<slug>/<codice>/` con "Data di nascita" | nome, numero, ruolo, foto (`ww1.legavolleyfemminile.it/Foto.aspx?Key=…`); include lo staff |
+| Lega Volley Femminile | `https://www.legavolleyfemminile.it/club/<slug>/<id>/roster/` (`.scheda-giocatrice-squadra`), profilo `/player/<slug>/<codice>/` (`.dati-atleta span` "Etichetta: valore", tabella `.tabella-carriera-atleta`) | nome, numero, ruolo, foto (`ww1.legavolleyfemminile.it/Foto.aspx?Key=…`); dal profilo: altezza, nazionalità sportiva, carriera (stagione, serie, squadra, numero), mostrati nella scheda che si apre toccando la figurina; include lo staff |
 | Portale regionale, feed federale | non pubblicano rose | — |
 
 Scelte di tutela, in `scraper/src/rose.ts`:
-- si pubblicano solo nome, numero, ruolo e il **link** alla foto: la foto non è copiata, se la fonte la toglie sparisce
+- si pubblicano solo nome, numero, ruolo, il **link** alla foto e, per la LVF, i dati sportivi del profilo (altezza,
+  nazionalità sportiva, carriera). Data e provincia di nascita **non** si pubblicano; volleybox.net non si usa: la LVF è la
+  fonte ufficiale degli stessi dati. La foto non è copiata, se la fonte la toglie sparisce
   anche dall'app;
 - per la LVF la foto si mostra solo se la data di nascita conferma che l'atleta è **maggiorenne**. Se la data non c'è,
   non si mostra. La data di nascita serve solo a questo calcolo e non viene pubblicata. Al 26/10/2026 nel Club Italia
   sono nascoste 3 foto su 15;
 - `data/privacy.json` permette di togliere persone, foto o intere rose su richiesta e di indicare un contatto, che
   compare nell'app;
-- aggiornamento: rose ogni 3 giorni, profili LVF ogni 14 giorni (cache), circa 20 richieste a CSEN e 16 a LVF.
+- aggiornamento: rose ogni 3 giorni, profili LVF ogni 14 giorni (cache), circa 20 richieste a CSEN e 20 a LVF (ora si legge il profilo di ogni atleta, non solo di chi ha la foto).
 
 ## 7. Rassegna stampa
 

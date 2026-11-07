@@ -70,9 +70,39 @@ export function parseRosaLvf(html: string): AtletaLvf[] {
     .filter((a) => a.nome || a.cognome);
 }
 
+export interface ProfiloLvf {
+  /** Solo per decidere sulla foto: non viene pubblicata. */
+  nascita: string | null;
+  altezza: number | null;
+  nazionalita: string | null;
+  carriera: { stagione: string; serie: string; squadra: string; numero: string | null }[];
+}
+
+/** Profilo atleta: blocco ".dati-atleta" ("Data di nascita: …", "Altezza: 173 cm") e tabella della carriera. */
+export function parseProfiloLvf(html: string): ProfiloLvf {
+  const $ = cheerio.load(html);
+  const campi = new Map<string, string>();
+  $('.dati-atleta span').each((_, el) => {
+    const m = /^([^:]+):\s*(.+)$/.exec(pulisciSpazi($(el).text()));
+    if (m) campi.set(m[1].toLowerCase(), m[2]);
+  });
+  const altezza = Number(/(\d{3})/.exec(campi.get('altezza') ?? '')?.[1]) || null;
+  const carriera = $('.tabella-carriera-atleta tbody tr')
+    .toArray()
+    .map((tr) => $(tr).find('td').toArray().map((td) => pulisciSpazi($(td).text())))
+    .filter((c) => /^\d{4}-\d{4}$/.test(c[0] ?? '') && c[2])
+    .map(([stagione, serie, squadra, numero]) => ({ stagione, serie: serie ?? '', squadra, numero: numero || null }));
+  const testo = pulisciSpazi($.root().text());
+  const nascita = campi.get('data di nascita') ?? /Data di nascita:?\s*(\d{1,2}\/\d{1,2}\/\d{4})/i.exec(testo)?.[1];
+  return {
+    nascita: nascita ? dataIso(nascita) : null,
+    altezza: altezza && altezza >= 140 && altezza <= 230 ? altezza : null,
+    nazionalita: campi.get('nazionalità sportiva') ?? null,
+    carriera,
+  };
+}
+
 /** "Data di nascita: 02/04/2008" dal profilo atleta. */
 export function parseNascitaLvf(html: string): string | null {
-  const testo = pulisciSpazi(cheerio.load(html).root().text());
-  const m = /Data di nascita:?\s*(\d{1,2}\/\d{1,2}\/\d{4})/i.exec(testo);
-  return m ? dataIso(m[1]) : null;
+  return parseProfiloLvf(html).nascita;
 }

@@ -114,6 +114,19 @@ export interface Atleta {
    * Sempre null per i minorenni e per chi è escluso in data/privacy.json.
    */
   foto: string | null;
+  /** Scheda dal profilo alla fonte (solo Lega Volley Femminile). Niente data né luogo di nascita. */
+  scheda?: SchedaAtleta;
+}
+
+export interface SchedaAtleta {
+  /** Pagina del profilo alla fonte. */
+  profilo: string;
+  /** Centimetri. */
+  altezza: number | null;
+  /** Nazionalità sportiva, sigla (es. "ITA"). */
+  nazionalita: string | null;
+  /** Dalla stagione più recente. */
+  carriera: { stagione: string; serie: string; squadra: string; numero: string | null }[];
 }
 
 /** Rosa di una squadra, solo per le squadre di Parma e solo dove la fonte la pubblica. */

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { eta, filtraRosa, type FilePrivacy } from '../src/rose.ts';
 import { parseRosaCsen, parseSquadreCsen } from '../src/sources/csen.ts';
-import { parseClubLvf, parseNascitaLvf, parseRosaLvf } from '../src/sources/lvf.ts';
+import { parseClubLvf, parseNascitaLvf, parseProfiloLvf, parseRosaLvf } from '../src/sources/lvf.ts';
 
 // HTML ricalcato sulla struttura reale delle fonti, con persone inventate: niente dati personali veri nel repository.
 
@@ -60,6 +60,35 @@ describe('parser rose', () => {
     ]);
     expect(parseNascitaLvf('<p>Data di nascita: 02/04/2008</p>')).toBe('2008-04-02');
     expect(parseNascitaLvf('<p>nessuna data</p>')).toBeNull();
+  });
+});
+
+const PROFILO_LVF = `
+<div class="row info-atleta">
+  <div class="col-md-12 col-lg-4 dati-atleta"><div class="num-giocatrice"> 4 </div><span><b>Middle Blocker</b></span>
+    <span class="nome">Giulia</span><span class="nome">Verdi</span><span class="squadra">Club Prova</span></div>
+  <div class="col-md-12 col-lg-4 dati-atleta">
+    <span>Data di nascita: 02/04/2000</span><span>Provincia di nascita: PR</span>
+    <span>Nazionalità sportiva: ITA</span><span>Altezza: 181 cm</span></div>
+</div>
+<table class="table tabella-carriera-atleta"><thead><tr><th>Stagione</th><th>Serie</th><th>Squadra</th><th>Numero</th></tr></thead>
+<tbody>
+  <tr><td>2026-2027</td><td>A2</td><td><a href="/club/club/1/"> Club Prova </a></td><td>4</td></tr>
+  <tr><td>2025-2026</td><td>B1</td><td> Volley Esempio </td><td></td></tr>
+</tbody></table>`;
+
+describe('profilo LVF', () => {
+  it('estrae dati sportivi e carriera', () => {
+    expect(parseProfiloLvf(PROFILO_LVF)).toEqual({
+      nascita: '2000-04-02',
+      altezza: 181,
+      nazionalita: 'ITA',
+      carriera: [
+        { stagione: '2026-2027', serie: 'A2', squadra: 'Club Prova', numero: '4' },
+        { stagione: '2025-2026', serie: 'B1', squadra: 'Volley Esempio', numero: null },
+      ],
+    });
+    expect(parseProfiloLvf('<p>vuoto</p>')).toEqual({ nascita: null, altezza: null, nazionalita: null, carriera: [] });
   });
 });
 

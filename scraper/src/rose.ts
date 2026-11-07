@@ -6,10 +6,11 @@ import { scarica } from './http.ts';
 import { clubLvf } from './loghi.ts';
 import { abbina, chiaveSquadra } from './normalize.ts';
 import { CSEN_CAMPIONATO_ID, URL_SQUADRE_CSEN, parseRosaCsen, parseSquadreCsen } from './sources/csen.ts';
-import { SERIE_LVF, parseNascitaLvf, parseRosaLvf } from './sources/lvf.ts';
+import { SERIE_LVF, parseProfiloLvf, parseRosaLvf } from './sources/lvf.ts';
 
 // Rose delle squadre di Parma, dove la fonte le pubblica (CSEN, Lega Volley Femminile).
-// Dati personali: si tengono solo nome, numero e ruolo; la foto resta sul sito della fonte (link, non copia)
+// Dati personali: si tengono nome, numero, ruolo e, per la LVF, i dati sportivi del profilo (altezza, nazionalità
+// sportiva, carriera); la foto resta sul sito della fonte (link, non copia)
 // e non si mostra mai per i minorenni o quando l'età non è verificabile. Rimozioni su richiesta: data/privacy.json.
 
 const FILE_ROSE = path.join(DATA_DIR, 'rose.json');
@@ -101,14 +102,24 @@ async function roseLvf(squadre: Squadra[], campionati: Campionato[], log: (m: st
       const fonteUrl = `${cl.url}roster/`;
       const atleti: AtletaConNascita[] = [];
       for (const a of parseRosaLvf(await scarica(fonteUrl, { maxEtaCacheMs: 3 * GIORNO }))) {
-        let nascita: string | null = null;
-        if (a.profilo && a.foto) {
-          // La data di nascita serve solo a decidere se mostrare la foto; il profilo cambia di rado.
-          nascita = await scarica(a.profilo, { maxEtaCacheMs: 14 * GIORNO })
-            .then(parseNascitaLvf)
-            .catch(() => null);
+        // Il profilo cambia di rado. La data di nascita serve solo a decidere se mostrare la foto e non si pubblica.
+        const p = a.profilo
+          ? await scarica(a.profilo, { maxEtaCacheMs: 14 * GIORNO })
+              .then(parseProfiloLvf)
+              .catch(() => null)
+          : null;
+        const atleta: AtletaConNascita = {
+          numero: a.numero,
+          nome: a.nome,
+          cognome: a.cognome,
+          ruolo: a.ruolo,
+          foto: a.foto,
+          nascita: p?.nascita ?? null,
+        };
+        if (a.profilo && p && (p.altezza || p.nazionalita || p.carriera.length)) {
+          atleta.scheda = { profilo: a.profilo, altezza: p.altezza, nazionalita: p.nazionalita, carriera: p.carriera };
         }
-        atleti.push({ numero: a.numero, nome: a.nome, cognome: a.cognome, ruolo: a.ruolo, foto: a.foto, nascita });
+        atleti.push(atleta);
       }
       if (atleti.length) rose.push({ squadra: s, fonteUrl, atleti });
     }
