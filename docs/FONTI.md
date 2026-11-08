@@ -238,7 +238,10 @@ rispettive società: si usano solo per riconoscere la squadra, e si possono togl
 
 ## 6. Rose delle squadre (dati personali)
 
-Solo per le **squadre di Parma** e solo dove la fonte pubblica la rosa:
+Per le **squadre di Parma** e, in più, per **tutte le squadre della Serie A2 femminile** (`ROSE_TUTTE_LE_SQUADRE` in
+`scraper/src/rose.ts`), solo dove la fonte pubblica la rosa. In A2 i nomi federali e quelli della LVF spesso hanno
+sponsor diversi (es. "Dragons Offanengo" / "Trasporti Bressan Offanengo"): dopo gli abbinamenti sicuri le squadre
+rimaste si abbinano per esclusione (`abbinaTutti`). Se una rosa non si riesce a scaricare si tiene la precedente.
 
 | Fonte | Dove | Dati |
 |---|---|---|
@@ -256,7 +259,8 @@ Scelte di tutela, in `scraper/src/rose.ts`:
   sono nascoste 3 foto su 15;
 - `data/privacy.json` permette di togliere persone, foto o intere rose su richiesta e di indicare un contatto, che
   compare nell'app;
-- aggiornamento: rose ogni 3 giorni, profili LVF ogni 14 giorni (cache), circa 20 richieste a CSEN e 20 a LVF (ora si legge il profilo di ogni atleta, non solo di chi ha la foto).
+- aggiornamento: rose ogni 3 giorni, profili LVF ogni 14 giorni (cache), circa 20 richieste a CSEN; per la LVF 17 rose e circa 300 profili al primo giro (circa 6 minuti), poi solo quelli
+  scaduti, distribuiti nei giri successivi.
 
 ## 7. Rassegna stampa
 

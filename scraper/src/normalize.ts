@@ -113,3 +113,33 @@ export function parziale(testo: string): [number, number] | null {
 export function titoloCase(s: string): string {
   return s.toLowerCase().replace(/(^|[\s'’(/-])(\p{L})/gu, (_, p, c: string) => p + c.toUpperCase());
 }
+
+/**
+ * Abbina due elenchi che contengono le stesse squadre con nomi diversi (sponsor). Prima gli abbinamenti sicuri di
+ * `abbina`, poi per esclusione: ogni squadra rimasta va al club libero con più parole in comune (almeno una),
+ * solo se non c'è pari merito e se quel club non è conteso da un'altra squadra.
+ */
+export function abbinaTutti<S extends { nome: string }, T extends { nome: string }>(squadre: S[], elenco: T[]): Map<S, T> {
+  const esito = new Map<S, T>();
+  const usati = new Set<T>();
+  for (const s of squadre) {
+    const t = abbina(s.nome, elenco);
+    if (t && !usati.has(t)) {
+      esito.set(s, t);
+      usati.add(t);
+    }
+  }
+  const liberi = elenco.filter((t) => !usati.has(t));
+  const proposte = new Map<T, S[]>();
+  for (const s of squadre.filter((x) => !esito.has(x))) {
+    const a = parole(s.nome);
+    const punteggi = liberi
+      .map((t) => ({ t, n: [...parole(t.nome)].filter((p) => a.has(p)).length }))
+      .sort((u, v) => v.n - u.n);
+    if (punteggi[0]?.n > 0 && (punteggi.length < 2 || punteggi[1].n < punteggi[0].n)) {
+      proposte.set(punteggi[0].t, [...(proposte.get(punteggi[0].t) ?? []), s]);
+    }
+  }
+  for (const [t, ss] of proposte) if (ss.length === 1) esito.set(ss[0], t);
+  return esito;
+}

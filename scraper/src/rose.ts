@@ -4,11 +4,12 @@ import type { Atleta, Campionato, Rosa, Squadra } from '../../shared/model.ts';
 import { DATA_DIR } from './config.ts';
 import { scarica } from './http.ts';
 import { clubLvf } from './loghi.ts';
-import { abbina, chiaveSquadra } from './normalize.ts';
+import { abbina, abbinaTutti, chiaveSquadra } from './normalize.ts';
 import { CSEN_CAMPIONATO_ID, URL_SQUADRE_CSEN, parseRosaCsen, parseSquadreCsen } from './sources/csen.ts';
 import { SERIE_LVF, parseProfiloLvf, parseRosaLvf } from './sources/lvf.ts';
 
-// Rose delle squadre di Parma, dove la fonte le pubblica (CSEN, Lega Volley Femminile).
+// Rose delle squadre di Parma, dove la fonte le pubblica (CSEN, Lega Volley Femminile), e di tutte le squadre
+// dei campionati in ROSE_TUTTE_LE_SQUADRE (oggi la Serie A2 femminile).
 // Dati personali: si tengono nome, numero, ruolo e, per la LVF, i dati sportivi del profilo (altezza, nazionalità
 // sportiva, carriera); la foto resta sul sito della fonte (link, non copia)
 // e non si mostra mai per i minorenni o quando l'età non è verificabile. Rimozioni su richiesta: data/privacy.json.
@@ -90,18 +91,50 @@ async function roseCsen(squadre: Squadra[], log: (m: string) => void) {
   return rose;
 }
 
-async function roseLvf(squadre: Squadra[], campionati: Campionato[], log: (m: string) => void) {
-  const rose: { squadra: Squadra; fonteUrl: string; atleti: AtletaConNascita[] }[] = [];
+/** Campionati LVF di cui si pubblicano le rose di tutte le squadre, non solo di quelle di Parma. */
+export const ROSE_TUTTE_LE_SQUADRE = new Set(['naz-a2-f']);
+
+type RosaGrezza = { squadra: Squadra; fonteUrl: string; atleti: AtletaConNascita[] };
+
+async function roseLvf(
+  squadre: Squadra[],
+  campionati: Campionato[],
+  log: (m: string) => void,
+): Promise<{ rose: RosaGrezza[]; fallite: Set<string> }> {
+  const rose: RosaGrezza[] = [];
+  // Squadre la cui rosa non si è potuta leggere: si tiene quella precedente.
+  const fallite = new Set<string>();
   for (const c of campionati.filter((x) => SERIE_LVF[x.id])) {
-    const daFare = squadre.filter((s) => s.parmense && s.campionati.includes(c.id));
+    const tutte = ROSE_TUTTE_LE_SQUADRE.has(c.id);
+    const daFare = squadre.filter((s) => (tutte || s.parmense) && s.campionati.includes(c.id));
     if (!daFare.length) continue;
-    const club = await clubLvf(c);
+    let club;
+    try {
+      club = await clubLvf(c);
+    } catch (e) {
+      log(`Rose LVF ${c.nomeBreve} non disponibili: ${(e as Error).message}`);
+      daFare.forEach((s) => fallite.add(s.id));
+      continue;
+    }
+    // Per un campionato intero i due elenchi coincidono: si può abbinare anche per esclusione.
+    const abbinati = tutte ? abbinaTutti(daFare, club) : new Map(daFare.map((s) => [s, abbina(s.nome, club)]));
     for (const s of daFare) {
-      const cl = abbina(s.nome, club);
-      if (!cl?.url) continue;
+      const cl = abbinati.get(s);
+      if (!cl?.url) {
+        log(`Rose LVF: club non trovato per ${s.nome}`);
+        continue;
+      }
       const fonteUrl = `${cl.url}roster/`;
+      let html: string;
+      try {
+        html = await scarica(fonteUrl, { maxEtaCacheMs: 3 * GIORNO });
+      } catch (e) {
+        log(`Rosa LVF di ${s.nome} non disponibile: ${(e as Error).message}`);
+        fallite.add(s.id);
+        continue;
+      }
       const atleti: AtletaConNascita[] = [];
-      for (const a of parseRosaLvf(await scarica(fonteUrl, { maxEtaCacheMs: 3 * GIORNO }))) {
+      for (const a of parseRosaLvf(html)) {
         // Il profilo cambia di rado. La data di nascita serve solo a decidere se mostrare la foto e non si pubblica.
         const p = a.profilo
           ? await scarica(a.profilo, { maxEtaCacheMs: 14 * GIORNO })
@@ -124,8 +157,8 @@ async function roseLvf(squadre: Squadra[], campionati: Campionato[], log: (m: st
       if (atleti.length) rose.push({ squadra: s, fonteUrl, atleti });
     }
   }
-  if (rose.length) log(`Rose LVF: ${rose.map((r) => r.squadra.nome).join(', ')}`);
-  return rose;
+  if (rose.length) log(`Rose LVF: ${rose.length} squadre (${rose.map((r) => r.squadra.nome).join(', ')})`);
+  return { rose, fallite };
 }
 
 function oggiRoma(): string {
@@ -158,10 +191,12 @@ export async function aggiornaRose(
         return { ...r, atleti: f.atleti, fotoNascoste: r.fotoNascoste + f.fotoNascoste };
       });
   } else {
+    const lvf = await roseLvf(squadre, campionati, opz.log);
     const grezze = [
       ...(await roseCsen(squadre, opz.log).catch((e) => (opz.log(`Rose CSEN non disponibili: ${e.message}`), []))),
-      ...(await roseLvf(squadre, campionati, opz.log).catch((e) => (opz.log(`Rose LVF non disponibili: ${e.message}`), []))),
+      ...lvf.rose,
     ];
+    const tenute = precedenti.filter((r) => lvf.fallite.has(r.squadraId) && !esclusa(perId.get(r.squadraId), r.squadraId));
     rose = grezze
       .filter((g) => !esclusa(g.squadra, g.squadra.id))
       .map((g) => {
@@ -177,7 +212,8 @@ export async function aggiornaRose(
           atleti: f.atleti,
           fotoNascoste: f.fotoNascoste,
         };
-      });
+      })
+      .concat(tenute);
   }
   rose.sort((a, b) => a.squadraId.localeCompare(b.squadraId));
   await writeFile(FILE_ROSE, JSON.stringify(rose) + '\n');

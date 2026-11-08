@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chiaveSquadra, dataIso, oraIso, separaProvincia } from '../src/normalize.ts';
+import { abbinaTutti, chiaveSquadra, dataIso, oraIso, separaProvincia } from '../src/normalize.ts';
 
 describe('normalizzazione nomi', () => {
   it('separa la sigla provincia finale solo se è una provincia', () => {
@@ -21,5 +21,19 @@ describe('normalizzazione nomi', () => {
     expect(oraIso('19.00')).toBe('19:00');
     expect(oraIso('9:30')).toBe('09:30');
     expect(oraIso('00:00')).toBeNull();
+  });
+});
+
+describe('abbinaTutti', () => {
+  it('abbina per esclusione i nomi di sponsor diversi, senza forzare i casi ambigui', () => {
+    const fed = [{ nome: 'DRAGONS OFFANENGO' }, { nome: "AKADEMIA SANT'ANNA MESSINA" }, { nome: 'CLUB ITALIA' }, { nome: 'VOLLEY ROMA' }, { nome: 'VOLLEY MILANO' }];
+    const lvf = [{ nome: 'Club Italia' }, { nome: 'Cosedil Akademia Messina' }, { nome: 'Trasporti Bressan Offanengo' }, { nome: 'Pallavolo Volley A' }];
+    const m = abbinaTutti(fed, lvf);
+    expect(m.get(fed[0])?.nome).toBe('Trasporti Bressan Offanengo');
+    expect(m.get(fed[1])?.nome).toBe('Cosedil Akademia Messina');
+    expect(m.get(fed[2])?.nome).toBe('Club Italia');
+    // "Volley" è in comune con due squadre: nessun abbinamento.
+    expect(m.has(fed[3])).toBe(false);
+    expect(m.has(fed[4])).toBe(false);
   });
 });
